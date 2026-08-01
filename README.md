@@ -1,15 +1,15 @@
 # Hub Calendário
 
-## Configuração de Sincronização em Nuvem (Vercel KV)
+## Configuração de Sincronização em Nuvem (Upstash Redis)
 
 Para que o progresso seja salvo na nuvem e você possa visualizar pelo celular, é necessário seguir os passos abaixo no painel da Vercel:
 
-### 1. Criar o Banco de Dados KV (Upstash Redis)
+### 1. Criar o Banco de Dados (Upstash Redis)
 1. Acesse o [Dashboard da Vercel](https://vercel.com/dashboard) e entre no seu projeto (`hub-calendario-coral`).
 2. Vá até a aba **Storage** no menu superior.
-3. Clique em **Create Database** e selecione **KV** (Powered by Upstash).
-4. Siga as instruções para criar (aceite os termos se for a primeira vez e crie numa região padrão, como Washington D.C. - `iad1`).
-5. Depois de criado, conecte esse banco KV ao seu projeto. Isso fará com que as variáveis de ambiente necessárias (como `KV_URL`, `KV_REST_API_URL`, `KV_REST_API_TOKEN`) sejam preenchidas automaticamente.
+3. Clique em **Connect Store/Database**, ou na lista de Providers, selecione a opção **Upstash** (Serverless DB).
+4. Siga as instruções para criar o Redis Database (aceite os termos se for a primeira vez e crie numa região padrão, como Washington D.C. - `iad1`).
+5. Depois de criado, verifique se ele está conectado ao seu projeto. Isso fará com que as variáveis de ambiente necessárias (como `UPSTASH_REDIS_REST_URL` e `UPSTASH_REDIS_REST_TOKEN`) sejam preenchidas automaticamente.
 
 ### 2. Configurar o Token de Segurança
 Para garantir que ninguém altere o seu progresso publicamente, a gravação é protegida por um Token que definiremos agora:

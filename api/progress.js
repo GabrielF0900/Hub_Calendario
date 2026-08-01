@@ -1,4 +1,7 @@
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+// Inicializa o Redis com as variáveis de ambiente UPSTASH_REDIS_REST_URL e UPSTASH_REDIS_REST_TOKEN
+const redis = Redis.fromEnv();
 
 export default async function handler(req, res) {
   // Configuração de CORS para permitir chamadas do front-end
@@ -18,7 +21,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
-      const data = await kv.get('hubGabrielV3_progress');
+      const data = await redis.get('hubGabrielV3_progress');
       return res.status(200).json(data || {});
     } catch (error) {
       console.error('KV GET Error:', error);
@@ -42,7 +45,7 @@ export default async function handler(req, res) {
     try {
       const data = req.body;
       // Salva o JSON no KV Storage
-      await kv.set('hubGabrielV3_progress', data);
+      await redis.set('hubGabrielV3_progress', data);
       return res.status(200).json({ success: true, message: 'Salvo com sucesso na nuvem.' });
     } catch (error) {
       console.error('KV POST Error:', error);
