@@ -1840,7 +1840,30 @@ function toggleCC() {
 // -- Persistência -------------------------------------------------------------
 const store = () => { const s=localStorage.getItem(SKEY); return s?JSON.parse(s):{}; };
 const isDone = id => !!store()[id];
-const setDone = (id, v) => { const c=store(); if(v) c[id]=true; else delete c[id]; localStorage.setItem(SKEY,JSON.stringify(c)); };
+const setDone = (id, v) => {
+  const c = store();
+  if (v) c[id] = true; else delete c[id];
+  c._lastUpdated = Date.now();
+  localStorage.setItem(SKEY, JSON.stringify(c));
+  syncCloud(c);
+};
+
+async function syncCloud(data) {
+  const token = localStorage.getItem('syncToken');
+  if (!token) return;
+  try {
+    await fetch('/api/progress', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-hub-token': token
+      },
+      body: JSON.stringify(data)
+    });
+  } catch (e) {
+    console.error('Falha ao sincronizar com a nuvem', e);
+  }
+}
 
 // -- Progresso ----------------------------------------------------------------
 function trackTotal(tid) {
@@ -2236,7 +2259,36 @@ function toggleDailTemp(e){
   renderDailTempChk();
 }
 
-window.onload=()=>{switchTab('ingles'); renderDailTempChk();};
+window.onload = async () => {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('token');
+  if (token) {
+    localStorage.setItem('syncToken', token);
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+  
+  switchTab('ingles');
+  renderDailTempChk();
+
+  try {
+    const res = await fetch('/api/progress');
+    if (res.ok) {
+      const cloudData = await res.json();
+      const localData = store();
+      const cloudTime = cloudData._lastUpdated || 0;
+      const localTime = localData._lastUpdated || 0;
+      
+      if (cloudTime > localTime) {
+        localStorage.setItem(SKEY, JSON.stringify(cloudData));
+        // Re-render UI with new data
+        renderMain();
+        renderDailTempChk();
+      }
+    }
+  } catch (e) {
+    console.error('Falha ao carregar dados da nuvem', e);
+  }
+};
 </script>
 </body>
 </html>
