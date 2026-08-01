@@ -1,7 +1,10 @@
 import { Redis } from '@upstash/redis';
 
-// Inicializa o Redis com as variáveis de ambiente UPSTASH_REDIS_REST_URL e UPSTASH_REDIS_REST_TOKEN
-const redis = Redis.fromEnv();
+// Inicializa o Redis com as variáveis de ambiente geradas pela Vercel/Upstash
+const redis = new Redis({
+  url: process.env.KV_REST_API_URL,
+  token: process.env.KV_REST_API_TOKEN,
+});
 
 export default async function handler(req, res) {
   // Configuração de CORS para permitir chamadas do front-end

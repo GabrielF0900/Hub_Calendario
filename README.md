@@ -13,7 +13,7 @@ Para que o progresso seja salvo na nuvem e você possa visualizar pelo celular, 
    - **Read Regions:** Pode deixar vazio (opcional).
    - **Eviction:** Pode deixar desmarcado.
    - **Installation Plans:** Escolha a opção **Free** (gratuito).
-5. Após confirmar e criar, verifique se ele está conectado ao seu projeto. Isso fará com que as variáveis de ambiente necessárias (como `UPSTASH_REDIS_REST_URL` e `UPSTASH_REDIS_REST_TOKEN`) sejam preenchidas automaticamente.
+5. Após confirmar e criar, verifique se ele está conectado ao seu projeto. Isso fará com que as variáveis de ambiente necessárias (como `KV_REST_API_URL` e `KV_REST_API_TOKEN`) sejam preenchidas automaticamente pela Vercel.
 
 ### 2. Configurar o Token de Segurança
 Para garantir que ninguém altere o seu progresso publicamente, a gravação é protegida por um Token que definiremos agora:
