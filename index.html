@@ -1,0 +1,2242 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gabriel Falcão — Hub de Estudos · 6 Trilhas</title>
+  <meta name="description" content="Hub de calendários: Inglês, Java Core, DSA, Testes, SQL e Storytelling."/>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    body{font-family:'Inter',sans-serif}
+    .mono{font-family:'JetBrains Mono',monospace}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+    .no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+    ::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:#0f172a}::-webkit-scrollbar-thumb{background:#334155;border-radius:3px}
+    html{scroll-behavior:smooth}
+    .lesson-done{background:linear-gradient(135deg,rgba(16,185,129,0.08) 0%,transparent 100%);border-color:rgba(16,185,129,0.35)!important}
+    .lesson-done .lesson-title{text-decoration:line-through;opacity:0.6}
+    @keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    .fadein{animation:fadein 0.22s ease-out}
+    .wpill{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;cursor:pointer;border:1px solid #334155;background:#0f172a;color:#94a3b8;transition:all .15s}
+    .wpill:hover{border-color:#475569;color:#cbd5e1}
+    .wpill.active{border-color:var(--tc,#06b6d4);color:var(--tc,#06b6d4);background:#0f172a;box-shadow:0 0 0 1px color-mix(in srgb,var(--tc,#06b6d4) 25%,transparent)}
+    .dpill{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;cursor:pointer;border:1px solid #334155;background:#0f172a;color:#94a3b8;transition:all .15s;gap:4px}
+    .dpill:hover{border-color:#475569;color:#cbd5e1}
+    .dpill.active{background:var(--tc,#06b6d4);color:#0f172a;border-color:var(--tc,#06b6d4)}
+    .dpill.done{border-color:#10b98140;color:#10b981}
+    .dpill.partial{border-color:#f59e0b40;color:#f59e0b}
+    .tab-btn{cursor:pointer;transition:all .2s}
+    .priority-high{color:#ef4444}
+    .priority-mid{color:#f59e0b}
+    .priority-low{color:#64748b}
+  </style>
+</head>
+<body class="bg-[#0f172a] text-slate-100 min-h-screen relative overflow-x-hidden antialiased select-none">
+
+<header class="bg-[#1e293b]/90 border-b border-slate-700/50 backdrop-blur-md sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-col md:flex-row items-center justify-between gap-3">
+    <div class="flex items-center gap-3 w-full md:w-auto">
+      <div class="w-10 h-10 min-w-[40px] bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-xl shadow-lg">&#x1F680;</div>
+      <div>
+        <h1 class="text-base sm:text-lg font-bold tracking-tight">Gabriel Falcão — Hub de Estudos</h1>
+        <p class="text-[10px] text-slate-400 mono mt-0.5" id="headerSub">Carregando...</p>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-2 justify-center md:justify-end" id="headerBadges"></div>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-1 overflow-x-auto no-scrollbar pt-2">
+    <button onclick="switchTab('ingles')"       id="tab-ingles"       class="tab-btn px-3 py-2.5 text-sm font-bold border-b-2 border-transparent text-slate-400 whitespace-nowrap">&#9312; &#127482;&#127480; Ingl&ecirc;s</button>
+    <button onclick="switchTab('javacore')"     id="tab-javacore"     class="tab-btn px-3 py-2.5 text-sm font-bold border-b-2 border-transparent text-slate-400 whitespace-nowrap">&#9313; &#9749; Java Core</button>
+    <button onclick="switchTab('dsa')"          id="tab-dsa"          class="tab-btn px-3 py-2.5 text-sm font-bold border-b-2 border-transparent text-slate-400 whitespace-nowrap">&#9314; &#x1F9E9; DSA</button>
+    <button onclick="switchTab('testes')"       id="tab-testes"       class="tab-btn px-3 py-2.5 text-sm font-bold border-b-2 border-transparent text-slate-400 whitespace-nowrap">&#9315; &#x2705; Testes</button>
+    <button onclick="switchTab('sql')"          id="tab-sql"          class="tab-btn px-3 py-2.5 text-sm font-bold border-b-2 border-transparent text-slate-400 whitespace-nowrap">&#9316; &#x1F5C4;&#xFE0F; SQL</button>
+    <button onclick="switchTab('storytelling')" id="tab-storytelling" class="tab-btn px-3 py-2.5 text-sm font-bold border-b-2 border-transparent text-slate-400 whitespace-nowrap">&#9317; &#x1F399;&#xFE0F; Storytelling</button>
+  </div>
+</header>
+
+<div class="bg-[#1e293b] border-b border-slate-700/50 sticky top-[108px] md:top-[120px] z-30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col gap-3">
+    <div class="flex flex-col gap-1.5">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-xs font-bold text-slate-300">&#127758; Progresso Global:</span>
+        <span id="pg-text" class="text-xs text-slate-400 mono">0 de 0</span>
+        <span id="pg-pct" class="text-xs text-emerald-400 font-bold">(0%)</span>
+      </div>
+      <div class="w-full bg-[#0f172a] border border-slate-700/30 rounded-full h-1.5 overflow-hidden">
+        <div id="pg-bar" class="h-full bg-gradient-to-r from-purple-500 to-emerald-500 transition-all duration-500 rounded-full" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-1.5">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-sm font-bold" id="pt-title" style="color:var(--tc,#06b6d4)">&#128202; Trilha Atual:</span>
+        <span id="pt-text" class="text-sm text-slate-300 font-bold">0 de 0</span>
+        <span id="pt-pct" class="text-sm text-emerald-400 font-bold">(0%)</span>
+      </div>
+      <div class="w-full bg-[#0f172a] border border-slate-700/30 rounded-full h-2 overflow-hidden">
+        <div id="pt-bar" class="h-full transition-all duration-500 rounded-full" style="width:0%;background:var(--tg,linear-gradient(to right,#10b981,#06b6d4))"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMO COMEÇAR — Ordem de entrada das trilhas -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-0 relative z-10">
+  <div class="bg-gradient-to-br from-[#1e293b] to-[#1a2744] border border-indigo-500/30 rounded-xl overflow-hidden">
+    <button onclick="toggleCC()" class="w-full flex items-center gap-3 p-4 text-left cursor-pointer hover:bg-indigo-500/5 transition-colors">
+      <span class="text-lg">&#x1F680;</span>
+      <span class="font-bold text-slate-100 text-sm">Como Começar — Ordem de Entrada das Trilhas</span>
+      <span id="ccArrow" class="ml-auto text-[10px] mono text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 rounded px-2 py-0.5">&#9660; recolher</span>
+    </button>
+    <div id="ccContent" class="border-t border-slate-700/40 px-4 pb-4 pt-3">
+      <p class="text-[11px] text-slate-400 mb-3 leading-relaxed">As trilhas entram em ordem progressiva. Java Core vem antes do DSA porque constrói o vocabulário técnico que o problema de algoritmo do dia seguinte vai usar. Testes consolida na sexta o que foi produzido na semana em Java Core + DSA.</p>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+        <div class="bg-[#0f172a] border border-cyan-500/40 rounded-lg p-3 text-center">
+          <div class="text-xl mb-1.5">&#127482;&#127480;</div>
+          <div class="text-[10px] font-bold mono text-cyan-400 mb-1">&#9312; Ingl&ecirc;s</div>
+          <div class="text-[9px] text-slate-400 leading-tight">J&aacute; em andamento</div>
+          <div class="text-[9px] text-slate-500 mt-1 mono">Todo dia &middot; manh&atilde;</div>
+        </div>
+        <div class="bg-[#0f172a] border border-yellow-500/40 rounded-lg p-3 text-center">
+          <div class="text-xl mb-1.5">&#9749;</div>
+          <div class="text-[10px] font-bold mono text-yellow-400 mb-1">&#9313; Java Core</div>
+          <div class="text-[9px] text-slate-400 leading-tight">Seg 03/08/2026</div>
+          <div class="text-[9px] text-slate-500 mt-1 mono">Seg+Qua &middot; 13h-15h</div>
+        </div>
+        <div class="bg-[#0f172a] border border-red-500/40 rounded-lg p-3 text-center">
+          <div class="text-xl mb-1.5">&#x1F9E9;</div>
+          <div class="text-[10px] font-bold mono text-red-400 mb-1">&#9314; DSA</div>
+          <div class="text-[9px] text-slate-400 leading-tight">Ter 04/08/2026</div>
+          <div class="text-[9px] text-slate-500 mt-1 mono">Ter+Qui &middot; 13h-15h</div>
+        </div>
+        <div class="bg-[#0f172a] border border-blue-500/40 rounded-lg p-3 text-center">
+          <div class="text-xl mb-1.5">&#x2705;</div>
+          <div class="text-[10px] font-bold mono text-blue-400 mb-1">&#9315; Testes</div>
+          <div class="text-[9px] text-slate-400 leading-tight">Sex 07/08/2026</div>
+          <div class="text-[9px] text-slate-500 mt-1 mono">Sex &middot; 13h-15h</div>
+        </div>
+        <div class="bg-[#0f172a] border border-cyan-400/40 rounded-lg p-3 text-center">
+          <div class="text-xl mb-1.5">&#x1F5C4;&#xFE0F;</div>
+          <div class="text-[10px] font-bold mono text-cyan-300 mb-1">&#9316; SQL</div>
+          <div class="text-[9px] text-slate-400 leading-tight">S&aacute;b 08/08/2026</div>
+          <div class="text-[9px] text-slate-500 mt-1 mono">S&aacute;b &middot; 13h-13h50</div>
+        </div>
+        <div class="bg-[#0f172a] border border-purple-500/40 rounded-lg p-3 text-center">
+          <div class="text-xl mb-1.5">&#x1F399;&#xFE0F;</div>
+          <div class="text-[10px] font-bold mono text-purple-400 mb-1">&#9317; Storytelling</div>
+          <div class="text-[9px] text-slate-400 leading-tight">S&aacute;b 19/09/2026</div>
+          <div class="text-[9px] text-slate-500 mt-1 mono">S&aacute;b &middot; 13h50-14h20</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCO DO SÁBADO — mostrado apenas nas abas SQL e Storytelling -->
+<div id="saturdayBlockPanel" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 relative z-10">
+  <div class="bg-gradient-to-r from-[#1e293b] to-[#1a2744] border border-slate-600/50 rounded-xl p-4">
+    <div class="flex items-center gap-2 mb-3 flex-wrap">
+      <span class="text-base">&#128197;</span>
+      <h3 class="font-bold text-slate-100 text-sm">Bloco do S&aacute;bado — 13h &agrave;s 15h (2 horas no total)</h3>
+      <span class="text-[9px] mono bg-[#0f172a] border border-slate-700 rounded px-2 py-0.5 text-slate-400 ml-auto">Todo s&aacute;bado</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div class="bg-[#0f172a] border border-cyan-500/40 rounded-lg p-3">
+        <div class="text-[11px] font-bold mono text-cyan-400 mb-2">&#9200; 13h00 &ndash; 13h50 &middot; 50min</div>
+        <div class="text-sm font-bold text-slate-100 mb-1.5">&#x1F5C4;&#xFE0F; SQL</div>
+        <div class="text-[11px] text-slate-400 leading-relaxed">Conte&uacute;do da trilha SQL da semana. Come&ccedil;a em 08/08/2026 e ocorre todo s&aacute;bado.</div>
+      </div>
+      <div class="bg-[#0f172a] border border-purple-500/40 rounded-lg p-3">
+        <div class="text-[11px] font-bold mono text-purple-400 mb-2">&#9200; 13h50 &ndash; 14h20 &middot; 30min</div>
+        <div class="text-sm font-bold text-slate-100 mb-1.5">&#x1F399;&#xFE0F; Storytelling</div>
+        <div class="text-[11px] text-slate-400 leading-relaxed"><span class="text-purple-300 font-semibold">Inicia na Semana 7 (19/09/2026).</span> Nas semanas 1&ndash;6 (08/08 a 12/09), use este bloco como buffer adicional &mdash; n&atilde;o acumule conte&uacute;do antes de estar pronto.</div>
+      </div>
+      <div class="bg-[#0f172a] border border-amber-500/40 rounded-lg p-3">
+        <div class="text-[11px] font-bold mono text-amber-400 mb-2">&#9200; 14h20 &ndash; 15h00 &middot; 40min</div>
+        <div class="text-sm font-bold text-amber-300 mb-1.5">&#x1F6E1;&#xFE0F; Buffer / Reposi&ccedil;&atilde;o</div>
+        <div class="text-[11px] text-slate-400 leading-relaxed">Use este tempo para repor qualquer sess&atilde;o perdida durante a semana (Seg&ndash;Sex). <span class="text-slate-300">Se nada ficou pendente, use como revis&atilde;o livre.</span> Rocketseat dispon&iacute;vel como refor&ccedil;o complementar opcional neste bloco.</div>
+        <div class="mt-3 pt-2 border-t border-amber-500/20">
+          <div class="text-[9px] font-bold uppercase tracking-wider text-amber-400 mono mb-1.5">&#127381; Extra opcional &mdash; S&aacute;b 29/08/2026 (Semana 4)</div>
+          <label id="label-dsa-sem4-2" class="flex items-start gap-2 cursor-pointer group" onclick="toggleDailTemp(event)">
+            <div id="chk-dsa-sem4-2" class="mt-0.5 w-4 h-4 rounded border border-slate-500 flex items-center justify-center shrink-0 transition-colors group-hover:border-amber-400"></div>
+            <div>
+              <div class="text-[11px] font-semibold text-slate-200 leading-snug group-hover:text-amber-200 transition-colors">Daily Temperatures &mdash; Stack mon&oacute;tono</div>
+              <div class="text-[10px] text-slate-500 mt-0.5">S&oacute; se sentir confian&ccedil;a ap&oacute;s Valid Parentheses e Min Stack (Qui 27/08). N&atilde;o &eacute; obrigat&oacute;rio &mdash; n&atilde;o entra na porcentagem da trilha DSA.</div>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="mt-3 pt-3 border-t border-slate-700/40">
+      <p class="text-[10px] text-slate-500 leading-relaxed mono">&#9888;&#65039; Regra do buffer: se uma sess&atilde;o n&atilde;o puder ser reposta neste s&aacute;bado, siga para a pr&oacute;xima semana normalmente &mdash; nunca empilhe duas trilhas no mesmo bloco de 2h.</p>
+    </div>
+  </div>
+</div>
+
+<main id="mainContainer" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10 grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6"></main>
+
+<!-- Modal -->
+<div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 p-4" onclick="closeModal()">
+  <div class="bg-[#1e293b] border border-slate-600 w-full max-w-lg max-h-[90vh] rounded-2xl shadow-2xl transform scale-95 transition-all duration-300 flex flex-col overflow-hidden" onclick="event.stopPropagation()">
+    <div class="border-b border-slate-700 p-5 pb-4 shrink-0">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex-1 min-w-0">
+          <div id="m-badge" class="text-[9px] font-bold tracking-wider uppercase mono mb-1"></div>
+          <h3 id="m-title" class="text-lg font-bold text-slate-100 leading-snug">&#8212;</h3>
+          <p id="m-schedule" class="text-[11px] text-slate-400 mono mt-1"></p>
+        </div>
+        <span id="m-time" class="text-[11px] font-bold mono px-2 py-1 rounded bg-[#0f172a] text-slate-300 border border-slate-700 whitespace-nowrap shrink-0"></span>
+      </div>
+    </div>
+    <div class="p-5 flex flex-col gap-4 overflow-y-auto no-scrollbar">
+      <div id="m-why" class="hidden bg-[#0f172a] border border-slate-700/50 rounded-lg p-3 text-xs text-slate-300 leading-relaxed"></div>
+      <div id="m-ingles-stats" class="grid grid-cols-2 gap-2 text-[11px]"></div>
+      <div id="m-ingles-day" class="bg-[#0f172a]/50 p-2.5 rounded-lg border border-slate-700/40 text-[10px] text-slate-400 mono hidden"></div>
+      <div id="m-subtopics" class="hidden flex-col gap-2">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mono">T&oacute;picos Pedag&oacute;gicos</div>
+        <div id="m-subtopics-list" class="flex flex-col gap-2"></div>
+      </div>
+      <div id="m-feynman" class="hidden bg-[#0f172a] border border-purple-500/20 rounded-lg p-3 text-xs text-purple-300 leading-relaxed">
+        <div class="text-[9px] font-bold uppercase tracking-wider text-purple-400 mono mb-1.5">&#x1F399;&#xFE0F; Pr&aacute;tica Feynman</div>
+        <span id="m-feynman-text"></span>
+      </div>
+    </div>
+    <div class="p-4 flex gap-3 border-t border-slate-700 shrink-0">
+      <button id="m-mark-btn" class="flex-1 px-4 py-2.5 rounded-lg font-bold text-sm transition-all cursor-pointer">&#8212;</button>
+      <button onclick="closeModal()" class="px-4 py-2.5 text-xs font-bold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 rounded-lg cursor-pointer transition-colors shrink-0">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// -- Dados Inglês -------------------------------------------------------------
+const MD = [
+  {id:1,t:"O Básico para a Comunicação",c:"#06b6d4",e:"🗣️",l:[
+    {t:"Introdução e Names",d:"43m"},{t:"Introductions",d:"31m"},{t:"Greetings I",d:"25m"},
+    {t:"Greetings II",d:"29m"},{t:"Occupations I",d:"30m"},{t:"Occupations II",d:"30m"},
+    {t:"Countries and Nationalities I",d:"29m"},{t:"Countries and Nationalities II",d:"31m"},
+    {t:"Alphabet",d:"31m"},{t:"Numbers",d:"29m"},{t:"Telling the time",d:"25m"},
+    {t:"To Be: Simple Present",d:"26m"},{t:"Simple Present",d:"29m"},
+    {t:"[Questões] Simple Present",d:"10m"},
+  ]},
+  {id:2,t:"Adjetivos e Pronomes",c:"#a855f7",e:"📝",l:[
+    {t:"Possessive Adjectives",d:"26m"},{t:"[Questões] Possessive Adjectives",d:"10m"},
+    {t:"Numbers and Addresses",d:"28m"},{t:"Modal Verbs",d:"32m"},
+    {t:"[Questões] Modal Verbs",d:"10m"},{t:"Interrogative Pronouns",d:"34m"},
+    {t:"Places in Town I",d:"50m"},{t:"Places in Town II",d:"22m"},
+    {t:"Places In Town III",d:"29m"},{t:"To Be: Past",d:"24m"},
+    {t:"[Questões] Praticando Inglês 2",d:"10m"},{t:"[Questões] Praticando Inglês 3",d:"10m"},
+    {t:"[Questões] Praticando Inglês 4",d:"10m"},{t:"[Questões] Praticando Inglês 5",d:"10m"},
+  ]},
+  {id:3,t:"Um Pouco de Vocabulário",c:"#10b981",e:"📚",l:[
+    {t:"Breakfast Vocabulary",d:"44m"},{t:"Fruit",d:"31m"},{t:"Vegetable",d:"43m"},
+    {t:"Family Members",d:"47m"},{t:"Lunch",d:"50m"},{t:"Occupations",d:"19m"},
+  ]},
+  {id:4,t:"Vamos Dialogar?",c:"#f59e0b",e:"💬",l:[
+    {t:"Personal Information: Dialogue",d:"39m"},{t:"Places in Town: Dialogue I",d:"47m"},
+    {t:"Places in Town: Dialogue II",d:"24m"},{t:"Places in Town: Dialogue III",d:"26m"},
+    {t:"Family Members: Sentences and Questions",d:"39m"},{t:"Daily Routines: Vocabulary",d:"48m"},
+    {t:"Dialogue: Family Album",d:"45m"},{t:"Dialogue: Making Arrangements",d:"50m"},
+  ]},
+  {id:5,t:"Vamos Falar Sobre Comida e Roupas?",c:"#f43f5e",e:"🍽️",l:[
+    {t:"Restaurant I",d:"40m"},{t:"Restaurant II",d:"24m"},{t:"Restaurant III",d:"23m"},
+    {t:"Clothes I",d:"32m"},{t:"Clothes II",d:"31m"},{t:"Clothes III",d:"34m"},
+  ]},
+  {id:6,t:"Partes da Casa",c:"#3b82f6",e:"🏠",l:[
+    {t:"Prepositions of Places I",d:"34m"},{t:"Prepositions of Place II",d:"24m"},
+    {t:"School Objects I",d:"34m"},{t:"School Objects II",d:"37m"},
+    {t:"Frequency Adverbs and Expressions",d:"41m"},{t:"Places In the house I",d:"30m"},
+    {t:"Places In the house II",d:"37m"},{t:"In the kitchen I",d:"43m"},
+    {t:"In the kitchen II",d:"29m"},{t:"In The Kitchen III",d:"44m"},
+    {t:"In the kitchen IV",d:"38m"},
+  ]},
+  {id:7,t:"Mais Conversação",c:"#f97316",e:"🎙️",l:[
+    {t:"To Have x There to Be",d:"37m"},{t:"How Do You Like This Kind of Movie",d:"52m"},
+    {t:"How Does He Look Like I",d:"41m"},{t:"How Does He Look Like II",d:"31m"},
+  ]},
+  {id:8,t:"Móveis e Objetos",c:"#14b8a6",e:"🛋️",l:[
+    {t:"Living Room I",d:"29m"},{t:"Living Room II",d:"31m"},
+    {t:"In The Bathroom I",d:"8m"},{t:"In The Bathroom II",d:"31m"},
+    {t:"In The Bathroom III",d:"27m"},{t:"Bedroom I",d:"29m"},
+    {t:"Bedroom II",d:"34m"},{t:"Subject and Object Pronouns",d:"29m"},
+  ]},
+  {id:9,t:"Partes do Corpo e Mais",c:"#6366f1",e:"💪",l:[
+    {t:"Parts of The Body I",d:"30m"},{t:"Parts of The Body II",d:"32m"},
+    {t:"Parts of The Body III",d:"36m"},{t:"Parts of The Body IV",d:"34m"},
+    {t:"Parts of The Body V",d:"39m"},{t:"Muitos I",d:"35m"},{t:"Muitos II",d:"31m"},
+    {t:"Cooking Verbs I",d:"34m"},{t:"Cooking Verbs II",d:"33m"},
+    {t:"Dialogue: How Does he Look Like",d:"36m"},{t:"Dialogue: Movies",d:"58m"},
+    {t:"Dialogue: Where is my Backpack",d:"53m"},
+  ]},
+  {id:10,t:"Comparativos e Superlativos",c:"#eab308",e:"📊",l:[
+    {t:"Comparativos e Superlativos: Introdução",d:"19m"},{t:"Comparativo de Superioridade",d:"28m"},
+    {t:"Comparativo de Inferioridade",d:"10m"},{t:"Comparativo de Igualdade",d:"24m"},
+    {t:"Superlativo de Superioridade",d:"28m"},{t:"Superlativo de Inferioridade",d:"17m"},
+    {t:"At the Clothing Store I",d:"49m"},{t:"At the Clothing Store II",d:"37m"},
+    {t:"Dialogue: Let's Have a Lasagna I",d:"47m"},{t:"Dialogue: Let's Have a Lasagna II",d:"19m"},
+  ]},
+  {id:11,t:"Main Verbs",c:"#84cc16",e:"⚡",l:[
+    {t:"Main Verbs I",d:"32m"},{t:"Main Verbs II",d:"29m"},{t:"Days of the Weeks",d:"49m"},
+    {t:"Question Tags I",d:"39m"},{t:"Question Tags II",d:"29m"},
+    {t:"Main Verbs IV",d:"20m"},{t:"Main Verbs V",d:"25m"},
+    {t:"Main Verbs VI",d:"28m"},{t:"Main Verbs VII",d:"28m"},{t:"Main Verbs VIII",d:"26m"},
+  ]},
+  {id:12,t:"Um Pouco Mais de Gramática",c:"#ec4899",e:"📖",l:[
+    {t:"Simple Past",d:"26m"},{t:"[Questões] Simple Past",d:"10m"},
+    {t:"Present Continuous",d:"27m"},{t:"Exercises: Present Continuous",d:"44m"},
+    {t:"Past Continuous",d:"39m"},{t:"Future Will x Going To",d:"39m"},
+    {t:"Prepositions of Time In - Out - At e Outras",d:"42m"},
+    {t:"Agree and Disagree - Affirmative",d:"39m"},
+  ]},
+  {id:13,t:"Vamos Expandir o Vocabulário?",c:"#0ea5e9",e:"🚗",l:[
+    {t:"Basic Vocabulary: Cars I",d:"29m"},{t:"Basic Vocabulary: Cars II",d:"31m"},
+    {t:"Basic Vocabulary: Cars III",d:"29m"},{t:"Basic Vocabulary: Cars IV",d:"22m"},
+    {t:"Agree and Disagree: Negative",d:"34m"},{t:"Prepositions + Verb + Ing",d:"24m"},
+    {t:"Car Situations I",d:"36m"},{t:"Car Situations II",d:"30m"},
+    {t:"Car Situations III",d:"31m"},{t:"Car Situations IV",d:"30m"},
+  ]},
+  {id:14,t:"Rotina",c:"#7c3aed",e:"⏰",l:[
+    {t:"Dialogue: Daily Routine",d:"57m"},{t:"Daily Routines",d:"22m"},
+    {t:"Present Perfect",d:"26m"},{t:"Present Perfect x Simple Past",d:"9m"},
+  ]},
+  {id:15,t:"No Hotel",c:"#22c55e",e:"🏨",l:[
+    {t:"Dialogue: Hotel Check In",d:"58m"},{t:"Hotel Check In",d:"22m"},
+    {t:"Dialogue: Hotel Problems I",d:"15m"},{t:"Dialogue: Hotel Problems II",d:"19m"},
+    {t:"Dialogue: Hotel Problems III",d:"34m"},{t:"Hotel Problems",d:"10m"},
+    {t:"Dialogue: Hotel Check Out",d:"33m"},{t:"Hotel Check Out",d:"11m"},
+    {t:"Airplane Vocabulary I",d:"39m"},{t:"Airplane Vocabulary II",d:"32m"},
+    {t:"Hotel Words and Expressions I",d:"30m"},{t:"Hotel Words and Expressions II",d:"19m"},
+    {t:"Hotel Words and Expressions III",d:"36m"},
+  ]},
+  {id:16,t:"Conversação Aplicada",c:"#ef4444",e:"🎤",l:[
+    {t:"To Remember Me I",d:"33m"},{t:"To Remember Me II",d:"22m"},
+    {t:"Stars Spangled Banner History",d:"22m"},{t:"Exercises: To be Present",d:"25m"},
+    {t:"Exercises: To be Past",d:"34m"},{t:"Possessives",d:"27m"},
+    {t:"Reflexive Pronouns",d:"11m"},{t:"Possessive Adjectives: Pronouns",d:"20m"},
+    {t:"At the Airport I",d:"30m"},{t:"At the Airport II",d:"29m"},
+    {t:"Stars Spangled Banner Verse I",d:"21m"},{t:"Stars Spangled Banner Verse II",d:"19m"},
+    {t:"Stars Spangled Banner Verse III",d:"15m"},{t:"Stars Spangled Banner Verse IV",d:"11m"},
+    {t:"Exercises: Simple Present",d:"34m"},{t:"Exercises: Reflexive Pronouns",d:"30m"},
+  ]},
+  {id:17,t:"Irregular Verbs",c:"#67e8f9",e:"📋",l:[
+    {t:"List of Irregular Verbs (A-B)",d:"29m"},{t:"List of Irregular Verbs (B)",d:"27m"},
+    {t:"List of Irregular Verbs (C-D-E) I",d:"28m"},{t:"List of Irregular Verbs (C-D-E) II",d:"33m"},
+    {t:"List of Irregular Verbs (F-G)",d:"39m"},{t:"List of Irregular Verbs (G)",d:"25m"},
+    {t:"List of Irregular Verbs (H-K)",d:"34m"},{t:"List of Irregular Verbs (L-M)",d:"30m"},
+    {t:"List of Irregular Verbs (M)",d:"14m"},{t:"List of Irregular Verbs (O-P-Q)",d:"21m"},
+    {t:"List of Irregular Verbs (R)",d:"20m"},{t:"List of Irregular Verbs (S) I",d:"35m"},
+    {t:"List of Irregular Verbs (S) II",d:"30m"},{t:"List of Irregular Verbs (S) III",d:"23m"},
+    {t:"List of Irregular Verbs (S) IV",d:"29m"},{t:"List of Irregular Verbs (T)",d:"22m"},
+    {t:"List of Irregular Verbs (W)",d:"22m"},
+  ]},
+  {id:18,t:"Meios de Transporte",c:"#c084fc",e:"🚌",l:[
+    {t:"Means of Transportation I",d:"33m"},{t:"Means of Transportation II",d:"26m"},
+    {t:"Means of Transportation III",d:"29m"},{t:"Means of Transportation IV",d:"27m"},
+    {t:"Dialogue: At the Real Estate Agency I",d:"64m"},{t:"Dialogue: At the Real Estate Agency II",d:"10m"},
+    {t:"Exercises: Question Tags",d:"52m"},{t:"Exercises: Simple Past",d:"28m"},
+    {t:"Exercises: Pronomes Interrogativos",d:"51m"},
+  ]},
+  {id:19,t:"To Do x To Make",c:"#34d399",e:"🔧",l:[
+    {t:"To Do x To Make",d:"16m"},{t:"To Make: Aplicação Prática I",d:"30m"},
+    {t:"To Make: Aplicação Prática II",d:"28m"},{t:"To Make: Aplicação Prática III",d:"27m"},
+    {t:"To Make: Aplicação Prática IV",d:"28m"},{t:"To Make: Aplicação Prática V",d:"29m"},
+    {t:"To Make: Aplicação Prática VI",d:"32m"},{t:"To Do: Aplicação Prática I",d:"31m"},
+    {t:"To Do: Aplicação Prática II",d:"31m"},{t:"To Do: Aplicação Prática III",d:"7m"},
+  ]},
+  {id:20,t:"To Take",c:"#fbbf24",e:"✋",l:[
+    {t:"Expressões com To Take I",d:"2m"},{t:"Expressões com To Take II",d:"29m"},
+    {t:"Expressões com To Take III",d:"29m"},{t:"Expressões com To Take IV",d:"23m"},
+    {t:"Expressões com To Take V",d:"22m"},{t:"Expressões com To Take VI",d:"31m"},
+    {t:"Exercises: Past Continuous",d:"38m"},
+  ]},
+  {id:21,t:"To Get",c:"#fb7185",e:"🎯",l:[
+    {t:"Uso Prático: To Get 1",d:"35m"},{t:"Uso Prático: To Get 2",d:"32m"},
+    {t:"Uso Prático: To Get 3",d:"29m"},{t:"Uso Prático: To Get 4",d:"32m"},
+    {t:"Uso Prático: To Get 5",d:"30m"},{t:"Uso Prático: To Get 6",d:"29m"},
+    {t:"Uso Prático: To Get 7",d:"28m"},{t:"Uso Prático: To Get 8",d:"29m"},
+    {t:"Uso Prático: To Get 9",d:"24m"},
+  ]},
+  {id:22,t:"To Look",c:"#60a5fa",e:"👀",l:[
+    {t:"Phrasal Verbs - To Look 1",d:"28m"},{t:"Phrasal Verbs - To Look 2",d:"29m"},
+    {t:"Phrasal Verbs - To Look 3",d:"32m"},{t:"Phrasal Verbs - To Look 4",d:"28m"},
+    {t:"Expressions - To Look 1",d:"29m"},{t:"Expressions - To Look 2",d:"27m"},
+    {t:"Expressions - To Look 3",d:"29m"},{t:"Expressions - To Look 4",d:"28m"},
+    {t:"Expressions - To Look 5",d:"27m"},{t:"Expressions - To Look 6",d:"30m"},
+    {t:"Expressions - To Look 7",d:"29m"},{t:"Expressions - To Look 8",d:"32m"},
+  ]},
+  {id:23,t:"Diálogo Viagem/Férias",c:"#fb923c",e:"✈️",l:[
+    {t:"Dialogue: Vacation in Europe 1",d:"50m"},{t:"Dialogue: Vacation in Europe 2",d:"15m"},
+    {t:"Dialogue: Vacation in Europe 3",d:"24m"},{t:"Extra Class - Passive Voice 1",d:"30m"},
+    {t:"Extra Class - Passive Voice 2",d:"43m"},{t:"Dialogue: Plans for Holiday 1",d:"52m"},
+    {t:"Dialogue: Plans for Holiday 2",d:"27m"},
+  ]},
+];
+
+// ============================================================
+// GENERATE FLAT LESSON LIST (225 lessons)
+// ============================================================
+const ALL = [];
+MD.forEach(mod => {
+  mod.l.forEach((l, i) => {
+    ALL.push({
+      id: `m${mod.id}l${i+1}`,
+      modId: mod.id, modTitle: mod.t, modColor: mod.c, modEmoji: mod.e,
+      num: i+1, total: mod.l.length,
+      title: l.t, dur: l.d,
+    });
+  });
+});
+ALL.forEach((l, i) => l.gn = i + 1); // global number 1..225
+
+// ============================================================
+// BUILD SCHEDULE (16 weeks, week 16 has 8 days = 113 days total)
+// Start: Monday July 21, 2026
+// ============================================================
+const START = new Date(2026, 6, 21);
+const DK = ['segunda','terca','quarta','quinta','sexta','sabado','domingo'];
+const DLS = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+const DLF = ['Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado','Domingo'];
+
+function addDays(base, n) {
+  const d = new Date(base); d.setDate(d.getDate() + n); return d;
+}
+function fmtDate(d) {
+  return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}).replace('.','');
+}
+
+const SCHED = []; // 16 weeks
+let ptr = 0, dayNum = 0;
+
+for (let w = 0; w < 16; w++) {
+  const daysInWeek = (w === 15) ? 8 : 7; // Week 16 gets extra day for lesson 225
+  const weekDays = {};
+
+  for (let d = 0; d < daysInWeek && ptr < ALL.length; d++) {
+    const key = d < 7 ? DK[d] : 'conclusao';
+    dayNum++;
+    const dayLessons = [];
+    for (let k = 0; k < 2 && ptr < ALL.length; k++) dayLessons.push(ALL[ptr++]);
+    weekDays[key] = { date: addDays(START, w*7+d), dayNum, lessons: dayLessons };
+  }
+
+  const modIds = new Set();
+  Object.values(weekDays).forEach(d => d.lessons.forEach(l => modIds.add(l.modId)));
+  const mods = [...modIds].map(id => MD.find(m => m.id === id));
+
+  SCHED.push({ wn: w+1, days: weekDays, mods });
+}
+
+// Week descriptions for sidebar map
+const WDESC = [
+  'M1 — O Básico para a Comunicação',
+  'M2 — Adjetivos e Pronomes',
+  'M3 Vocabulário + M4 Diálogos',
+  'M5 Comida/Roupas + M6 Casa (início)',
+  'M6 Casa (fim) + M7 Conversação + M8 Móveis',
+  'M8 Móveis (fim) + M9 Corpo + M10 Comparativos',
+  'M10 Comparativos (fim) + M11 Main Verbs',
+  'M11 Main Verbs (fim) + M12 Gramática + M13 Vocab',
+  'M13 Vocab (fim) + M14 Rotina + M15 Hotel',
+  'M15 Hotel (fim) + M16 Conversação Aplicada',
+  'M16 Conversação Aplicada (conclusão)',
+  'M17 Irregular Verbs (início)',
+  'M17 Irregular Verbs (fim) + M18 + M19 Do/Make',
+  'M19 Do/Make (fim) + M20 To Take',
+  'M20 Take (fim) + M21 To Get + M22 To Look',
+  'M22 To Look (fim) + M23 Viagem/Férias 🎓',
+];
+
+// -- Dados Novas Trilhas ------------------------------------------------------
+const NEW_TRACKS = {
+  "javacore": {
+    "id": "javacore",
+    "title": "Java Core",
+    "emoji": "☕",
+    "order": 2,
+    "totalWeeks": 6,
+    "startDate": "03/08/2026",
+    "endDate": "13/09/2026",
+    "color": "#eab308",
+    "frequency": "Segunda e Quarta, às 13h",
+    "whyStudy": "Pergunta mais citada em relatos reais de entrevista júnior no Brasil. O risco não é 'não saber' — é saber na prática mas não conseguir explicar sob pressão. Errar uma pergunta de Java Core sinaliza ao entrevistador que faltam fundamentos, mesmo que seu currículo tenha projetos avançados.",
+    "feynmanPractice": "Grave um áudio de 60 segundos por tópico, como se estivesse respondendo a um entrevistador que perguntou 'me explica a diferença entre X e Y'. Regra: zero jargão sem explicar o jargão. Se você disser 'por causa do contrato de hashCode', pare e explique o que é esse contrato antes de continuar. Ouça de volta e marque onde travou.",
+    "weeks": [
+      {
+        "weekNum": 1,
+        "dateRange": "03/08 a 09/08",
+        "topics": [
+          {
+            "id": "jc_1_1",
+            "title": "1.1 Igualdade e Hashing",
+            "schedule": "Segunda, 03/08 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "A diferença entre == e .equals() é a pergunta de Java mais repetida em entrevistas júnior. Entender o contrato hashCode/equals é obrigatório para usar HashMap corretamente.",
+            "subtopics": [
+              {
+                "id": "jc_1_1_1",
+                "text": "Diferença entre == (comparação de referência) e .equals() (comparação de valor)"
+              },
+              {
+                "id": "jc_1_1_2",
+                "text": "Por que String se comporta de forma 'estranha' com == (String Pool)"
+              },
+              {
+                "id": "jc_1_1_3",
+                "text": "O contrato entre equals() e hashCode() — por que sobrescrever um sem o outro quebra HashMap/HashSet"
+              }
+            ]
+          },
+          {
+            "id": "jc_1_2",
+            "title": "1.2 Coleções na prática",
+            "schedule": "Quarta, 05/08 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Não basta saber que ArrayList é array e LinkedList é lista. A resposta certa é saber quando o custo de inserção/remoção no meio compensa o custo de acesso aleatório.",
+            "subtopics": [
+              {
+                "id": "jc_1_2_1",
+                "text": "ArrayList vs LinkedList — quando o custo de inserção/remoção no meio compensa o custo de acesso aleatório"
+              },
+              {
+                "id": "jc_1_2_2",
+                "text": "HashMap vs TreeMap vs LinkedHashMap — quando ordem importa e quando não importa"
+              },
+              {
+                "id": "jc_1_2_3",
+                "text": "HashSet vs TreeSet — mesma lógica aplicada a conjuntos"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 2,
+        "dateRange": "10/08 a 16/08",
+        "topics": [
+          {
+            "id": "jc_1_3",
+            "title": "1.3 Streams e Lambdas",
+            "schedule": "Segunda, 10/08 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Streams é como o Java moderno faz manipulação funcional de coleções. Saber transformar um for em stream — e explicar o porquê da escolha — é cobrado tanto em teoria quanto em take-home.",
+            "subtopics": [
+              {
+                "id": "jc_1_3_1",
+                "text": "Diferença entre operação intermediária (filter, map) e terminal (collect, reduce)"
+              },
+              {
+                "id": "jc_1_3_2",
+                "text": "Optional — por que existe, como evita NullPointerException"
+              },
+              {
+                "id": "jc_1_3_3",
+                "text": "Exemplo prático: transformar um for tradicional em stream, sabendo dizer o motivo da escolha"
+              }
+            ]
+          },
+          {
+            "id": "jc_1_4",
+            "title": "1.4 Tratamento de Exceções",
+            "schedule": "Quarta, 12/08 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Saber a diferença entre Checked e Unchecked exceptions explica por que o compilador força tratamento em alguns casos e não em outros — pergunta clássica de entrevista.",
+            "subtopics": [
+              {
+                "id": "jc_1_4_1",
+                "text": "Checked vs Unchecked exceptions — quando o compilador obriga tratamento e quando não"
+              },
+              {
+                "id": "jc_1_4_2",
+                "text": "try-with-resources — por que existe (fecha recursos automaticamente)"
+              },
+              {
+                "id": "jc_1_4_3",
+                "text": "Quando vale criar uma exceção customizada"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 3,
+        "dateRange": "17/08 a 23/08",
+        "topics": [
+          {
+            "id": "jc_1_5",
+            "title": "1.5 Generics",
+            "schedule": "Segunda, 17/08 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Generics existem para mover ClassCastException do runtime para o tempo de compilação — uma vez que você entende isso, a sintaxe faz sentido imediatamente.",
+            "subtopics": [
+              {
+                "id": "jc_1_5_1",
+                "text": "Por que existem (evitam ClassCastException em runtime, movem o erro pro tempo de compilação)"
+              },
+              {
+                "id": "jc_1_5_2",
+                "text": "Sintaxe básica (List<T>) e um wildcard simples (List<? extends Number>)"
+              }
+            ]
+          },
+          {
+            "id": "jc_1_6",
+            "title": "1.6 POO Aplicada",
+            "schedule": "Quarta, 19/08 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "A resposta que o entrevistador quer não é a definição do dicionário — é quando usar Interface vs Abstrata e por que 'favoreça composição' é mais flexível que herança.",
+            "subtopics": [
+              {
+                "id": "jc_1_6_1",
+                "text": "Interface vs Classe Abstrata — quando usar cada uma (contrato puro vs comportamento compartilhado)"
+              },
+              {
+                "id": "jc_1_6_2",
+                "text": "Herança vs Composição — por que 'favoreça composição' é um princípio comum em entrevista"
+              },
+              {
+                "id": "jc_1_6_3",
+                "text": "Polimorfismo com um exemplo de código, não só a definição de dicionário"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 4,
+        "dateRange": "24/08 a 30/08",
+        "topics": [
+          {
+            "id": "jc_1_7",
+            "title": "1.7 Java Moderno (17/21)",
+            "schedule": "Segunda, 24/08 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Muitas entrevistas 2025-2026 já perguntam sobre record e switch expressions. São recursos simples que mostram que você acompanha a evolução da linguagem.",
+            "subtopics": [
+              {
+                "id": "jc_1_7_1",
+                "text": "var — inferência de tipo, quando usar e quando evitar (legibilidade)"
+              },
+              {
+                "id": "jc_1_7_2",
+                "text": "record — para que serve, diferença de uma classe normal"
+              },
+              {
+                "id": "jc_1_7_3",
+                "text": "switch expressions — sintaxe nova vs switch tradicional"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 5,
+        "dateRange": "31/08 a 06/09",
+        "topics": [
+          {
+            "id": "jc_rev1",
+            "title": "Revisão I — Feynman em Código",
+            "schedule": "Seg e Qua às 13h",
+            "estimatedTime": "2 blocos (2h cada)",
+            "description": "Semana de consolidação. Para cada tópico 1.1 a 1.4, gravar um áudio de 60s e implementar pelo menos um exemplo de código no IntelliJ — sem consultar anotações.",
+            "subtopics": [
+              {
+                "id": "jc_rev1_1",
+                "text": "Revisar 1.1 e 1.2: implementar um exemplo com equals()/hashCode() correto + usar HashMap, TreeMap e HashSet em código"
+              },
+              {
+                "id": "jc_rev1_2",
+                "text": "Revisar 1.3 e 1.4: converter um for em stream com justificativa + criar uma exceção customizada com try-with-resources"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 6,
+        "dateRange": "07/09 a 13/09",
+        "topics": [
+          {
+            "id": "jc_rev2",
+            "title": "Revisão Final — Simulado Feynman",
+            "schedule": "Seg e Qua às 13h",
+            "estimatedTime": "2 blocos (2h cada)",
+            "description": "Última semana do Java Core. Simular uma entrevista técnica: abrir cada tópico de 1.1 a 1.7 e explicar em voz alta sem reler material.",
+            "subtopics": [
+              {
+                "id": "jc_rev2_1",
+                "text": "Revisar 1.5, 1.6 e 1.7: Generics, Interface vs Abstrata, record e switch expressions"
+              },
+              {
+                "id": "jc_rev2_2",
+                "text": "Simulado final: responder em voz alta como entrevistador — todos os 7 tópicos em sequência"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "dsa": {
+    "id": "dsa",
+    "title": "DSA",
+    "emoji": "🧩",
+    "order": 3,
+    "totalWeeks": 12,
+    "startDate": "04/08/2026",
+    "endDate": "25/10/2026",
+    "color": "#ef4444",
+    "frequency": "Terça e Quinta, às 13h",
+    "whyStudy": "Base de qualquer teste técnico prático e de perguntas sobre eficiência de código. A trilha foi calibrada para o seu perfil (backend de produto), não para entrevista estilo big tech — por isso os tópicos mais avançados ficam como opcionais.",
+    "feynmanPractice": "Antes de escrever qualquer código, explique em voz alta a estratégia ('vou usar dois ponteiros porque o array já está ordenado, então...'). Só depois implemente. Se você não conseguir explicar a estratégia antes de codar, é sinal de que está memorizando a solução, não entendendo o padrão.",
+    "weeks": [
+      {
+        "weekNum": 1,
+        "dateRange": "03/08 a 09/08",
+        "topics": [
+          {
+            "id": "dsa_2_1",
+            "title": "2.1 HashMap/HashSet aplicado a problemas",
+            "schedule": "Ter 04/08 + Qui 06/08 às 13h",
+            "estimatedTime": "2 sessões (1h cada)",
+            "priority": "🔥 FASE 1 — Alta probabilidade",
+            "description": "O HashMap é a estrutura mais usada em problemas de entrevista. Entender o O(1) de lookup transforma soluções O(N²) em O(N).",
+            "subtopics": [
+              {
+                "id": "dsa_2_1_1",
+                "text": "Two Sum — entenda o porquê do O(1): você guarda o complemento no mapa, não varre o array duas vezes"
+              },
+              {
+                "id": "dsa_2_1_2",
+                "text": "Contains Duplicate — verificar em O(1) se elemento já foi visto"
+              },
+              {
+                "id": "dsa_2_1_3",
+                "text": "Group Anagrams — usar hashCode da string ordenada como chave do agrupamento"
+              }
+            ]
+          },
+          {
+            "id": "dsa_2_2",
+            "title": "2.2 Big O na prática",
+            "schedule": "Após cada problema",
+            "estimatedTime": "Prática contínua",
+            "priority": "🔥 FASE 1 — Alta probabilidade",
+            "description": "Não se trata de decorar tabela — é saber deduzir olhando para o código. Entrevistadores perguntam 'qual a complexidade da sua solução?' logo depois que você termina.",
+            "subtopics": [
+              {
+                "id": "dsa_2_2_1",
+                "text": "Como analisar a complexidade de tempo da sua própria solução — contar loops e chamadas recursivas"
+              },
+              {
+                "id": "dsa_2_2_2",
+                "text": "Complexidade de espaço — quando ela importa tanto quanto tempo (ex: HashMap usa O(N) espaço)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 2,
+        "dateRange": "10/08 a 16/08",
+        "topics": [
+          {
+            "id": "dsa_sem2",
+            "title": "Consolidação: HashMap + 3 problemas extras",
+            "schedule": "Ter 11/08 + Qui 13/08 às 13h",
+            "estimatedTime": "2 sessões",
+            "priority": "🔥 FASE 1",
+            "description": "HashMap é o padrão mais cobrado — invista uma semana inteira nele. Feynman antes de codar em todos.",
+            "subtopics": [
+              {
+                "id": "dsa_sem2_1",
+                "text": "Resolver Ransom Note (HashMap para contar caracteres)"
+              },
+              {
+                "id": "dsa_sem2_2",
+                "text": "Resolver Isomorphic Strings"
+              },
+              {
+                "id": "dsa_sem2_3",
+                "text": "Feynman: Para cada solução, explicar em voz alta o raciocínio antes de ver o código"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 3,
+        "dateRange": "17/08 a 23/08",
+        "topics": [
+          {
+            "id": "dsa_2_3",
+            "title": "2.3 Array/String + Two Pointers",
+            "schedule": "Ter 18/08 + Qui 20/08 às 13h",
+            "estimatedTime": "2 sessões",
+            "priority": "🔥 FASE 1 — Alta probabilidade",
+            "description": "Dois ponteiros substituem um loop aninhado O(N²) por uma passagem linear O(N). Entender quando aplicar esse padrão é fundamental.",
+            "subtopics": [
+              {
+                "id": "dsa_2_3_1",
+                "text": "Valid Palindrome — ponteiro do início e do fim caminhando para o centro"
+              },
+              {
+                "id": "dsa_2_3_2",
+                "text": "Merge Sorted Array — ponteiro de trás para frente evita sobrescrever elementos"
+              },
+              {
+                "id": "dsa_2_3_3",
+                "text": "Padrão geral: quando dois ponteiros substituem um loop aninhado — identificar o invariante"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 4,
+        "dateRange": "24/08 a 30/08",
+        "topics": [
+          {
+            "id": "dsa_sem4",
+            "title": "Consolidação: Two Pointers",
+            "schedule": "Ter 25/08 às 13h",
+            "estimatedTime": "1 sessão",
+            "priority": "🔥 FASE 1",
+            "description": "Prática adicional de Two Pointers para solidificar o reconhecimento automático do padrão antes de avançar para Stack.",
+            "subtopics": [
+              {
+                "id": "dsa_sem4_1",
+                "text": "3Sum ou Remove Duplicates from Sorted Array (Two Pointers)"
+              },
+              {
+                "id": "dsa_sem4_3",
+                "text": "Feynman em cada solução antes de codar"
+              }
+            ]
+          },
+          {
+            "id": "dsa_2_4",
+            "title": "2.4 Stack / Queue",
+            "schedule": "Qui 27/08 às 13h",
+            "estimatedTime": "1 sessão",
+            "priority": "🔥 FASE 1 — Alta probabilidade",
+            "description": "Stack é a estrutura ideal para problemas de 'paridade' e 'rastrear histórico'. Min Stack é um clássico que testa se você pensa além do óbvio.",
+            "subtopics": [
+              {
+                "id": "dsa_2_4_1",
+                "text": "Valid Parentheses — usar stack para verificar abertura/fechamento corretos"
+              },
+              {
+                "id": "dsa_2_4_2",
+                "text": "Min Stack — manter pilha auxiliar para retornar mínimo em O(1)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 5,
+        "dateRange": "31/08 a 06/09",
+        "topics": [
+          {
+            "id": "dsa_2_5",
+            "title": "2.5 LinkedList",
+            "schedule": "Ter 01/09 + Qui 03/09 às 13h",
+            "estimatedTime": "2 sessões",
+            "priority": "🔥 FASE 1 — Alta probabilidade",
+            "description": "Reverse Linked List é o problema de LinkedList mais cobrado. Saber a versão iterativa e depois a recursiva mostra profundidade. Floyd (tartaruga e lebre) é um algoritmo elegante que impressiona.",
+            "subtopics": [
+              {
+                "id": "dsa_2_5_1",
+                "text": "Reverse Linked List — iterativo primeiro (prev, curr, next), depois recursivo"
+              },
+              {
+                "id": "dsa_2_5_2",
+                "text": "Linked List Cycle — algoritmo de Floyd (tartaruga e lebre), detectar sem memória extra O(1)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 6,
+        "dateRange": "07/09 a 13/09",
+        "topics": [
+          {
+            "id": "dsa_2_6",
+            "title": "2.6 Binary Search",
+            "schedule": "Ter 08/09 às 13h",
+            "estimatedTime": "1 sessão",
+            "priority": "🔥 FASE 1 — Alta probabilidade",
+            "description": "Binary Search parece simples mas esconde armadilhas nos limites (off-by-one). A variação em array rotacionado é a favorita de entrevistadores para testar entendimento real.",
+            "subtopics": [
+              {
+                "id": "dsa_2_6_1",
+                "text": "Busca clássica — garantir que mid não causa overflow (usar left + (right-left)/2)"
+              },
+              {
+                "id": "dsa_2_6_2",
+                "text": "Search in Rotated Sorted Array — identificar qual metade está ordenada em cada iteração"
+              }
+            ]
+          },
+          {
+            "id": "dsa_fim_f1",
+            "title": "Fim da Fase 1 — Revisão e Simulado",
+            "schedule": "Qui 10/09 às 13h",
+            "estimatedTime": "1 sessão",
+            "priority": "🔥 FASE 1",
+            "description": "Fechamento da Fase 1. Simular um teste técnico real com problemas mistos dos 6 padrões estudados em 1 sessão de 2h.",
+            "subtopics": [
+              {
+                "id": "dsa_f1_1",
+                "text": "Simulado: 1 problema de cada padrão (HashMap, Two Pointers, Stack, LinkedList, Binary Search)"
+              },
+              {
+                "id": "dsa_f1_2",
+                "text": "Para cada solução: complexidade de tempo E espaço explicada em voz alta"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 7,
+        "dateRange": "14/09 a 20/09",
+        "topics": [
+          {
+            "id": "dsa_2_7",
+            "title": "2.7 Sliding Window / Greedy",
+            "schedule": "Ter 15/09 + Qui 17/09 às 13h",
+            "estimatedTime": "2 sessões",
+            "priority": "📈 FASE 2 — Probabilidade média",
+            "description": "Início da Fase 2. Sliding Window reduz problemas de substring/subarray de O(N²) para O(N) expandindo e contraindo uma janela. Greedy faz a escolha localmente ótima.",
+            "subtopics": [
+              {
+                "id": "dsa_2_7_1",
+                "text": "Longest Substring Without Repeating Characters — expandir janela, contrair quando encontrar repetição"
+              },
+              {
+                "id": "dsa_2_7_2",
+                "text": "Best Time to Buy and Sell Stock — greedy: rastrear mínimo visto e maximizar lucro"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 8,
+        "dateRange": "21/09 a 27/09",
+        "topics": [
+          {
+            "id": "dsa_sem8",
+            "title": "Consolidação: Sliding Window",
+            "schedule": "Ter 22/09 + Qui 24/09 às 13h",
+            "estimatedTime": "2 sessões",
+            "priority": "📈 FASE 2",
+            "description": "Sliding Window é o padrão que mais cai junto com HashMap em entrevistas de nível médio. Mais prática aqui é investimento direto.",
+            "subtopics": [
+              {
+                "id": "dsa_sem8_1",
+                "text": "Maximum Average Subarray I (janela fixa)"
+              },
+              {
+                "id": "dsa_sem8_2",
+                "text": "Minimum Size Subarray Sum (janela variável)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 9,
+        "dateRange": "28/09 a 04/10",
+        "topics": [
+          {
+            "id": "dsa_2_8",
+            "title": "2.8 Grafos — Fundamentos",
+            "schedule": "Ter 29/09 + Qui 01/10 às 13h",
+            "estimatedTime": "2 sessões",
+            "priority": "📈 FASE 2 — Probabilidade média",
+            "description": "Grafos aparecem disfarçados como grids (matrizes 2D). Number of Islands é o problema de grafos mais cobrado em entrevistas de backend.",
+            "subtopics": [
+              {
+                "id": "dsa_2_8_1",
+                "text": "Representação como lista de adjacência — quando usar vs matriz de adjacência"
+              },
+              {
+                "id": "dsa_2_8_2",
+                "text": "BFS e DFS aplicados a Number of Islands — tratar grid como grafo implícito (4 vizinhos)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 10,
+        "dateRange": "05/10 a 11/10",
+        "topics": [
+          {
+            "id": "dsa_sem10",
+            "title": "Consolidação: Grafos/Grid",
+            "schedule": "Ter 06/10 + Qui 08/10 às 13h",
+            "estimatedTime": "2 sessões",
+            "priority": "📈 FASE 2",
+            "description": "Mais problemas de grid para solidificar BFS e DFS em matrizes.",
+            "subtopics": [
+              {
+                "id": "dsa_sem10_1",
+                "text": "Flood Fill (pintura em grid — DFS direto)"
+              },
+              {
+                "id": "dsa_sem10_2",
+                "text": "Rotting Oranges (BFS multi-source — se sentir confiança)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 11,
+        "dateRange": "12/10 a 18/10",
+        "topics": [
+          {
+            "id": "dsa_2_9_10",
+            "title": "2.9 Árvore Binária + 2.10 Recursão",
+            "schedule": "Ter 13/10 + Qui 15/10 às 13h",
+            "estimatedTime": "2 sessões",
+            "priority": "📈 FASE 2 — Probabilidade média",
+            "description": "Árvores introduzem recursão de forma natural. Saber os 3 percursos e validar BST são os problemas mais cobrados nessa categoria.",
+            "subtopics": [
+              {
+                "id": "dsa_2_9_1",
+                "text": "Percursos: in-order (esq->raiz->dir), pre-order (raiz->esq->dir), post-order (esq->dir->raiz)"
+              },
+              {
+                "id": "dsa_2_9_2",
+                "text": "Validate Binary Search Tree — usar limites min/max passados recursivamente"
+              },
+              {
+                "id": "dsa_2_10_1",
+                "text": "Fibonacci com e sem memoização — sentir visualmente a diferença de O(2^N) para O(N)"
+              },
+              {
+                "id": "dsa_2_10_2",
+                "text": "Subsets — gerar todos os subconjuntos via recursão com backtracking simples"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 12,
+        "dateRange": "19/10 a 25/10",
+        "topics": [
+          {
+            "id": "dsa_fim",
+            "title": "Conclusão Fase 2 + Opcionais",
+            "schedule": "Ter 20/10 + Qui 22/10 às 13h",
+            "estimatedTime": "2 sessões",
+            "priority": "📈 FASE 2",
+            "description": "Semana final do DSA. Revisão geral com simulado misto. Opcionais abaixo só se terminar antes do prazo.",
+            "subtopics": [
+              {
+                "id": "dsa_fim_1",
+                "text": "Simulado final: 1 problema de cada padrão (Fase 1 + Fase 2 misturados)"
+              },
+              {
+                "id": "dsa_fim_2",
+                "text": "📊 Opcional: DP básico (Climbing Stairs / Coin Change) se sobrar tempo"
+              },
+              {
+                "id": "dsa_fim_3",
+                "text": "📊 Opcional: Dijkstra ou Union-Find apenas para conhecimento — não é prioridade"
+              },
+              {
+                "id": "dsa_fim_4",
+                "text": "📊 Opcional: Trie (implementar insert e search) — só se quiser aprofundar"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "testes": {
+    "id": "testes",
+    "title": "Testes",
+    "emoji": "✅",
+    "order": 4,
+    "totalWeeks": 12,
+    "startDate": "07/08/2026",
+    "endDate": "25/10/2026",
+    "color": "#3b82f6",
+    "frequency": "Sexta-feira, às 13h",
+    "whyStudy": "Gap real e comprovável — hoje não há testes automatizados evidentes no portfólio. É cobrado tanto em pergunta teórica ('como você testaria isso?') quanto em teste prático/take-home. Também é a trilha com retorno direto de portfólio: aplicar no SafeWallet Core fortalece o projeto principal no GitHub.",
+    "feynmanPractice": "Para cada teste que você escrever, explique em voz alta o que ele está validando e por quê — não 'estou testando o método X', e sim 'estou garantindo que, se o saldo for insuficiente, o sistema lança uma exceção em vez de permitir a transação'. Isso treina a resposta para a pergunta clássica: 'como você garante que seu código funciona?'.",
+    "weeks": [
+      {
+        "weekNum": 1,
+        "dateRange": "03/08 a 09/08",
+        "topics": [
+          {
+            "id": "tst_3_1",
+            "title": "3.1 JUnit 5 Core",
+            "schedule": "Sexta, 07/08 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Fundamentos essenciais. Sem entender @BeforeEach e o padrão AAA, qualquer teste vira código confuso impossível de manter.",
+            "subtopics": [
+              {
+                "id": "tst_3_1_1",
+                "text": "Anotação @Test e ciclo de vida: @BeforeEach (antes de cada teste), @AfterEach, @BeforeAll, @AfterAll"
+              },
+              {
+                "id": "tst_3_1_2",
+                "text": "Assertions: assertEquals (valor esperado vs real), assertTrue (condição booleana), assertThrows (exceção esperada)"
+              },
+              {
+                "id": "tst_3_1_3",
+                "text": "Estrutura Arrange-Act-Assert (AAA): montar o cenário, executar a ação, verificar o resultado"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 2,
+        "dateRange": "10/08 a 16/08",
+        "topics": [
+          {
+            "id": "tst_app1",
+            "title": "3.1 Aplicação no SafeWallet Core",
+            "schedule": "Sexta, 14/08 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Aplicar JUnit 5 Core em funções reais do projeto — validações de regra de negócio são os candidatos ideais.",
+            "subtopics": [
+              {
+                "id": "tst_app1_1",
+                "text": "Identificar 3 funções utilitárias ou regras estáticas no SafeWallet Core para testar"
+              },
+              {
+                "id": "tst_app1_2",
+                "text": "Escrever 5-10 testes puros sem Mocks, usando somente JUnit 5"
+              },
+              {
+                "id": "tst_app1_3",
+                "text": "Feynman: Para cada teste, explicar em voz alta o que está protegendo de regressão"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 3,
+        "dateRange": "17/08 a 23/08",
+        "topics": [
+          {
+            "id": "tst_3_2",
+            "title": "3.2 Mockito Core",
+            "schedule": "Sexta, 21/08 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Mockito permite testar uma classe em isolamento substituindo suas dependências por objetos simulados. Sem Mockito, um teste de Service acaba virando um teste de integração.",
+            "subtopics": [
+              {
+                "id": "tst_3_2_1",
+                "text": "@Mock — criar um objeto simulado que responde às chamadas sem lógica real"
+              },
+              {
+                "id": "tst_3_2_2",
+                "text": "when(...).thenReturn(...) — definir o que o mock retorna para uma entrada específica"
+              },
+              {
+                "id": "tst_3_2_3",
+                "text": "verify(...) — confirmar que um método foi chamado no mock (ex: repositório.save() foi chamado 1 vez)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 4,
+        "dateRange": "24/08 a 30/08",
+        "topics": [
+          {
+            "id": "tst_app2",
+            "title": "3.2 Mockar Repository no SafeWallet",
+            "schedule": "Sexta, 28/08 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Criar testes de Service mockando o Repository. Esse é o padrão mais cobrado em take-home.",
+            "subtopics": [
+              {
+                "id": "tst_app2_1",
+                "text": "Escrever teste de um Service que depende de um Repository — mockar o Repository com @Mock"
+              },
+              {
+                "id": "tst_app2_2",
+                "text": "Testar o caminho feliz E o caminho de erro (ex: saldo insuficiente lança exceção)"
+              },
+              {
+                "id": "tst_app2_3",
+                "text": "Feynman: Explicar a diferença entre unit test e integration test"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 5,
+        "dateRange": "31/08 a 06/09",
+        "topics": [
+          {
+            "id": "tst_3_3",
+            "title": "3.3 JUnit Avançado",
+            "schedule": "Sexta, 04/09 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "@ParameterizedTest elimina duplicação: ao invés de 5 métodos @Test quase iguais, você escreve um único teste com 5 entradas de dados.",
+            "subtopics": [
+              {
+                "id": "tst_3_3_1",
+                "text": "@ParameterizedTest com @ValueSource e @CsvSource — testar múltiplos casos com um único método"
+              },
+              {
+                "id": "tst_3_3_2",
+                "text": "assertThrows com lambda — verificar que a exceção certa é lançada com a mensagem certa"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 6,
+        "dateRange": "07/09 a 13/09",
+        "topics": [
+          {
+            "id": "tst_app3",
+            "title": "3.3 Refatorar Testes Repetitivos",
+            "schedule": "Sexta, 11/09 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Pegar testes já escritos e transformar os que são quase iguais em @ParameterizedTest.",
+            "subtopics": [
+              {
+                "id": "tst_app3_1",
+                "text": "Identificar 2-3 testes repetitivos no SafeWallet e refatorar para @ParameterizedTest"
+              },
+              {
+                "id": "tst_app3_2",
+                "text": "Testar cenários de exceção com assertThrows — incluindo validação da mensagem da exceção"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 7,
+        "dateRange": "14/09 a 20/09",
+        "topics": [
+          {
+            "id": "tst_3_4",
+            "title": "3.4 Mockito Avançado",
+            "schedule": "Sexta, 18/09 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "@Spy é útil quando você quer manter o comportamento real de um objeto mas sobrescrever apenas alguns métodos. ArgumentCaptor captura o objeto exato que foi passado para um mock.",
+            "subtopics": [
+              {
+                "id": "tst_3_4_1",
+                "text": "@Spy vs @Mock — spy chama o método real, mock retorna o valor configurado; quando usar cada um"
+              },
+              {
+                "id": "tst_3_4_2",
+                "text": "ArgumentCaptor — capturar o objeto passado para o mock e fazer assertions sobre seus campos"
+              },
+              {
+                "id": "tst_3_4_3",
+                "text": "Estilo BDD com BDDMockito: given(...).willReturn(...) em vez de when(...).thenReturn(...)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 8,
+        "dateRange": "21/09 a 27/09",
+        "topics": [
+          {
+            "id": "tst_app4",
+            "title": "3.4 ArgumentCaptor em Prática",
+            "schedule": "Sexta, 25/09 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Usar ArgumentCaptor para validar o objeto completo que foi salvo no banco, não só se o método foi chamado.",
+            "subtopics": [
+              {
+                "id": "tst_app4_1",
+                "text": "Capturar o objeto passado para o .save() do Repository e verificar todos os campos importantes"
+              },
+              {
+                "id": "tst_app4_2",
+                "text": "Refatorar um teste existente para o estilo BDD (given/when/then)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 9,
+        "dateRange": "28/09 a 04/10",
+        "topics": [
+          {
+            "id": "tst_rev1",
+            "title": "Revisão — Fluxo Ponta a Ponta",
+            "schedule": "Sexta, 02/10 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Construir uma suíte de teste completa para um Controller + Service + Repository chain usando Mocks.",
+            "subtopics": [
+              {
+                "id": "tst_rev1_1",
+                "text": "Testar o fluxo completo de uma operação (ex: criar transação) com Mocks em cada camada"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 10,
+        "dateRange": "05/10 a 11/10",
+        "topics": [
+          {
+            "id": "tst_rev2",
+            "title": "Cobertura no Portfólio",
+            "schedule": "Sexta, 09/10 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Meta: ter testes visíveis no GitHub para o SafeWallet Core — isso aparece no perfil.",
+            "subtopics": [
+              {
+                "id": "tst_rev2_1",
+                "text": "Garantir que todos os Services principais têm pelo menos 1 teste feliz e 1 teste de erro"
+              },
+              {
+                "id": "tst_rev2_2",
+                "text": "Commit no GitHub com testes — visibilidade de portfólio"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 11,
+        "dateRange": "12/10 a 18/10",
+        "topics": [
+          {
+            "id": "tst_rev3",
+            "title": "Cenários de Falha",
+            "schedule": "Sexta, 16/10 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Simular falhas de dependências externas e garantir que o sistema responde corretamente.",
+            "subtopics": [
+              {
+                "id": "tst_rev3_1",
+                "text": "Mockar dependência que lança RuntimeException e verificar que o serviço trata corretamente"
+              },
+              {
+                "id": "tst_rev3_2",
+                "text": "Feynman: Como você garantiria a resiliência do SafeWallet Core via testes?"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 12,
+        "dateRange": "19/10 a 25/10",
+        "topics": [
+          {
+            "id": "tst_fim",
+            "title": "Conclusão Testes",
+            "schedule": "Sexta, 23/10 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Auditoria final: garantir que o portfólio no GitHub mostra claramente a existência de testes.",
+            "subtopics": [
+              {
+                "id": "tst_fim_1",
+                "text": "Auditoria final do repositório SafeWallet Core no GitHub"
+              },
+              {
+                "id": "tst_fim_2",
+                "text": "Feynman de 90s: como você testaria uma API REST do zero?"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "sql": {
+    "id": "sql",
+    "title": "SQL",
+    "emoji": "🗄️",
+    "order": 5,
+    "totalWeeks": 12,
+    "startDate": "08/08/2026",
+    "endDate": "24/10/2026",
+    "color": "#06b6d4",
+    "frequency": "Sábado, 13h-13h50 (50min)",
+    "whyStudy": "Citado com frequência em relatos de entrevista júnior. Você já usa PostgreSQL nos projetos, mas não há treino ativo de escrever query sob pressão — é uma trilha barata (pouco tempo) com retorno alto.",
+    "feynmanPractice": "Depois de escrever uma query, explique em voz alta linha por linha o que ela faz, como se estivesse ensinando alguém que nunca viu SQL. Se a explicação de uma linha for 'isso aqui eu não sei bem por que funciona', volte e estude só aquela cláusula.",
+    "weeks": [
+      {
+        "weekNum": 1,
+        "dateRange": "08/08 (Sáb)",
+        "topics": [
+          {
+            "id": "sql_4_1a",
+            "title": "4.1 INNER JOIN",
+            "schedule": "Sábado, 08/08 às 13h (13h-13h50, 50min)",
+            "estimatedTime": "50 minutos",
+            "description": "INNER JOIN retorna somente as linhas que têm correspondência nas duas tabelas — a interseção do conjunto.",
+            "subtopics": [
+              {
+                "id": "sql_4_1a_1",
+                "text": "INNER JOIN: retorna somente linhas com correspondência em ambas as tabelas"
+              },
+              {
+                "id": "sql_4_1a_2",
+                "text": "Escrever 2 queries com INNER JOIN usando o banco do SafeWallet (ex: usuário + transações)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 2,
+        "dateRange": "15/08 (Sáb)",
+        "topics": [
+          {
+            "id": "sql_4_1b",
+            "title": "4.1 LEFT e RIGHT JOIN",
+            "schedule": "Sábado, 15/08 às 13h (13h-13h50, 50min)",
+            "estimatedTime": "50 minutos",
+            "description": "LEFT JOIN retorna tudo da tabela esquerda mesmo sem correspondência — ideal para 'todos os usuários, mesmo os sem transações'.",
+            "subtopics": [
+              {
+                "id": "sql_4_1b_1",
+                "text": "LEFT JOIN — tudo da esquerda, mesmo sem correspondência à direita (NULL para colunas da direita)"
+              },
+              {
+                "id": "sql_4_1b_2",
+                "text": "RIGHT JOIN — espelho do LEFT; quando usar (geralmente LEFT é preferido para clareza)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 3,
+        "dateRange": "22/08 (Sáb)",
+        "topics": [
+          {
+            "id": "sql_4_2a",
+            "title": "4.2 GROUP BY e Funções de Agregação",
+            "schedule": "Sábado, 22/08 às 13h (13h-13h50, 50min)",
+            "estimatedTime": "50 minutos",
+            "description": "GROUP BY é a base de qualquer relatório. Sem ele, COUNT, SUM e AVG operam em toda a tabela.",
+            "subtopics": [
+              {
+                "id": "sql_4_2a_1",
+                "text": "GROUP BY com COUNT — contar transações por usuário"
+              },
+              {
+                "id": "sql_4_2a_2",
+                "text": "GROUP BY com SUM e AVG — soma e média de valores por categoria"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 4,
+        "dateRange": "29/08 (Sáb)",
+        "topics": [
+          {
+            "id": "sql_4_2b",
+            "title": "4.2 WHERE vs HAVING",
+            "schedule": "Sábado, 29/08 às 13h (13h-13h50, 50min)",
+            "estimatedTime": "50 minutos",
+            "description": "WHERE filtra linhas individuais antes do agrupamento. HAVING filtra grupos depois. A diferença impacta diretamente performance e resultado.",
+            "subtopics": [
+              {
+                "id": "sql_4_2b_1",
+                "text": "WHERE filtra antes do GROUP BY — não pode usar funções de agregação"
+              },
+              {
+                "id": "sql_4_2b_2",
+                "text": "HAVING filtra depois do GROUP BY — pode usar COUNT, SUM, etc. Ex: HAVING COUNT(*) > 5"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 5,
+        "dateRange": "05/09 (Sáb)",
+        "topics": [
+          {
+            "id": "sql_4_3a",
+            "title": "4.3 Subqueries Básicas",
+            "schedule": "Sábado, 05/09 às 13h (13h-13h50, 50min)",
+            "estimatedTime": "50 minutos",
+            "description": "Subquery é uma query dentro de outra. A mais comum é dentro do WHERE para filtrar com base em um conjunto dinâmico.",
+            "subtopics": [
+              {
+                "id": "sql_4_3a_1",
+                "text": "Subquery no WHERE: SELECT * FROM pedidos WHERE usuario_id IN (SELECT id FROM usuarios WHERE ativo = true)"
+              },
+              {
+                "id": "sql_4_3a_2",
+                "text": "Subquery no SELECT (subquery escalar): retorna um único valor por linha"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 6,
+        "dateRange": "12/09 (Sáb)",
+        "topics": [
+          {
+            "id": "sql_4_3b",
+            "title": "4.3 JOIN vs Subquery",
+            "schedule": "Sábado, 12/09 às 13h (13h-13h50, 50min)",
+            "estimatedTime": "50 minutos",
+            "description": "Nem sempre a subquery é melhor que JOIN. Saber quando uma é mais clara ou mais performática é o que o entrevistador quer ouvir.",
+            "subtopics": [
+              {
+                "id": "sql_4_3b_1",
+                "text": "Quando subquery é mais clara (filtro simples em subcondição)"
+              },
+              {
+                "id": "sql_4_3b_2",
+                "text": "Quando JOIN é melhor (múltiplas colunas da tabela relacionada necessárias no resultado)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 7,
+        "dateRange": "19/09 (Sáb)",
+        "topics": [
+          {
+            "id": "sql_4_4a",
+            "title": "4.4 Índices — Como funcionam",
+            "schedule": "Sábado, 19/09 às 13h (13h-13h50, 50min)",
+            "estimatedTime": "50 minutos",
+            "description": "Um índice é uma estrutura de busca auxiliar (geralmente B-Tree) que permite encontrar linhas sem varrer a tabela inteira.",
+            "subtopics": [
+              {
+                "id": "sql_4_4a_1",
+                "text": "Por que um índice acelera busca: comparar full table scan O(N) vs B-Tree O(log N)"
+              },
+              {
+                "id": "sql_4_4a_2",
+                "text": "Índice em coluna de chave estrangeira: quando é criado automaticamente e quando não é"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 8,
+        "dateRange": "26/09 (Sáb)",
+        "topics": [
+          {
+            "id": "sql_4_4b",
+            "title": "4.4 Índices — Trade-offs",
+            "schedule": "Sábado, 26/09 às 13h (13h-13h50, 50min)",
+            "estimatedTime": "50 minutos",
+            "description": "Índice não é gratuito: ocupa espaço e torna INSERT/UPDATE/DELETE mais lentos porque o índice precisa ser atualizado.",
+            "subtopics": [
+              {
+                "id": "sql_4_4b_1",
+                "text": "Quando NAO criar índice: tabelas pequenas, colunas de baixa cardinalidade (ex: booleano), tabelas de escrita intensiva"
+              },
+              {
+                "id": "sql_4_4b_2",
+                "text": "Índice composto: quando (coluna_a, coluna_b) juntos são melhores que dois índices separados"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 9,
+        "dateRange": "03/10 (Sáb)",
+        "topics": [
+          {
+            "id": "sql_rev1",
+            "title": "Prática: JOIN + Agregação (HackerRank)",
+            "schedule": "Sábado, 03/10 às 13h (13h-13h50, 50min)",
+            "estimatedTime": "50 minutos",
+            "description": "Resolver problemas reais de SQL em plataforma de prática.",
+            "subtopics": [
+              {
+                "id": "sql_rev1_1",
+                "text": "Resolver 2 problemas de JOIN no HackerRank ou LeetCode SQL"
+              },
+              {
+                "id": "sql_rev1_2",
+                "text": "Feynman: Explicar cada query linha por linha como se ensinasse SQL pela primeira vez"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 10,
+        "dateRange": "10/10 (Sáb)",
+        "topics": [
+          {
+            "id": "sql_rev2",
+            "title": "Prática: Agregação Avançada",
+            "schedule": "Sábado, 10/10 às 13h (13h-13h50, 50min)",
+            "estimatedTime": "50 minutos",
+            "description": "Foco em GROUP BY + HAVING em cenários mais complexos.",
+            "subtopics": [
+              {
+                "id": "sql_rev2_1",
+                "text": "Resolver problema com GROUP BY + HAVING + JOIN combinados"
+              },
+              {
+                "id": "sql_rev2_2",
+                "text": "Usar o banco do SafeWallet para gerar um relatório real (ex: total por categoria por mês)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 11,
+        "dateRange": "17/10 (Sáb)",
+        "topics": [
+          {
+            "id": "sql_rev3",
+            "title": "Prática com Banco Real (SafeWallet)",
+            "schedule": "Sábado, 17/10 às 13h (13h-13h50, 50min)",
+            "estimatedTime": "50 minutos",
+            "description": "Aplicar os conhecimentos no banco PostgreSQL real do seu projeto.",
+            "subtopics": [
+              {
+                "id": "sql_rev3_1",
+                "text": "Escrever 3 queries úteis para o SafeWallet (relatórios, auditorias, buscas complexas)"
+              },
+              {
+                "id": "sql_rev3_2",
+                "text": "Identificar onde um índice ajudaria e criar via EXPLAIN ANALYZE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 12,
+        "dateRange": "24/10 (Sáb)",
+        "topics": [
+          {
+            "id": "sql_fim",
+            "title": "Conclusão SQL",
+            "schedule": "Sábado, 24/10 às 13h (13h-13h50, 50min)",
+            "estimatedTime": "50 minutos",
+            "description": "Semana final do SQL.",
+            "subtopics": [
+              {
+                "id": "sql_fim_1",
+                "text": "Feynman de 60s para cada tópico: JOIN, Agregação, Subquery, Índice"
+              },
+              {
+                "id": "sql_fim_2",
+                "text": "Qual query seria mais eficiente para buscar transações de alto valor de usuários ativos? Desenhar em papel e justificar"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "storytelling": {
+    "id": "storytelling",
+    "title": "Storytelling",
+    "emoji": "🎙️",
+    "order": 6,
+    "totalWeeks": 6,
+    "startDate": "19/09/2026",
+    "endDate": "24/10/2026",
+    "color": "#a855f7",
+    "frequency": "Sábado, 13h50-14h20 (30min — a partir de 19/09)",
+    "whyStudy": "Com o portfólio que você tem (CityShield, SafeWallet Core, Resilient Audit Batch), o entrevistador vai querer ouvir você explicar decisões com fluência. Isso pesa tanto quanto resolver um problema novo na hora — e não existia espaço reservado para isso no plano anterior.",
+    "feynmanPractice": "Grave um áudio de 60-90 segundos por projeto cobrindo os 4 pontos (Pitch, Arquitetura, Desafio, Impacto) em sequência natural, sem ler roteiro. Repita até sair fluido sem parecer decorado — a diferença é que decorado soa igual toda vez, fluido soa natural mesmo se você mudar a ordem.",
+    "weeks": [
+      {
+        "weekNum": 7,
+        "dateRange": "19/09 (Sáb)",
+        "topics": [
+          {
+            "id": "sty_5_1",
+            "title": "5.1 Elevator Pitch — SafeWallet Core",
+            "schedule": "Sábado, 19/09 às 13h50 (13h50-14h20, 30min)",
+            "estimatedTime": "30 minutos",
+            "description": "O Elevator Pitch é a resposta de 20 segundos para 'me fala do seu projeto'. Precisa ser direto, claro e mostrar valor sem jargão.",
+            "subtopics": [
+              {
+                "id": "sty_5_1_1",
+                "text": "O que o SafeWallet Core faz, para quem serve, e qual problema resolve (resposta de 20 segundos)"
+              },
+              {
+                "id": "sty_5_1_2",
+                "text": "Gravar áudio, ouvir e identificar onde engasgou ou usou jargão sem explicar"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 8,
+        "dateRange": "26/09 (Sáb)",
+        "topics": [
+          {
+            "id": "sty_5_2",
+            "title": "5.2 Decisões de Arquitetura — SafeWallet",
+            "schedule": "Sábado, 26/09 às 13h50 (13h50-14h20, 30min)",
+            "estimatedTime": "30 minutos",
+            "description": "Entrevistadores adoram perguntar 'por que você escolheu X e não Y?' — porque a resposta revela se você pensou ou apenas copiou um tutorial.",
+            "subtopics": [
+              {
+                "id": "sty_5_2_1",
+                "text": "Por que Spring Boot + PostgreSQL e não outra stack? Justificativa técnica, não 'porque aprendi assim'"
+              },
+              {
+                "id": "sty_5_2_2",
+                "text": "Um trade-off real: ex: escolher consistência (transações ACID) em detrimento de performance"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 9,
+        "dateRange": "03/10 (Sáb)",
+        "topics": [
+          {
+            "id": "sty_5_3",
+            "title": "5.3 Maior Desafio Técnico — SafeWallet",
+            "schedule": "Sábado, 03/10 às 13h50 (13h50-14h20, 30min)",
+            "estimatedTime": "30 minutos",
+            "description": "A narrativa STAR (Situação, Tarefa, Ação, Resultado) é o formato que entrevistadores esperam para histórias de problemas técnicos.",
+            "subtopics": [
+              {
+                "id": "sty_5_3_1",
+                "text": "Descrever um problema real do SafeWallet (não 'tive um bug', mas 'ao processar lote de 1M itens, o algoritmo ingênuo demorava 45min')"
+              },
+              {
+                "id": "sty_5_3_2",
+                "text": "Explicar o processo de chegar na solução — não só o resultado, mas o raciocínio"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 10,
+        "dateRange": "10/10 (Sáb)",
+        "topics": [
+          {
+            "id": "sty_5_4",
+            "title": "5.4 Resultado / Impacto — SafeWallet",
+            "schedule": "Sábado, 10/10 às 13h50 (13h50-14h20, 30min)",
+            "estimatedTime": "30 minutos",
+            "description": "Métricas concretas transformam 'fiz um projeto' em 'resolvi um problema com resultado mensurável'.",
+            "subtopics": [
+              {
+                "id": "sty_5_4_1",
+                "text": "Traduzir o benchmark 0,309s para 1M transações em linguagem de impacto de negócio"
+              },
+              {
+                "id": "sty_5_4_2",
+                "text": "Montar o pitch completo do SafeWallet Core cobrindo os 4 blocos em 90 segundos"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 11,
+        "dateRange": "17/10 (Sáb)",
+        "topics": [
+          {
+            "id": "sty_sim1",
+            "title": "Simulação 1 — CityShield + Audit Batch",
+            "schedule": "Sábado, 17/10 às 13h50 (13h50-14h20, 30min)",
+            "estimatedTime": "30 minutos",
+            "description": "Rotacionar para os outros projetos do portfólio com o mesmo framework dos 4 blocos.",
+            "subtopics": [
+              {
+                "id": "sty_sim1_1",
+                "text": "Pitch de 90s do CityShield: problema, stack, desafio técnico, impacto"
+              },
+              {
+                "id": "sty_sim1_2",
+                "text": "Pitch de 90s do Resilient Audit Batch: o que é, por que Spring Batch, resultado"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 12,
+        "dateRange": "24/10 (Sáb)",
+        "topics": [
+          {
+            "id": "sty_sim2",
+            "title": "Simulação Final — Rotação Completa",
+            "schedule": "Sábado, 24/10 às 13h50 (13h50-14h20, 30min)",
+            "estimatedTime": "30 minutos",
+            "description": "Semana final. Apresentar os 3 projetos em sequência natural como se fosse uma entrevista real.",
+            "subtopics": [
+              {
+                "id": "sty_sim2_1",
+                "text": "Apresentar SafeWallet -> CityShield -> Audit Batch em 5 minutos totais"
+              },
+              {
+                "id": "sty_sim2_2",
+                "text": "Identificar qual projeto apresentar primeiro dependendo do foco da vaga (fintech vs cidade inteligente vs backend pesado)"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+};
+
+// -- Estado -------------------------------------------------------------------
+const SKEY = 'hubGabrielV3';
+let activeTab = 'ingles', curW = 0, curD = null, curLid = null;
+let ccOpen = true;
+
+const THEME = {
+  ingles:      {color:'#06b6d4', grad:'linear-gradient(to right,#10b981,#06b6d4)'},
+  javacore:    {color:'#eab308', grad:'linear-gradient(to right,#facc15,#eab308)'},
+  dsa:         {color:'#ef4444', grad:'linear-gradient(to right,#f87171,#ef4444)'},
+  testes:      {color:'#3b82f6', grad:'linear-gradient(to right,#60a5fa,#3b82f6)'},
+  sql:         {color:'#06b6d4', grad:'linear-gradient(to right,#22d3ee,#06b6d4)'},
+  storytelling:{color:'#a855f7', grad:'linear-gradient(to right,#c084fc,#a855f7)'},
+};
+
+// -- Como Começar toggle ------------------------------------------------------
+function toggleCC() {
+  ccOpen = !ccOpen;
+  const content = document.getElementById('ccContent');
+  const arrow   = document.getElementById('ccArrow');
+  if(content) content.classList.toggle('hidden', !ccOpen);
+  if(arrow)   arrow.innerHTML = ccOpen ? '&#9660; recolher' : '&#9654; expandir';
+}
+
+// -- Persistência -------------------------------------------------------------
+const store = () => { const s=localStorage.getItem(SKEY); return s?JSON.parse(s):{}; };
+const isDone = id => !!store()[id];
+const setDone = (id, v) => { const c=store(); if(v) c[id]=true; else delete c[id]; localStorage.setItem(SKEY,JSON.stringify(c)); };
+
+// -- Progresso ----------------------------------------------------------------
+function trackTotal(tid) {
+  if(tid==='ingles') return ALL.length;
+  const tr=NEW_TRACKS[tid]; if(!tr) return 0;
+  return tr.weeks.reduce((a,w)=>a+w.topics.reduce((b,t)=>b+(t.subtopics?t.subtopics.length:1),0),0);
+}
+function trackDone(tid) {
+  if(tid==='ingles') { let d=0; ALL.forEach(l=>{if(isDone(l.id))d++;}); return d; }
+  const tr=NEW_TRACKS[tid]; if(!tr) return 0;
+  let d=0;
+  tr.weeks.forEach(w=>w.topics.forEach(t=>{
+    if(t.subtopics&&t.subtopics.length) t.subtopics.forEach(st=>{if(isDone(st.id))d++;});
+    else if(isDone(t.id)) d++;
+  }));
+  return d;
+}
+function updateProgress() {
+  const tabs=['ingles','javacore','dsa','testes','sql','storytelling'];
+  let gt=0,gd=0;
+  tabs.forEach(t=>{gt+=trackTotal(t);gd+=trackDone(t);});
+  const gp=gt>0?Math.round(gd/gt*100):0;
+  document.getElementById('pg-text').textContent=`${gd} de ${gt}`;
+  document.getElementById('pg-pct').textContent=`(${gp}%)`;
+  document.getElementById('pg-bar').style.width=gp+'%';
+  const tt=trackTotal(activeTab),td=trackDone(activeTab);
+  const tp=tt>0?Math.round(td/tt*100):0;
+  const unit=activeTab==='ingles'?'aulas':'sub-t\u00f3picos';
+  document.getElementById('pt-text').textContent=`${td} de ${tt} ${unit}`;
+  document.getElementById('pt-pct').textContent=`(${tp}%)`;
+  document.getElementById('pt-bar').style.width=tp+'%';
+}
+
+// -- Troca de Aba -------------------------------------------------------------
+function switchTab(tid) {
+  activeTab=tid; curW=0; curD=null;
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+    b.classList.remove('border-transparent');
+    b.classList.add('border-transparent');
+    b.style.color=''; b.style.borderColor='';
+  });
+  const th=THEME[tid];
+  document.documentElement.style.setProperty('--tc',th.color);
+  document.documentElement.style.setProperty('--tg',th.grad);
+  const btn=document.getElementById('tab-'+tid);
+  btn.style.color=th.color; btn.style.borderBottomColor=th.color;
+  // Mostrar painel Bloco do Sabado apenas para SQL e Storytelling
+  const sbp=document.getElementById('saturdayBlockPanel');
+  if(sbp) sbp.classList.toggle('hidden', tid!=='sql' && tid!=='storytelling');
+  updateHeader(tid);
+  renderMain();
+}
+
+function updateHeader(tid) {
+  const sub=document.getElementById('headerSub');
+  const bdg=document.getElementById('headerBadges');
+  if(tid==='ingles'){
+    sub.textContent='\u2460 Em andamento \u00b7 16 Semanas \u00b7 225 Aulas \u00b7 Manh\u00e3 (todo dia)';
+    bdg.innerHTML=badge('In\u00edcio','21 Jul 2026','text-cyan-400')+badge('T\u00e9rmino','10 Nov 2026','text-emerald-400')+badge('Ritmo','2/dia \u00b7 manh\u00e3','text-purple-400');
+  } else {
+    const tr=NEW_TRACKS[tid];
+    sub.textContent=`${tr.emoji} Ordem #${tr.order} \u00b7 ${tr.totalWeeks} semanas \u00b7 ${tr.frequency}`;
+    bdg.innerHTML=badge('In\u00edcio',tr.startDate,'text-cyan-400')+badge('T\u00e9rmino',tr.endDate,'text-emerald-400');
+  }
+}
+function badge(label,val,cls){return `<div class="bg-[#0f172a] border border-slate-700 rounded-md px-3 py-1.5 text-center"><div class="text-[9px] text-slate-400 font-bold tracking-wider uppercase mono">${label}</div><div class="text-xs font-bold ${cls}">${val}</div></div>`;}
+
+// -- Render Principal ---------------------------------------------------------
+function renderMain(){
+  updateProgress();
+  const mc=document.getElementById('mainContainer');
+  mc.innerHTML='';
+  if(activeTab==='ingles') renderIngles(mc);
+  else renderTrack(mc,activeTab);
+}
+
+// -- Inglês -------------------------------------------------------------------
+function renderIngles(c){
+  c.innerHTML=`
+  <div class="lg:col-span-3 flex flex-col gap-4">
+    <div class="bg-[#1e293b] border border-slate-700/50 rounded-xl p-3">
+      <label class="text-[9px] text-slate-400 font-bold tracking-wider uppercase mono block mb-2 px-1">Semana</label>
+      <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1" id="weekContainer"></div>
+    </div>
+    <div class="bg-[#1e293b] border border-slate-700/50 rounded-xl p-3">
+      <label class="text-[9px] text-slate-400 font-bold tracking-wider uppercase mono block mb-2 px-1">Dia</label>
+      <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1" id="dayContainer"></div>
+    </div>
+    <div class="bg-gradient-to-r from-[#1e293b] to-[#1e293b]/40 border border-slate-700/50 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div><h2 id="weekTitle" class="text-lg sm:text-xl font-bold">&#8212;</h2><p id="weekSub" class="text-xs text-slate-400 mt-1">&#8212;</p></div>
+      <div id="weekBadges" class="flex flex-wrap gap-1.5"></div>
+    </div>
+    <div id="lessonsContainer" class="flex flex-col gap-4"></div>
+    <div class="bg-[#1e293b] border-t-2 border-dashed border-slate-700 rounded-xl p-4 text-center mono text-[10px] text-slate-500 mt-4">
+      Trilha Ingl&#234;s Kultivi &#183; Gabriel Falc&#227;o &#183; 225 Aulas &#183; 23 M&#243;dulos &#183; 16 Semanas
+    </div>
+  </div>
+  <div class="flex flex-col gap-4 mt-4 lg:mt-0">
+    <div class="bg-[#1e293b] border border-slate-700/50 rounded-xl p-4">
+      <h3 class="text-[10px] font-bold tracking-wider uppercase text-slate-400 mb-3 mono">&#x1F5FA;&#xFE0F; Mapa das 16 Semanas</h3>
+      <div id="weekMapContainer" class="flex flex-col gap-1 max-h-[700px] overflow-y-auto no-scrollbar"></div>
+    </div>
+  </div>`;
+  renderWeekPills(); renderDayPills(); renderWeekHeader(); renderLessons(); renderWeekMap();
+}
+
+function renderWeekPills(){
+  const c=document.getElementById('weekContainer'); if(!c) return; c.innerHTML='';
+  SCHED.forEach((w,i)=>{
+    const b=document.createElement('div'); b.className=`wpill ${i===curW?'active':''}`;
+    b.textContent=`S${i+1}`; b.onclick=()=>selWeek(i); c.appendChild(b);
+  });
+}
+function renderDayPills(){
+  const c=document.getElementById('dayContainer'); if(!c) return; c.innerHTML='';
+  const week=SCHED[curW];
+  const all=document.createElement('div'); all.className=`dpill ${curD===null?'active':''}`;
+  all.textContent='Vis\u00e3o Semanal'; all.onclick=()=>selDay(null); c.appendChild(all);
+  Object.entries(week.days).forEach(([key,data])=>{
+    let done=0; data.lessons.forEach(l=>{if(isDone(l.id))done++;});
+    const tot=data.lessons.length; let scls='';
+    if(done===tot&&tot>0) scls='done'; else if(done>0) scls='partial';
+    const b=document.createElement('div'); b.className=`dpill ${key===curD?'active':''} ${scls}`;
+    b.onclick=()=>selDay(key);
+    const label=key==='conclusao'?'&#127891;':DLS[DK.indexOf(key)];
+    b.innerHTML=`<span>${label}</span><span class="opacity-50 font-normal">&#183;${data.dayNum}</span>`;
+    c.appendChild(b);
+  });
+}
+function renderWeekHeader(){
+  const week=SCHED[curW]; const t=document.getElementById('weekTitle');
+  const s=document.getElementById('weekSub'); const bd=document.getElementById('weekBadges');
+  if(!t) return;
+  if(curD===null){
+    t.textContent=`Semana ${curW+1}`; s.textContent=WDESC[curW];
+    bd.innerHTML=week.mods.map(m=>`<span class="text-[9px] mono px-2 py-0.5 rounded bg-[#0f172a] border border-slate-700/60 font-bold" style="color:${m.c}">${m.e} M${m.id}</span>`).join('');
+  } else {
+    const d=week.days[curD]; const lbl=curD==='conclusao'?'Conclus\u00e3o':DLF[DK.indexOf(curD)];
+    t.textContent=`${lbl} \u00b7 Dia ${d.dayNum}`; s.textContent=`${fmtDate(d.date)} \u00b7 Semana ${curW+1}`;
+    bd.innerHTML=`<span class="text-[10px] mono px-2 py-1 rounded bg-[#0f172a] text-slate-300 border border-slate-600 font-bold">${d.lessons.length} aulas</span>`;
+  }
+}
+function renderLessons(){
+  const c=document.getElementById('lessonsContainer'); if(!c) return; c.innerHTML='';
+  const week=SCHED[curW];
+  if(curD===null){
+    const grid=document.createElement('div'); grid.className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 fadein';
+    Object.entries(week.days).forEach(([key,dd])=>{
+      let done=0; dd.lessons.forEach(l=>{if(isDone(l.id))done++;});
+      const tot=dd.lessons.length; const allDone=done===tot&&tot>0;
+      const card=document.createElement('div');
+      card.className=`bg-[#1e293b] border rounded-xl p-3 cursor-pointer transition-all ${allDone?'border-emerald-500/40 bg-emerald-500/5':'border-slate-700/50 hover:border-slate-500/60'}`;
+      card.onclick=()=>selDay(key);
+      const lbl=key==='conclusao'?'Conclus\u00e3o':DLS[DK.indexOf(key)];
+      card.innerHTML=`<div class="flex justify-between items-center mb-2"><div class="text-[10px] mono font-bold ${allDone?'text-emerald-400':'text-slate-300'}">${lbl}&#183;Dia ${dd.dayNum}</div><div class="text-[9px] mono ${allDone?'text-emerald-500':'text-slate-500'}">${fmtDate(dd.date)}</div></div>${dd.lessons.map(l=>`<div class="mb-1.5 p-2 bg-[#0f172a] rounded-lg border ${isDone(l.id)?'border-emerald-500/30':'border-slate-700/40'}"><div class="text-[9px] mono font-bold mb-0.5" style="color:${l.modColor}">${l.modEmoji} M${l.modId}&#183;Aula ${l.num}/${l.total}</div><div class="text-[11px] text-slate-200 font-semibold leading-tight ${isDone(l.id)?'line-through opacity-60':''}">${l.title}</div></div>`).join('')}`;
+      grid.appendChild(card);
+    }); c.appendChild(grid); return;
+  }
+  const dd=week.days[curD];
+  dd.lessons.forEach(lesson=>{
+    const done=isDone(lesson.id); const card=document.createElement('div');
+    card.className=`bg-[#1e293b] border rounded-xl p-4 sm:p-5 cursor-pointer hover:shadow-xl transition-all duration-200 ${done?'lesson-done border-emerald-500/30':'border-slate-700/50 hover:border-slate-500/60'}`;
+    card.onclick=()=>openInglesModal(lesson.id);
+    card.innerHTML=`<div class="flex items-start gap-3 mb-4"><div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0" style="background:${lesson.modColor}20;border:1px solid ${lesson.modColor}35">${lesson.modEmoji}</div><div><div class="text-[10px] mono font-bold" style="color:${lesson.modColor}">M${lesson.modId}&#183;Aula ${lesson.num}/${lesson.total}</div><div class="text-[9px] text-slate-500 mono">${lesson.modTitle}</div></div></div><h3 class="lesson-title text-base sm:text-lg font-bold text-slate-100 leading-snug mb-4">${lesson.title}</h3><button onclick="event.stopPropagation();qToggle('${lesson.id}')" class="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${done?'bg-emerald-500/15 border border-emerald-500/35 text-emerald-400':'bg-slate-700/40 border border-slate-600/60 text-slate-300 hover:bg-slate-700 hover:text-white'}">${done?'&#x2705; Assistida':'&#x25CB; Marcar como Assistida'}</button>`;
+    c.appendChild(card);
+  });
+}
+function renderWeekMap(){
+  const el=document.getElementById('weekMapContainer'); if(!el) return; el.innerHTML='';
+  SCHED.forEach((week,i)=>{
+    let done=0,tot=0;
+    Object.values(week.days).forEach(d=>d.lessons.forEach(l=>{tot++;if(isDone(l.id))done++;}));
+    const pct=tot>0?Math.round(done/tot*100):0; const isActive=i===curW; const allDone=done===tot&&tot>0;
+    const row=document.createElement('div'); row.className=`flex items-center gap-2 p-1.5 rounded-lg cursor-pointer transition-all ${isActive?'bg-[#0f172a]/80 border border-cyan-500/25':'hover:bg-[#0f172a]/40'}`;
+    row.onclick=()=>selWeek(i);
+    row.innerHTML=`<div class="text-[10px] mono font-bold w-5 shrink-0 ${isActive?'text-cyan-400':allDone?'text-emerald-400':'text-slate-500'}">S${i+1}</div><div class="flex-1 min-w-0"><div class="text-[9px] text-slate-400 truncate">${WDESC[i]}</div><div class="flex items-center gap-1 mt-0.5"><div class="flex-1 bg-slate-800 h-1 rounded-full overflow-hidden"><div class="h-full rounded-full transition-all" style="width:${pct}%;background:${allDone?'#10b981':'#06b6d4'}"></div></div><span class="text-[8px] mono text-slate-500 shrink-0">${done}/${tot}</span></div></div>`;
+    el.appendChild(row);
+  });
+}
+function selWeek(i){curW=i;curD=null;renderMain();}
+function selDay(k){curD=k;renderMain();}
+function qToggle(id){setDone(id,!isDone(id));renderMain();}
+
+// -- Novas Trilhas ------------------------------------------------------------
+function renderTrack(container, tid) {
+  const tr=NEW_TRACKS[tid];
+  container.innerHTML=`
+  <div class="lg:col-span-3 flex flex-col gap-4">
+    <div class="bg-[#1e293b] border border-slate-700/50 rounded-xl p-3">
+      <label class="text-[9px] text-slate-400 font-bold tracking-wider uppercase mono block mb-2 px-1">Selecione a Semana</label>
+      <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1" id="newWeekPills"></div>
+    </div>
+    <div class="bg-gradient-to-r from-[#1e293b] to-[#1e293b]/40 border border-slate-700/50 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div><h2 id="nwTitle" class="text-lg sm:text-xl font-bold">&#8212;</h2><p id="nwDate" class="text-xs text-slate-400 mt-1">&#8212;</p></div>
+      <div id="nwBadges" class="flex flex-wrap gap-1.5"></div>
+    </div>
+    <div id="newTopicsContainer" class="flex flex-col gap-4"></div>
+  </div>
+  <div class="flex flex-col gap-4 mt-4 lg:mt-0">
+    <div class="bg-[#1e293b] border border-slate-700/50 rounded-xl p-4">
+      <h3 class="text-[10px] font-bold tracking-wider uppercase text-slate-400 mb-3 mono">&#x1F5FA;&#xFE0F; Mapa de Progresso</h3>
+      <div id="newWeekMap" class="flex flex-col gap-1 max-h-[700px] overflow-y-auto no-scrollbar"></div>
+    </div>
+  </div>`;
+  renderNewWeekPills(tr);
+  renderNewWeekHeader(tr);
+  renderNewTopics(tr);
+  renderNewWeekMap(tr);
+}
+
+function renderNewWeekPills(tr){
+  const c=document.getElementById('newWeekPills'); if(!c) return; c.innerHTML='';
+  tr.weeks.forEach((w,i)=>{
+    const b=document.createElement('div'); b.className=`wpill ${i===curW?'active':''}`;
+    b.textContent=`S${w.weekNum}`; b.onclick=()=>{curW=i;renderMain();}; c.appendChild(b);
+  });
+}
+function renderNewWeekHeader(tr){
+  const week=tr.weeks[curW]; if(!week) return;
+  document.getElementById('nwTitle').textContent=`Semana ${week.weekNum}`;
+  document.getElementById('nwDate').textContent=week.dateRange;
+  document.getElementById('nwBadges').innerHTML=`<span class="text-[10px] mono px-2 py-1 rounded bg-[#0f172a] text-slate-300 border border-slate-600 font-bold">${week.topics.length} assunto(s)</span>`;
+}
+function renderNewTopics(tr){
+  const c=document.getElementById('newTopicsContainer'); if(!c) return; c.innerHTML='';
+  const week=tr.weeks[curW]; if(!week) return;
+  week.topics.forEach(t=>{
+    let tot=t.subtopics?t.subtopics.length:1, done=0;
+    if(t.subtopics&&t.subtopics.length) t.subtopics.forEach(s=>{if(isDone(s.id))done++;});
+    else if(isDone(t.id)) done++;
+    const pct=Math.round(done/tot*100); const comp=done===tot;
+    const card=document.createElement('div');
+    card.className=`bg-[#1e293b] border rounded-xl p-4 sm:p-5 flex flex-col cursor-pointer hover:shadow-xl transition-all duration-200 ${comp?'lesson-done border-emerald-500/30':'border-slate-700/50 hover:border-slate-500/60'}`;
+    card.onclick=()=>openTrackModal(tr.id,t.id);
+    const priHtml=t.priority?`<span class="text-[10px] mono px-2 py-0.5 rounded bg-[#0f172a] border border-slate-700">${t.priority}</span>`:'';
+    card.innerHTML=`
+      <div class="flex items-start justify-between gap-3 mb-3">
+        <div class="text-[10px] mono font-bold px-2 py-1 rounded border border-slate-700/50 text-slate-300 bg-[#0f172a]">&#9201;&#65039; ${t.estimatedTime}</div>
+        ${priHtml}
+      </div>
+      <div class="text-[10px] mono text-slate-500 mb-1">${t.schedule||''}</div>
+      <h3 class="lesson-title text-base sm:text-lg font-bold text-slate-100 leading-snug mb-2">${t.title}</h3>
+      <p class="text-xs text-slate-400 mb-4 leading-relaxed">${t.description}</p>
+      <div class="mt-auto">
+        <div class="flex items-center justify-between text-[10px] text-slate-400 mono mb-1.5">
+          <span>Progresso</span>
+          <span class="${comp?'text-emerald-400 font-bold':''}">${done}/${tot} t&#243;picos</span>
+        </div>
+        <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+          <div class="h-full transition-all duration-300" style="width:${pct}%;background:${comp?'#10b981':tr.color}"></div>
+        </div>
+      </div>
+      <div class="mt-4 pt-3 border-t border-slate-700/50">
+        <button onclick="event.stopPropagation();qToggleNew('${t.id}','${tr.id}')"
+          class="w-full items-center justify-center px-3 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${comp?'bg-emerald-500/15 border border-emerald-500/35 text-emerald-400 hover:bg-emerald-500/25':'bg-slate-700/40 border border-slate-600/60 text-slate-300 hover:bg-slate-700 hover:text-white'}">
+          ${comp?'&#x2705; Conclu&#237;do':'&#x25CB; Completar Todos os Sub-t&#243;picos'}
+        </button>
+      </div>`;
+    c.appendChild(card);
+  });
+}
+function renderNewWeekMap(tr){
+  const el=document.getElementById('newWeekMap'); if(!el) return; el.innerHTML='';
+  tr.weeks.forEach((w,i)=>{
+    let done=0,tot=0;
+    w.topics.forEach(t=>{
+      if(t.subtopics&&t.subtopics.length){tot+=t.subtopics.length;t.subtopics.forEach(s=>{if(isDone(s.id))done++;});}
+      else{tot++;if(isDone(t.id))done++;}
+    });
+    const pct=tot>0?Math.round(done/tot*100):0; const isActive=i===curW; const allDone=done===tot&&tot>0;
+    const row=document.createElement('div'); row.className=`flex items-center gap-2 p-1.5 rounded-lg cursor-pointer transition-all ${isActive?'bg-[#0f172a]/80 border border-cyan-500/25':'hover:bg-[#0f172a]/40'}`;
+    row.onclick=()=>{curW=i;renderMain();};
+    row.innerHTML=`<div class="text-[10px] mono font-bold w-6 shrink-0 ${isActive?'text-cyan-400':allDone?'text-emerald-400':'text-slate-500'}">S${w.weekNum}</div><div class="flex-1 min-w-0"><div class="text-[9px] text-slate-400 truncate">${w.dateRange}</div><div class="flex items-center gap-1 mt-0.5"><div class="flex-1 bg-slate-800 h-1 rounded-full overflow-hidden"><div class="h-full rounded-full transition-all" style="width:${pct}%;background:${allDone?'#10b981':tr.color}"></div></div><span class="text-[8px] mono text-slate-500 shrink-0">${done}/${tot}</span></div></div>`;
+    el.appendChild(row);
+  });
+}
+
+function qToggleNew(tid,trackId){
+  const tr=NEW_TRACKS[trackId]; let topic=null;
+  for(const w of tr.weeks){topic=w.topics.find(t=>t.id===tid);if(topic)break;}
+  if(!topic) return;
+  let tot=topic.subtopics?topic.subtopics.length:1, done=0;
+  if(topic.subtopics&&topic.subtopics.length) topic.subtopics.forEach(s=>{if(isDone(s.id))done++;});
+  else if(isDone(topic.id)) done++;
+  const ns=done<tot;
+  if(topic.subtopics&&topic.subtopics.length) topic.subtopics.forEach(s=>setDone(s.id,ns));
+  else setDone(topic.id,ns);
+  renderMain();
+}
+
+// -- Modais -------------------------------------------------------------------
+function openInglesModal(id){
+  curLid=id; const l=ALL.find(x=>x.id===id); if(!l) return;
+  const done=isDone(id);
+  set('m-badge',`${l.modEmoji} M\u00f3dulo ${l.modId} \u2014 ${l.modTitle}`,l.modColor);
+  document.getElementById('m-title').textContent=l.title;
+  document.getElementById('m-schedule').textContent='';
+  document.getElementById('m-time').textContent=`\u23f1 ${l.dur}`;
+  hide('m-why'); hide('m-feynman');
+  document.getElementById('m-subtopics').classList.add('hidden');
+  document.getElementById('m-subtopics').classList.remove('flex');
+  document.getElementById('m-ingles-stats').innerHTML=`
+    <div class="bg-[#0f172a] p-2.5 rounded-lg border border-slate-700/60"><div class="text-[9px] text-slate-400 mono mb-0.5 uppercase">M&#243;dulo</div><div class="text-slate-200 font-bold leading-tight">M${l.modId}: ${l.modTitle}</div></div>
+    <div class="bg-[#0f172a] p-2.5 rounded-lg border border-slate-700/60"><div class="text-[9px] text-slate-400 mono mb-0.5 uppercase">No M&#243;dulo</div><div class="text-slate-200 font-bold">Aula ${l.num} de ${l.total}</div></div>
+    <div class="bg-[#0f172a] p-2.5 rounded-lg border border-slate-700/60"><div class="text-[9px] text-slate-400 mono mb-0.5 uppercase">Aula Global</div><div class="text-slate-200 font-bold">#${l.gn} de 225</div></div>
+    <div class="bg-[#0f172a] p-2.5 rounded-lg border border-slate-700/60"><div class="text-[9px] text-slate-400 mono mb-0.5 uppercase">Status</div><div class="font-bold" style="color:${done?'#10b981':'#94a3b8'}">${done?'&#x2705; Assistida':'&#x25CB; Pendente'}</div></div>`;
+  let di='';
+  outer:for(let w=0;w<SCHED.length;w++){for(const[k,d] of Object.entries(SCHED[w].days)){if(d.lessons.some(x=>x.id===id)){const lbl=k==='conclusao'?'&#127891; Conclus\u00e3o':DLF[DK.indexOf(k)];di=`S${w+1} \u00b7 ${lbl} \u00b7 Dia ${d.dayNum} \u00b7 ${fmtDate(d.date)}`;break outer;}}}
+  const diel=document.getElementById('m-ingles-day');
+  diel.textContent=di; diel.classList.remove('hidden');
+  const btn=document.getElementById('m-mark-btn');
+  btn.textContent=done?'&#x25CB; Remover Marca\u00e7\u00e3o':'&#x2705; Marcar como Assistida';
+  btn.className=`flex-1 px-4 py-2.5 rounded-lg font-bold text-sm transition-all cursor-pointer ${done?'bg-slate-700/40 border border-slate-600 text-slate-300':'bg-emerald-500/20 border border-emerald-500/40 text-emerald-300'}`;
+  btn.onclick=()=>{setDone(id,!isDone(id));closeModal();renderMain();};
+  showModal();
+}
+
+function openTrackModal(trackId, topicId){
+  const tr=NEW_TRACKS[trackId]; let topic=null;
+  for(const w of tr.weeks){topic=w.topics.find(t=>t.id===topicId);if(topic)break;}
+  if(!topic) return;
+  curLid=topicId;
+  set('m-badge',tr.title,tr.color);
+  document.getElementById('m-title').textContent=topic.title;
+  document.getElementById('m-schedule').textContent=topic.schedule||'';
+  document.getElementById('m-time').textContent=`\u23f1 ${topic.estimatedTime}`;
+  document.getElementById('m-ingles-stats').innerHTML='';
+  document.getElementById('m-ingles-day').classList.add('hidden');
+  const why=document.getElementById('m-why');
+  if(tr.whyStudy){why.innerHTML=`<span class="text-[9px] font-bold uppercase tracking-wider text-slate-400 mono block mb-1.5">&#128161; Por que estudar esta trilha</span>${tr.whyStudy}`;why.classList.remove('hidden');}
+  else why.classList.add('hidden');
+  const sl=document.getElementById('m-subtopics-list'); sl.innerHTML='';
+  if(topic.subtopics&&topic.subtopics.length){
+    document.getElementById('m-subtopics').classList.remove('hidden');
+    document.getElementById('m-subtopics').classList.add('flex');
+    topic.subtopics.forEach(st=>{
+      const isD=isDone(st.id); const row=document.createElement('div');
+      row.className=`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${isD?'bg-emerald-500/10 border-emerald-500/30':'bg-[#0f172a] border-slate-700/50 hover:border-slate-500'}`;
+      row.onclick=()=>{setDone(st.id,!isD);openTrackModal(trackId,topicId);renderMain();};
+      row.innerHTML=`<div class="mt-0.5 w-4 h-4 rounded border flex items-center justify-center shrink-0 ${isD?'bg-emerald-500 border-emerald-500 text-white':'border-slate-500'}">${isD?'<svg viewBox="0 0 14 14" fill="none" class="w-3 h-3"><path d="M3 7.5L5.5 10L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div><div class="text-[12px] ${isD?'text-slate-400 line-through':'text-slate-200'} leading-relaxed">${st.text}</div>`;
+      sl.appendChild(row);
+    });
+    document.getElementById('m-mark-btn').style.display='none';
+  } else {
+    document.getElementById('m-subtopics').classList.add('hidden');
+    document.getElementById('m-subtopics').classList.remove('flex');
+    document.getElementById('m-mark-btn').style.display='block';
+    const isD=isDone(topicId); const btn=document.getElementById('m-mark-btn');
+    btn.textContent=isD?'&#x25CB; Remover':'&#x2705; Marcar como Estudado';
+    btn.className=`flex-1 px-4 py-2.5 rounded-lg font-bold text-sm transition-all cursor-pointer ${isD?'bg-slate-700/40 border border-slate-600 text-slate-300':'bg-emerald-500/20 border border-emerald-500/40 text-emerald-300'}`;
+    btn.onclick=()=>{setDone(topicId,!isD);openTrackModal(trackId,topicId);renderMain();};
+  }
+  const fp=document.getElementById('m-feynman');
+  if(tr.feynmanPractice){
+    document.getElementById('m-feynman-text').textContent=tr.feynmanPractice;
+    fp.classList.remove('hidden'); fp.classList.add('flex'); fp.style.flexDirection='column';
+  } else fp.classList.add('hidden');
+  showModal();
+}
+
+function set(id,txt,color){const el=document.getElementById(id);el.textContent=txt;if(color)el.style.color=color;}
+function hide(id){document.getElementById(id).classList.add('hidden');}
+function showModal(){
+  const m=document.getElementById('detailModal');
+  m.classList.remove('opacity-0','pointer-events-none');
+  m.firstElementChild.classList.remove('scale-95');
+  m.firstElementChild.classList.add('scale-100');
+}
+function closeModal(){
+  curLid=null;
+  const m=document.getElementById('detailModal');
+  m.classList.add('opacity-0','pointer-events-none');
+  m.firstElementChild.classList.remove('scale-100');
+  m.firstElementChild.classList.add('scale-95');
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+// -- Daily Temperatures bonus checkbox (buffer Sábado 29/08) -----------------
+function renderDailTempChk(){
+  const chk=document.getElementById('chk-dsa-sem4-2'); if(!chk) return;
+  const done=isDone('dsa_sem4_2');
+  if(done){
+    chk.style.background='#f59e0b'; chk.style.borderColor='#f59e0b';
+    chk.innerHTML='<svg viewBox="0 0 14 14" fill="none" style="width:10px;height:10px"><path d="M3 7.5L5.5 10L11 4" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  } else {
+    chk.style.background=''; chk.style.borderColor='';
+    chk.innerHTML='';
+  }
+}
+function toggleDailTemp(e){
+  e.preventDefault();
+  setDone('dsa_sem4_2', !isDone('dsa_sem4_2'));
+  renderDailTempChk();
+}
+
+window.onload=()=>{switchTab('ingles'); renderDailTempChk();};
+</script>
+</body>
+</html>
