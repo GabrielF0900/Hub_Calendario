@@ -43,7 +43,11 @@
         <p class="text-[10px] text-slate-400 mono mt-0.5" id="headerSub">Carregando...</p>
       </div>
     </div>
-    <div class="flex flex-wrap gap-2 justify-center md:justify-end" id="headerBadges"></div>
+    <div class="flex flex-wrap gap-2 justify-center md:justify-end items-center" id="headerBadges">
+      <button id="methodModalBtn" onclick="showMethodModal()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0f172a] border border-purple-500/30 text-purple-300 hover:border-purple-400/50 hover:text-purple-200 transition-all cursor-pointer" title="Como Vamos Estudar">
+        &#128218; Como Estudar
+      </button>
+    </div>
   </div>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-1 overflow-x-auto no-scrollbar pt-2">
     <button onclick="switchTab('ingles')"       id="tab-ingles"       class="tab-btn px-3 py-2.5 text-sm font-bold border-b-2 border-transparent text-slate-400 whitespace-nowrap">&#9312; &#127482;&#127480; Ingl&ecirc;s</button>
@@ -204,6 +208,83 @@
     <div class="p-4 flex gap-3 border-t border-slate-700 shrink-0">
       <button id="m-mark-btn" class="flex-1 px-4 py-2.5 rounded-lg font-bold text-sm transition-all cursor-pointer">&#8212;</button>
       <button onclick="closeModal()" class="px-4 py-2.5 text-xs font-bold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 rounded-lg cursor-pointer transition-colors shrink-0">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Metodologia -->
+<div id="methodModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 p-4" onclick="closeMethodModal()">
+  <div class="bg-[#1e293b] border border-purple-600/30 w-full max-w-xl max-h-[90vh] rounded-2xl shadow-2xl transform scale-95 transition-all duration-300 flex flex-col overflow-hidden" onclick="event.stopPropagation()">
+    <div class="border-b border-slate-700 p-5 pb-4 shrink-0">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <div class="text-[9px] font-bold tracking-wider uppercase mono mb-1 text-purple-400">METODOLOGIA</div>
+          <h3 class="text-lg font-bold text-slate-100">&#128218; Como Vamos Estudar</h3>
+          <p class="text-[11px] text-slate-400 mono mt-1">Hierarquia de fontes &middot; Feynman &middot; Recupera&ccedil;&atilde;o &middot; NotebookLM</p>
+        </div>
+        <button onclick="closeMethodModal()" class="text-slate-400 hover:text-slate-200 transition-colors text-xl leading-none cursor-pointer">&times;</button>
+      </div>
+    </div>
+    <div class="p-5 flex flex-col gap-5 overflow-y-auto no-scrollbar">
+
+      <!-- a) Hierarquia de Fontes -->
+      <div class="bg-[#0f172a] border border-slate-700/50 rounded-xl p-4">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-yellow-400 mono mb-3">&#128218; a) Hierarquia de Fontes</div>
+        <div class="flex flex-col gap-2.5">
+          <div class="flex gap-3 items-start">
+            <span class="text-[10px] font-bold mono text-yellow-400 bg-yellow-400/10 border border-yellow-400/20 rounded px-2 py-0.5 shrink-0">1&ordf;</span>
+            <div>
+              <div class="text-[12px] font-bold text-slate-200">Rocketseat</div>
+              <div class="text-[11px] text-slate-400 leading-relaxed">Aula estruturada &mdash; ponto de partida padr&atilde;o para todos os t&oacute;picos.</div>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-[10px] font-bold mono text-slate-300 bg-slate-700/50 border border-slate-600/40 rounded px-2 py-0.5 shrink-0">2&ordf;</span>
+            <div>
+              <div class="text-[12px] font-bold text-slate-200">roadmap.sh/java</div>
+              <div class="text-[11px] text-slate-400 leading-relaxed">N&atilde;o &eacute; fonte de conte&uacute;do &mdash; &eacute; <em>mapa de verifica&ccedil;&atilde;o de cobertura</em>. Quando a Rocketseat n&atilde;o cobrir, abra o n&oacute; correspondente e siga o link recomendado de l&aacute;.</div>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-[10px] font-bold mono text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 rounded px-2 py-0.5 shrink-0">3&ordf;</span>
+            <div>
+              <div class="text-[12px] font-bold text-slate-200">Baeldung.com</div>
+              <div class="text-[11px] text-slate-400 leading-relaxed">Fonte de pr&aacute;tica e aprofundamento em qualquer caso, e fonte prim&aacute;ria de fallback quando as anteriores n&atilde;o cobrirem bem.</div>
+            </div>
+          </div>
+          <div class="mt-1 pt-2 border-t border-slate-700/40 text-[11px] text-slate-400 leading-relaxed">
+            <span class="text-red-400 font-bold">DSA:</span> NeetCode (prim&aacute;ria) + LeetCode/HackerRank (pr&aacute;tica) &nbsp;&middot;&nbsp;
+            <span class="text-cyan-400 font-bold">SQL:</span> SQLZoo (prim&aacute;ria) + HackerRank SQL (pr&aacute;tica)
+          </div>
+        </div>
+      </div>
+
+      <!-- b) Pr&aacute;tica Feynman -->
+      <div class="bg-[#0f172a] border border-purple-500/20 rounded-xl p-4">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-purple-400 mono mb-3">&#127897;&#65039; b) Pr&aacute;tica Feynman</div>
+        <p class="text-[12px] text-slate-300 leading-relaxed">Grave em voz alta explicando o t&oacute;pico <strong>como se fosse para um entrevistador</strong>, sem jarg&atilde;o n&atilde;o explicado. Ou&ccedil;a de volta e marque onde travou.</p>
+        <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">Se voc&ecirc; disser &ldquo;por causa do contrato de hashCode&rdquo;, pause e explique o que &eacute; esse contrato antes de continuar. O travamento &eacute; o dado &mdash; ele aponta exatamente onde o entendimento ainda &eacute; superficial.</p>
+      </div>
+
+      <!-- c) Regra de recupera&ccedil;&atilde;o -->
+      <div class="bg-[#0f172a] border border-amber-500/20 rounded-xl p-4">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-amber-400 mono mb-3">&#9888;&#65039; c) Regra de Recupera&ccedil;&atilde;o de Atraso</div>
+        <ul class="flex flex-col gap-2">
+          <li class="flex gap-2 items-start text-[12px] text-slate-300 leading-relaxed"><span class="text-amber-400 shrink-0 mt-0.5">&#9654;</span> O que importa &eacute; a <strong>ordem do conte&uacute;do</strong>, n&atilde;o o dia da semana marcado no calend&aacute;rio. Se perder um dia, fa&ccedil;a o pr&oacute;ximo conte&uacute;do na ordem certa &mdash; n&atilde;o pule pra &ldquo;ficar em dia com a data&rdquo;.</li>
+          <li class="flex gap-2 items-start text-[12px] text-slate-300 leading-relaxed"><span class="text-amber-400 shrink-0 mt-0.5">&#9654;</span> <strong>Nunca empilhe dois blocos de trilhas diferentes no mesmo dia</strong> para compensar atraso.</li>
+          <li class="flex gap-2 items-start text-[12px] text-slate-300 leading-relaxed"><span class="text-amber-400 shrink-0 mt-0.5">&#9654;</span> O buffer do s&aacute;bado (painel &ldquo;Bloco do S&aacute;bado&rdquo;) absorve o que sobrar da semana.</li>
+        </ul>
+      </div>
+
+      <!-- d) NotebookLM -->
+      <div class="bg-[#0f172a] border border-emerald-500/20 rounded-xl p-4">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 mono mb-3">&#128203; d) NotebookLM</div>
+        <p class="text-[12px] text-slate-300 leading-relaxed">N&atilde;o &eacute; uma fonte nova de conte&uacute;do. &Eacute; onde <strong>consolidar o que j&aacute; foi consumido</strong> (anota&ccedil;&otilde;es, artigos, resumos) para revisar depois e testar o pr&oacute;prio entendimento.</p>
+      </div>
+
+    </div>
+    <div class="p-4 border-t border-slate-700 shrink-0">
+      <button onclick="closeMethodModal()" class="w-full px-4 py-2.5 text-xs font-bold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 rounded-lg cursor-pointer transition-colors text-slate-200">Fechar</button>
     </div>
   </div>
 </div>
@@ -625,6 +706,27 @@ const NEW_TRACKS = {
                 "text": "switch expressions — sintaxe nova vs switch tradicional"
               }
             ]
+          },
+          {
+            "id": "jc_1_8",
+            "title": "1.8 Enums, Overload e Pass by Value",
+            "schedule": "Quarta, 27/08 às 13h",
+            "estimatedTime": "1 bloco (2h)",
+            "description": "Três tópicos que aparecem separados no roadmap.sh/java mas têm algo em comum: são perguntas onde o candidato que estudou superficialmente erra exatamente porque acha que sabe. Enum parece só 'uma constante com nome bonito' até o entrevistador perguntar 'posso ter um método dentro de um enum?'. Overloading e Overriding têm nomes parecidos e o entrevistador usa isso como armadilha. Pass by Value é o maior mito do Java — todo desenvolvedor que vem de outra linguagem acha que Java passa objetos por referência.",
+            "subtopics": [
+              {
+                "id": "jc_1_8_1",
+                "text": "Enums — para que servem além de constantes, como declarar um método dentro de um enum (ex: enum com getDescricao()), e por que isso é mais seguro que usar String ou int como constante"
+              },
+              {
+                "id": "jc_1_8_2",
+                "text": "Method Overloading vs Overriding — diferença prática: Overloading é mesmo nome com assinatura diferente na mesma classe (resolvido em tempo de compilação); Overriding é mesmo nome e assinatura em subclasse (resolvido em runtime via polimorfismo) — pergunta clássica de entrevista"
+              },
+              {
+                "id": "jc_1_8_3",
+                "text": "Pass by Value vs Pass by Reference — Java é SEMPRE pass-by-value: para primitivos, o valor é copiado; para objetos, a referência é copiada por valor (não o objeto em si) — a pegadinha clássica: você pode mudar o estado do objeto dentro do método, mas não pode fazer a variável original apontar para outro objeto"
+              }
+            ]
           }
         ]
       },
@@ -660,7 +762,7 @@ const NEW_TRACKS = {
             "title": "Revisão Final — Simulado Feynman",
             "schedule": "Seg e Qua às 13h",
             "estimatedTime": "2 blocos (2h cada)",
-            "description": "Última semana do Java Core. Simular uma entrevista técnica: abrir cada tópico de 1.1 a 1.7 e explicar em voz alta sem reler material.",
+            "description": "Última semana do Java Core. Simular uma entrevista técnica: abrir cada tópico de 1.1 a 1.8 e explicar em voz alta sem reler material.",
             "subtopics": [
               {
                 "id": "jc_rev2_1",
@@ -668,7 +770,11 @@ const NEW_TRACKS = {
               },
               {
                 "id": "jc_rev2_2",
-                "text": "Simulado final: responder em voz alta como entrevistador — todos os 7 tópicos em sequência"
+                "text": "Revisar 1.8: Enums com métodos, Overloading vs Overriding, Pass by Value — os três em sequência de perguntas de entrevista"
+              },
+              {
+                "id": "jc_rev2_3",
+                "text": "Simulado final: responder em voz alta como entrevistador — todos os 8 tópicos em sequência"
               }
             ]
           }
@@ -1920,13 +2026,23 @@ function switchTab(tid) {
 function updateHeader(tid) {
   const sub=document.getElementById('headerSub');
   const bdg=document.getElementById('headerBadges');
+  // Preserve the static 'Como Estudar' button
+  const methodBtn = document.getElementById('methodModalBtn');
   if(tid==='ingles'){
     sub.textContent='\u2460 Em andamento \u00b7 16 Semanas \u00b7 225 Aulas \u00b7 Manh\u00e3 (todo dia)';
-    bdg.innerHTML=badge('In\u00edcio','21 Jul 2026','text-cyan-400')+badge('T\u00e9rmino','10 Nov 2026','text-emerald-400')+badge('Ritmo','2/dia \u00b7 manh\u00e3','text-purple-400');
+    const badges=badge('In\u00edcio','21 Jul 2026','text-cyan-400')+badge('T\u00e9rmino','10 Nov 2026','text-emerald-400')+badge('Ritmo','2/dia \u00b7 manh\u00e3','text-purple-400');
+    bdg.innerHTML=badges;
+    if(methodBtn) bdg.appendChild(methodBtn);
   } else {
     const tr=NEW_TRACKS[tid];
+    // Use dynamic dates if hub was started
+    const dynDates = getEffectiveTrackDates(tid);
+    const startLabel = dynDates ? dynDates.startDate : tr.startDate;
+    const endLabel   = dynDates ? dynDates.endDate   : tr.endDate;
     sub.textContent=`${tr.emoji} Ordem #${tr.order} \u00b7 ${tr.totalWeeks} semanas \u00b7 ${tr.frequency}`;
-    bdg.innerHTML=badge('In\u00edcio',tr.startDate,'text-cyan-400')+badge('T\u00e9rmino',tr.endDate,'text-emerald-400');
+    const badges=badge('In\u00edcio',startLabel,'text-cyan-400')+badge('T\u00e9rmino',endLabel,'text-emerald-400');
+    bdg.innerHTML=badges;
+    if(methodBtn) bdg.appendChild(methodBtn);
   }
 }
 function badge(label,val,cls){return `<div class="bg-[#0f172a] border border-slate-700 rounded-md px-3 py-1.5 text-center"><div class="text-[9px] text-slate-400 font-bold tracking-wider uppercase mono">${label}</div><div class="text-xs font-bold ${cls}">${val}</div></div>`;}
@@ -1937,7 +2053,10 @@ function renderMain(){
   const mc=document.getElementById('mainContainer');
   mc.innerHTML='';
   if(activeTab==='ingles') renderIngles(mc);
-  else renderTrack(mc,activeTab);
+  else {
+    renderTrack(mc,activeTab);
+    renderIniciarBanner(mc);
+  }
 }
 
 // -- Inglês -------------------------------------------------------------------
@@ -2065,13 +2184,19 @@ function renderTrack(container, tid) {
   <div class="flex flex-col gap-4 mt-4 lg:mt-0">
     <div class="bg-[#1e293b] border border-slate-700/50 rounded-xl p-4">
       <h3 class="text-[10px] font-bold tracking-wider uppercase text-slate-400 mb-3 mono">&#x1F5FA;&#xFE0F; Mapa de Progresso</h3>
-      <div id="newWeekMap" class="flex flex-col gap-1 max-h-[700px] overflow-y-auto no-scrollbar"></div>
+      <div id="newWeekMap" class="flex flex-col gap-1 max-h-[400px] overflow-y-auto no-scrollbar"></div>
+    </div>
+    <div class="bg-[#1e293b] border border-emerald-500/20 rounded-xl p-4">
+      <h3 class="text-[10px] font-bold tracking-wider uppercase text-emerald-400 mb-3 mono">&#x1F4C5; Check-in de Estudo</h3>
+      <div id="studyLogContainer" class="flex flex-col gap-1 max-h-[320px] overflow-y-auto no-scrollbar"></div>
     </div>
   </div>`;
   renderNewWeekPills(tr);
   renderNewWeekHeader(tr);
   renderNewTopics(tr);
   renderNewWeekMap(tr);
+  const logContainer = document.getElementById('studyLogContainer');
+  if(logContainer) renderStudyLog(logContainer, tid);
 }
 
 function renderNewWeekPills(tr){
@@ -2239,7 +2364,224 @@ function closeModal(){
   m.firstElementChild.classList.remove('scale-100');
   m.firstElementChild.classList.add('scale-95');
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeMethodModal();}});
+
+// -- Modal Metodologia --------------------------------------------------------
+function showMethodModal(){
+  const m=document.getElementById('methodModal');
+  m.classList.remove('opacity-0','pointer-events-none');
+  m.firstElementChild.classList.remove('scale-95');
+  m.firstElementChild.classList.add('scale-100');
+}
+function closeMethodModal(){
+  const m=document.getElementById('methodModal');
+  m.classList.add('opacity-0','pointer-events-none');
+  m.firstElementChild.classList.remove('scale-100');
+  m.firstElementChild.classList.add('scale-95');
+}
+
+// -- Study Log (Check-in de dias estudados) -----------------------------------
+const SLOG_KEY = 'hubGabrielStudyLog';
+
+function getStudyLog() {
+  try { const s=localStorage.getItem(SLOG_KEY); return s?JSON.parse(s):[]; }
+  catch(e){ return []; }
+}
+
+function saveStudyLog(log) {
+  localStorage.setItem(SLOG_KEY, JSON.stringify(log));
+  // Sync to cloud alongside progress data
+  const progressData = store();
+  progressData._studyLog = log;
+  syncCloud(progressData);
+}
+
+function addStudyLog(trackId) {
+  const today = todayLocalISO();
+  const log = getStudyLog();
+  // Avoid duplicate for same day + same track
+  if(log.some(e=>e.date===today && e.trackId===trackId)){
+    alert('Você já marcou um check-in para esta trilha hoje!');
+    return;
+  }
+  log.unshift({date: today, trackId, note: ''});
+  saveStudyLog(log);
+  renderMain();
+}
+
+function removeStudyLog(index) {
+  const log = getStudyLog();
+  log.splice(index, 1);
+  saveStudyLog(log);
+  renderMain();
+}
+
+function renderStudyLog(container, trackId) {
+  const log = getStudyLog().filter(e=>e.trackId===trackId);
+  container.innerHTML = '';
+
+  // Check-in button
+  const btnWrap = document.createElement('div');
+  btnWrap.className = 'mb-3';
+  btnWrap.innerHTML = `<button id="checkinBtn-${trackId}" onclick="addStudyLog('${trackId}')"
+    class="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-xs font-bold
+    bg-emerald-500/15 border border-emerald-500/35 text-emerald-300 hover:bg-emerald-500/25
+    transition-all cursor-pointer">
+    &#x2705; Marquei que estudei hoje
+  </button>`;
+  container.appendChild(btnWrap);
+
+  if(log.length === 0){
+    const empty = document.createElement('div');
+    empty.className = 'text-[10px] text-slate-500 mono text-center py-2';
+    empty.textContent = 'Nenhum check-in registrado ainda.';
+    container.appendChild(empty);
+    return;
+  }
+
+  log.forEach((entry, idx) => {
+    const realIdx = getStudyLog().findIndex(e=>e.date===entry.date && e.trackId===entry.trackId);
+    const [y,m,d] = entry.date.split('-');
+    const dateStr = `${d}/${m}/${y}`;
+    const row = document.createElement('div');
+    row.className = 'flex items-center justify-between gap-2 py-1.5 border-b border-slate-700/40 last:border-0';
+    row.innerHTML = `
+      <div class="flex items-center gap-2">
+        <span class="text-emerald-400 text-[13px]">&#x2705;</span>
+        <div>
+          <div class="text-[11px] font-bold text-slate-200">${dateStr}</div>
+        </div>
+      </div>
+      <button onclick="removeStudyLog(${realIdx})" title="Remover check-in"
+        class="text-slate-500 hover:text-red-400 transition-colors text-[13px] cursor-pointer leading-none">&#x1F5D1;&#xFE0F;</button>`;
+    container.appendChild(row);
+  });
+}
+
+// -- Hub INICIAR — datas dinâmicas --------------------------------------------
+const HUB_START_KEY = 'hub_startedAt';
+
+// Offsets em dias a partir da data de início do Java Core (dia 0)
+const TRACK_OFFSETS = {
+  javacore:     { startOff: 0,  totalDays: 41 },  // 03/08 → 13/09 = 41 dias
+  dsa:          { startOff: 1,  totalDays: 82 },  // 04/08 → 25/10 = 82 dias
+  testes:       { startOff: 4,  totalDays: 79 },  // 07/08 → 25/10 = 79 dias
+  sql:          { startOff: 5,  totalDays: 77 },  // 08/08 → 24/10 = 77 dias
+  storytelling: { startOff: 47, totalDays: 35 },  // 19/09 → 24/10 = 35 dias
+};
+
+function getHubStartDate() {
+  const s = localStorage.getItem(HUB_START_KEY);
+  return s || null;
+}
+
+function fmtDateBR(dateStr) {
+  // dateStr: 'YYYY-MM-DD' → 'DD/MM/YYYY'
+  if(!dateStr) return '';
+  const [y,m,d] = dateStr.split('-');
+  return `${d}/${m}/${y}`;
+}
+
+function addDaysToISO(isoDate, days) {
+  const d = new Date(isoDate + 'T12:00:00');
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0,10);
+}
+
+function calcHubDates(startISO) {
+  // Returns an object with startDate/endDate for each track in DD/MM/YYYY
+  const result = {};
+  Object.entries(TRACK_OFFSETS).forEach(([tid, off]) => {
+    const s = addDaysToISO(startISO, off.startOff);
+    const e = addDaysToISO(startISO, off.startOff + off.totalDays);
+    result[tid] = { startDate: fmtDateBR(s), endDate: fmtDateBR(e) };
+  });
+  return result;
+}
+
+function getEffectiveTrackDates(tid) {
+  const startISO = getHubStartDate();
+  if(!startISO || tid === 'ingles') return null;
+  const dates = calcHubDates(startISO);
+  return dates[tid] || null;
+}
+
+function todayLocalISO() {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth()+1).padStart(2,'0');
+  const d = String(now.getDate()).padStart(2,'0');
+  return `${y}-${m}-${d}`;
+}
+
+function iniciarHub() {
+  const today = todayLocalISO();
+  if(localStorage.getItem(HUB_START_KEY)) {
+    if(!confirm('O Hub já foi iniciado. Deseja redefinir a data de início para hoje?')) return;
+  }
+  localStorage.setItem(HUB_START_KEY, today);
+  renderMain();
+  updateHeader(activeTab);
+}
+
+function resetHub() {
+  if(!confirm('Tem certeza que deseja resetar a data de início do Hub? O progresso de subtópicos não será perdido.')) return;
+  localStorage.removeItem(HUB_START_KEY);
+  renderMain();
+  updateHeader(activeTab);
+}
+
+function renderIniciarBanner(container) {
+  const startISO = getHubStartDate();
+  const banner = document.createElement('div');
+
+  if(!startISO) {
+    banner.className = 'lg:col-span-4 bg-gradient-to-r from-indigo-900/40 to-purple-900/30 border border-indigo-500/40 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 mb-0 fadein';
+    banner.innerHTML = `
+      <div class="flex items-center gap-3">
+        <span class="text-2xl">&#9654;&#65039;</span>
+        <div>
+          <div class="text-sm font-bold text-slate-100">Hub ainda não iniciado</div>
+          <div class="text-[11px] text-slate-400 leading-relaxed mt-0.5">
+            As datas das trilhas serão calculadas a partir de hoje. O Hub continua 100% navegável antes de iniciar.
+          </div>
+        </div>
+      </div>
+      <button onclick="iniciarHub()" id="btn-iniciar-hub"
+        class="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm
+        bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:from-indigo-400 hover:to-purple-500
+        shadow-lg shadow-indigo-500/20 transition-all cursor-pointer whitespace-nowrap">
+        &#9654; INICIAR Hub
+      </button>`;
+  } else {
+    const dates = calcHubDates(startISO);
+    const [y,m,d] = startISO.split('-');
+    const fmtStart = `${d}/${m}/${y}`;
+    // "Término geral" = data de fim da última trilha (maior endDate entre todas)
+    // storytelling e sql terminam por último (~77-82 dias após início)
+    // Usamos dsa.endDate ou testes.endDate como referência (ambos terminam ~mesmo dia)
+    const hubEnd = dates.dsa.endDate; // DSA é a trilha com maior duração
+    banner.className = 'lg:col-span-4 bg-gradient-to-r from-emerald-900/20 to-teal-900/15 border border-emerald-500/25 rounded-xl p-3 flex flex-col sm:flex-row items-center justify-between gap-2 fadein';
+    banner.innerHTML = `
+      <div class="flex items-center gap-2 flex-wrap gap-y-1">
+        <span class="text-emerald-400 text-base">&#x2705;</span>
+        <div class="text-[11px] text-slate-300 flex flex-wrap gap-x-3 gap-y-0.5">
+          <span><span class="text-slate-500 font-bold mono">INÍCIO</span> <span class="font-bold text-slate-100">${fmtStart}</span></span>
+          <span class="text-slate-600">&middot;</span>
+          <span><span class="text-slate-500 font-bold mono">JAVA CORE</span> <span class="font-bold text-yellow-300">${dates.javacore.startDate} → ${dates.javacore.endDate}</span></span>
+          <span class="text-slate-600">&middot;</span>
+          <span><span class="text-slate-500 font-bold mono">TÉRMINO GERAL</span> <span class="font-bold text-emerald-300">${hubEnd}</span></span>
+        </div>
+      </div>
+      <button onclick="resetHub()"
+        class="shrink-0 text-[10px] mono px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-600
+        text-slate-400 hover:text-red-400 hover:border-red-500/40 transition-all cursor-pointer">
+        &#x21BA; Redefinir data
+      </button>`;
+  }
+  container.insertBefore(banner, container.firstChild);
+}
+
 
 // -- Daily Temperatures bonus checkbox (buffer Sábado 29/08) -----------------
 function renderDailTempChk(){

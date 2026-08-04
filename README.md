@@ -28,7 +28,7 @@ Para garantir que ninguém altere o seu progresso publicamente, a gravação é 
 ### 3. Sincronizando o seu Computador (Notebook)
 Para autorizar o seu computador a enviar o progresso atualizado para a nuvem:
 1. Acesse o site do seu Hub através do seu computador (Notebook), mas adicione o token na URL desta forma:
-   `https://hub-calendario-coral.vercel.app/?token=SEU_TOKEN_CRIADO_AQUI`
+   `https://hub-calendario-coral.vercel.app/?token=CrieUmTokenSeguroAqui123`
 2. O sistema automaticamente vai ler esse token, salvar no cache do seu navegador e a URL voltará ao normal.
 3. A partir desse momento, qualquer item que você marcar ou desmarcar será enviado de forma "silenciosa" (background) para o Vercel KV.
 
