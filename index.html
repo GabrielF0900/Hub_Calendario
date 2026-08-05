@@ -710,7 +710,7 @@ const NEW_TRACKS = {
           {
             "id": "jc_1_8",
             "title": "1.8 Enums, Overload e Pass by Value",
-            "schedule": "Quarta, 27/08 às 13h",
+            "schedule": "Quarta, 26/08 às 13h",
             "estimatedTime": "1 bloco (2h)",
             "description": "Três tópicos que aparecem separados no roadmap.sh/java mas têm algo em comum: são perguntas onde o candidato que estudou superficialmente erra exatamente porque acha que sabe. Enum parece só 'uma constante com nome bonito' até o entrevistador perguntar 'posso ter um método dentro de um enum?'. Overloading e Overriding têm nomes parecidos e o entrevistador usa isso como armadilha. Pass by Value é o maior mito do Java — todo desenvolvedor que vem de outra linguagem acha que Java passa objetos por referência.",
             "subtopics": [
@@ -2209,7 +2209,7 @@ function renderNewWeekPills(tr){
 function renderNewWeekHeader(tr){
   const week=tr.weeks[curW]; if(!week) return;
   document.getElementById('nwTitle').textContent=`Semana ${week.weekNum}`;
-  document.getElementById('nwDate').textContent=week.dateRange;
+  document.getElementById('nwDate').textContent=recalcDateString(week.dateRange);
   document.getElementById('nwBadges').innerHTML=`<span class="text-[10px] mono px-2 py-1 rounded bg-[#0f172a] text-slate-300 border border-slate-600 font-bold">${week.topics.length} assunto(s)</span>`;
 }
 function renderNewTopics(tr){
@@ -2229,7 +2229,7 @@ function renderNewTopics(tr){
         <div class="text-[10px] mono font-bold px-2 py-1 rounded border border-slate-700/50 text-slate-300 bg-[#0f172a]">&#9201;&#65039; ${t.estimatedTime}</div>
         ${priHtml}
       </div>
-      <div class="text-[10px] mono text-slate-500 mb-1">${t.schedule||''}</div>
+      <div class="text-[10px] mono text-slate-500 mb-1">${recalcDateString(t.schedule||'')}</div>
       <h3 class="lesson-title text-base sm:text-lg font-bold text-slate-100 leading-snug mb-2">${t.title}</h3>
       <p class="text-xs text-slate-400 mb-4 leading-relaxed">${t.description}</p>
       <div class="mt-auto">
@@ -2261,7 +2261,7 @@ function renderNewWeekMap(tr){
     const pct=tot>0?Math.round(done/tot*100):0; const isActive=i===curW; const allDone=done===tot&&tot>0;
     const row=document.createElement('div'); row.className=`flex items-center gap-2 p-1.5 rounded-lg cursor-pointer transition-all ${isActive?'bg-[#0f172a]/80 border border-cyan-500/25':'hover:bg-[#0f172a]/40'}`;
     row.onclick=()=>{curW=i;renderMain();};
-    row.innerHTML=`<div class="text-[10px] mono font-bold w-6 shrink-0 ${isActive?'text-cyan-400':allDone?'text-emerald-400':'text-slate-500'}">S${w.weekNum}</div><div class="flex-1 min-w-0"><div class="text-[9px] text-slate-400 truncate">${w.dateRange}</div><div class="flex items-center gap-1 mt-0.5"><div class="flex-1 bg-slate-800 h-1 rounded-full overflow-hidden"><div class="h-full rounded-full transition-all" style="width:${pct}%;background:${allDone?'#10b981':tr.color}"></div></div><span class="text-[8px] mono text-slate-500 shrink-0">${done}/${tot}</span></div></div>`;
+    row.innerHTML=`<div class="text-[10px] mono font-bold w-6 shrink-0 ${isActive?'text-cyan-400':allDone?'text-emerald-400':'text-slate-500'}">S${w.weekNum}</div><div class="flex-1 min-w-0"><div class="text-[9px] text-slate-400 truncate">${recalcDateString(w.dateRange)}</div><div class="flex items-center gap-1 mt-0.5"><div class="flex-1 bg-slate-800 h-1 rounded-full overflow-hidden"><div class="h-full rounded-full transition-all" style="width:${pct}%;background:${allDone?'#10b981':tr.color}"></div></div><span class="text-[8px] mono text-slate-500 shrink-0">${done}/${tot}</span></div></div>`;
     el.appendChild(row);
   });
 }
@@ -2313,7 +2313,7 @@ function openTrackModal(trackId, topicId){
   curLid=topicId;
   set('m-badge',tr.title,tr.color);
   document.getElementById('m-title').textContent=topic.title;
-  document.getElementById('m-schedule').textContent=topic.schedule||'';
+  document.getElementById('m-schedule').textContent=recalcDateString(topic.schedule||'');
   document.getElementById('m-time').textContent=`\u23f1 ${topic.estimatedTime}`;
   document.getElementById('m-ingles-stats').innerHTML='';
   document.getElementById('m-ingles-day').classList.add('hidden');
@@ -2514,12 +2514,121 @@ function todayLocalISO() {
   return `${y}-${m}-${d}`;
 }
 
+// -- Recalculação dinâmica de datas -------------------------------------------
+const DIAS_PT_ABBR = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const DIAS_PT_FULL = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+const ORIGINAL_ANCHOR = new Date(2026, 7, 3, 12, 0, 0); // 03/08/2026, Segunda-feira — dia 0 do plano
+
+function extractAllDDMM(str) {
+  if (!str) return [];
+  const matches = [...str.matchAll(/(\d{2})\/(\d{2})/g)];
+  return matches.map(m => ({ day: parseInt(m[1],10), month: parseInt(m[2],10) }));
+}
+
+function offsetFromParsed(parsed) {
+  const d = new Date(2026, parsed.month - 1, parsed.day, 12, 0, 0);
+  return Math.round((d - ORIGINAL_ANCHOR) / 86400000);
+}
+
+function fmtDDMM(date) {
+  const d = String(date.getDate()).padStart(2, '0');
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  return `${d}/${m}`;
+}
+
+function hubDateFromOffset(offsetDays) {
+  const startISO = getHubStartDate();
+  if (!startISO) return null;
+  const [y, m, d] = startISO.split('-');
+  const base = new Date(+y, +m - 1, +d, 12, 0, 0);
+  base.setDate(base.getDate() + offsetDays);
+  return base;
+}
+
+function recalcDateString(rawStr) {
+  if (!rawStr) return rawStr;
+  if (!getHubStartDate()) return rawStr; // Hub não iniciado → fallback sem mudar nada
+
+  const datas = extractAllDDMM(rawStr);
+  const timeMatch = rawStr.match(/(\d{1,2}h\d{0,2})/);
+  const horario = timeMatch ? timeMatch[1] : '';
+
+  if (datas.length === 0) {
+    // Formato revisão, ex: "Seg e Qua às 13h" — sem data explícita, não recalcula
+    return rawStr;
+  }
+
+  if (datas.length === 1) {
+    const offset = offsetFromParsed(datas[0]);
+    const d = hubDateFromOffset(offset);
+    if (!d) return rawStr;
+    if (horario) {
+      // Detecta se é formato curto (ex: "Ter 04/08 às 13h") ou longo (ex: "Quarta, 26/08 às 13h")
+      if (rawStr.match(/^[A-ZÀ-Ú][a-zà-ú]+,/)) {
+        // Formato longo: "Dia, DD/MM às Xh..."
+        // Preserva sufixo após o horário (ex: " (13h-13h50, 50min)")
+        const afterHorario = rawStr.slice(rawStr.indexOf(horario) + horario.length);
+        return `${DIAS_PT_FULL[d.getDay()]}, ${fmtDDMM(d)} às ${horario}${afterHorario}`;
+      } else {
+        // Formato curto: "Dia DD/MM às Xh" (DSA sessão única)
+        return `${DIAS_PT_ABBR[d.getDay()]} ${fmtDDMM(d)} às ${horario}`;
+      }
+    }
+    // formato tipo "08/08 (Sáb)" — semana de SQL/Storytelling
+    if (rawStr.includes('(')) {
+      return `${fmtDDMM(d)} (${DIAS_PT_ABBR[d.getDay()]})`;
+    }
+    // fallback: só a data
+    return fmtDDMM(d);
+  }
+
+  if (datas.length === 2) {
+    const off1 = offsetFromParsed(datas[0]);
+    const off2 = offsetFromParsed(datas[1]);
+    const d1 = hubDateFromOffset(off1);
+    const d2 = hubDateFromOffset(off2);
+    if (!d1 || !d2) return rawStr;
+
+    if (rawStr.includes(' a ')) {
+      // formato "DD/MM a DD/MM" (dateRange de semana)
+      return `${fmtDDMM(d1)} a ${fmtDDMM(d2)}`;
+    }
+    // formato "Dia DD/MM + Dia DD/MM [às Xh]" (DSA multi-sessão)
+    const parte1 = `${DIAS_PT_ABBR[d1.getDay()]} ${fmtDDMM(d1)}`;
+    const parte2 = `${DIAS_PT_ABBR[d2.getDay()]} ${fmtDDMM(d2)}`;
+    return horario ? `${parte1} + ${parte2} às ${horario}` : `${parte1} + ${parte2}`;
+  }
+
+  return rawStr; // mais de 2 datas — caso não previsto, não mexe
+}
+
+function previousMonday(dateObj) {
+  const dow = dateObj.getDay(); // 0=Dom...6=Sáb
+  const sub = (dow + 6) % 7;    // Seg(1)->0, Ter(2)->1, ..., Dom(0)->6
+  const d = new Date(dateObj);
+  d.setDate(d.getDate() - sub);
+  return d;
+}
+
 function iniciarHub() {
-  const today = todayLocalISO();
   if(localStorage.getItem(HUB_START_KEY)) {
     if(!confirm('O Hub já foi iniciado. Deseja redefinir a data de início para hoje?')) return;
   }
-  localStorage.setItem(HUB_START_KEY, today);
+  const now = new Date();
+  const monday = previousMonday(now);
+  const my = monday.getFullYear();
+  const mm = String(monday.getMonth()+1).padStart(2,'0');
+  const md = String(monday.getDate()).padStart(2,'0');
+  const monISO = `${my}-${mm}-${md}`;
+  const today = todayLocalISO();
+  if(monISO !== today) {
+    const dow = now.getDay(); // 0=Dom...6=Sáb
+    const nomeDia = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'][dow];
+    const diaNum = (dow + 6) % 7 + 1; // Seg=1, Ter=2, ..., Dom=7
+    const monFmt = `${md}/${mm}/${my}`;
+    if(!confirm(`O Hub vai começar a contar a partir de Segunda, ${monFmt} — hoje é o ${diaNum}º dia dessa semana (${nomeDia}). Confirmar?`)) return;
+  }
+  localStorage.setItem(HUB_START_KEY, monISO);
   renderMain();
   updateHeader(activeTab);
 }

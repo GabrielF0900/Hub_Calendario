@@ -1,0 +1,91 @@
+laude, eu to fazendo um plano de estudos pra mim focado em java. To estudando o curso de ingles da kultivi e devo terminar em novembro. Porem, como eu quero entrar no mercado de java junior, estou querendo fazer um plano de estudos focado em DSA com java onde vou estudar primeiro os assuntos que mais tem probbabilidade de cair em teste técnico de java junior, dps vou estudar os assuntos que tem probabilidade media de cair,, dps, vou estudar os assuntos que menos tem probabilidade de cair somente pra ficar precavido. Também vou estudar mockito e JUniit. vou te mandar o arquivo md, voce analisa, me retorna feedback. Aqui está meu curriculo. Embora eu tenha projetos, quero me preparar para entrevistas técnicas para programador java junior. Claro, tenho grande foco em engenharia de software. Vou te mandar o arquivo md. Quero uma analise sobre esse plano de estudos. Quero validar ela devidamente para saber se estudando essa trilha eu irei me destacar e justifique porquê.
+
+
+Validou estratégia de aprendizado alinhada com demandas reais do mercado
+Validou estratégia de aprendizado alinhada com demandas reais do mercado
+Analisei o status_projeto.md, o prompt de persona e seu currículo. Vou te dar a real, como o consultor que você mesmo desenhou pediria.
+
+Veredito geral
+O plano tem uma lógica de priorização correta (atacar primeiro o que mais cai), mas tem um desequilíbrio real: ele está pesado demais em DSA "estilo LeetCode" (árvores, grafos, DP, sliding window) e leve demais no que efetivamente mais cai em entrevista júnior Java no Brasil — que é fundamentos da linguagem, SQL e Spring, não algoritmos de grafo.
+
+Pesquisei relatos recentes de processos de Java júnior no Brasil (Glassdoor, DevMedia, DIO) para confirmar isso antes de te responder, e o padrão é bem consistente: perguntas clássicas como a diferença entre == e equals, por que String se comporta de determinado jeito, explicação sobre Spring Boot e seus benefícios, em qual camada colocar regra de negócio (Model/Controller/Repository/Service), polimorfismo e herança, o que o INNER JOIN faz em SQL, e uso básico de Git (commit, clone, merge). Isso é o núcleo do que empresas médias/pequenas brasileiras testam em júnior — não Dijkstra, não Union-Find, não Segment Tree. O processo típico envolve entrevista técnica, teste prático/escrito e entrevista comportamental, e os testes práticos costumam ser baseados nos requisitos da vaga (ex.: pedem pra você montar uma consulta SQL sobre um sistema real deles). 
+DevMedia
+Glassdoor
+
+O que está certo no seu plano
+Congelar Spring/AWS com revisão leve — correto. Você já tem projetos aplicados, isso não é gap, é ponto forte demonstrável.
+Testes (JUnit/Mockito) como prioridade 🔥 — correto e bem justificado. É um gap real e comum de ser cobrado em teste técnico/take-home.
+Inglês mantido intacto — correto, não sacrificar isso é acertado dado seu prazo (novembro) e o ganho de empregabilidade (empresas remotas/internacionais, como você já viu no relato do Gabriel Bahia que citei: quem tinha inglês melhor teve mais chances em processos internacionais).
+Classificação por probabilidade — a lógica está certa, o problema é a calibração dos itens dentro de cada nível.
+O que está mal calibrado
+1. DSA pesada demais para o perfil da vaga que você está mirando.
+Seu currículo mostra forte ênfase em Spring/Cloud/arquitetura — isso posiciona você para vagas de backend Java "de produto", não para vagas estilo big tech com entrevista algorítmica pura. Para esse perfil de vaga, árvores/grafos/DP (sua faixa 📈 e 📊) tem probabilidade real de aparecer bem menor do que sua matriz sugere. O que você classificou como 🔥 (HashMap, Big O, Array/String, Stack/Queue, Binary Search) está certo. Mas eu rebaixaria Árvore Binária/BST e Recursão de 📈 para o limite entre 📈 e 📊 — eles aparecem mais em processos de empresas maiores (bancos, fintechs grandes) do que em vagas júnior de porte médio.
+
+2. Falta uma trilha de "Java Core / fundamentos de linguagem" — e essa é a lacuna mais crítica que vi.
+Nenhuma das suas 3 trilhas cobre explicitamente: == vs equals/hashCode, imutabilidade de String, coleções (diferença ArrayList vs LinkedList na prática, quando usar cada uma), streams/lambda, try-with-resources, generics, e diferenças entre interface/classe abstrata. Isso é testado com mais frequência que DSA avançada em processos júnior brasileiros, segundo os relatos que levantei. Eu inseriria isso como um item 🔥 dentro da fase 1, não como algo implícito dentro de "revisão enferrujada" do DSA.
+
+3. Falta SQL prático.
+Você tem PostgreSQL nos projetos, mas não vi no plano nenhum bloco de prática de queries (joins, agregações, subqueries). Isso é citado direto nos relatos que puxei como pergunta clássica de júnior, e é fácil de treinar em paralelo (30min, 1x/semana, não precisa de trilha própria).
+
+4. Falta ensaiar a narrativa dos seus próprios projetos.
+Com o portfólio que você tem (CityShield, SafeWallet, Resilient Audit Batch), entrevistador júnior vai querer que você explique decisões técnicas com fluência — isso pesa tanto quanto ou mais que resolver um problema novo de LeetCode. Não vi isso no cronograma. Sugiro 15-20min por semana ensaiando explicar 1 projeto em voz alta (e depois em inglês, quando o Kultivi acabar).
+
+Ajuste recomendado na matriz (resumo)
+Mover	De	Para	Motivo
+Java Core (==, equals, coleções, streams, generics)	Ausente	🔥 Fase 1	Mais citado nos relatos reais que DSA avançada
+SQL prático (joins, agregação)	Ausente	🔥 Fase 1 (leve, 30min/sem)	Citado como pergunta clássica júnior
+Narrativa de projetos (storytelling técnico)	Ausente	📈 Fase 2	Peso alto em entrevista comportamental/técnica combinada
+Árvore Binária/BST, Recursão/Backtracking	📈	Fronteira 📈/📊	Menos frequente pra perfil backend "de produto"
+DP Avançado, Grafos Avançados, Trie, Red-Black	📊	Manter 📊 (correto)	Baixa frequência confirmada para júnior
+Resposta direta à sua pergunta
+Sim, estudando essa trilha você vai se destacar em relação à maioria dos candidatos júnior — a maioria não estuda testes de forma estruturada nem tem certificação AWS. Mas o "vai me destacar" fica mais forte se você redistribuir ~20% do tempo que hoje vai para DSA avançada (grafos/DP/árvores complexas) para Java Core + SQL + storytelling de projeto, porque é isso que decide a maior parte das entrevistas júnior no Brasil, não algoritmo de grafo.
+
+Quer que eu já reescreva a matriz de probabilidade com esses ajustes e gere uma versão atualizada do status_projeto.md, ou prefere primeiro validar comigo os pontos acima?
+
+reescreva todo o plano atualizado, detalhado, didatico, com explicações do porque de cada coisa em um arquivo md e deixe para eu baixar.
+
+
+Elaborou plano detalhado em markdown para download
+Elaborou plano detalhado em markdown para download
+Pronto — plano reescrito e disponível pra download acima. Ele mantém a estrutura das 3 trilhas originais, mas adiciona duas novas (Java Core e SQL Prático, mais um bloco de Storytelling Técnico), reequilibrando o peso que estava concentrado em DSA avançada. Cada seção tem a justificativa de mercado embutida, então você pode usar o documento tanto como plano de execução quanto como referência caso precise defender essas escolhas pra você mesmo ou pra alguém mais adiante.
+
+
+Plano estudos java junior gabriel atualizado
+Documento · MD 
+Agora quero que faça outro arquivo md com todos os assuntos que preciso estudar, expliique porque preciso estudar. Pra cada assunto, planeje os topicos pedagogicos dos respectivos assuntos e coloque de forma organizada para eu saber nao só os assuntos mas os topicos que preciso estudar. Coloque a prática também que é o ato de explicar em voz alta usando feymamn. No final, faça um prompt onde pede para modificar o calendario do projeto onde vai fazer uma mesclagem para ser um hub de calendarios onde, terá o calendario de ingles da kultivi mantido e, vamos adicionar o novo calendario dessas trilhas onde vou poder alternar em cada uma e vou poder selecionar os assuntos que foram estudados e o progresso de cada um será atualizado. Coloque datas também reais. Pra cada assunto do novo calendario, coloque um modal com os respectivos topicos de acordo com o plano pedagogico. Planeje antes de executar. sobre designer, quero o mesmo designer do calendario de ingles da kultivi.
+
+Esta resposta não carregou.
+
+00:00 Bem pessoal, depois da gente ter vivenciado nessa jornada de criação de 00:6.12 objeto, instanciação, atribuição de valores, até mesmo uma questão de 00:11.48 construtores, de construir os objetos, chegou o momento da gente aplicar o que 00:16.64 nós consideramos cruciais para qua
+
+pasted
+
+Claude, aqui a transcrição da aula de == vs equals: esta bom ou precisa de mais ? outra coisa, nesse trecho: Quer que eu já reescreva o prompt corrigindo os itens 1 e 3 (a função ficar robusta pra qualquer formato de data), e inclua uma pergunta direta pra você decidir o item 2 (26/08 ou "Quinta" pro jc_1_8) antes de eu finalizar? execute.
+
+
+Avaliou transcrição, mapeou correções de regex e datas, identificou lacunas
+Avaliou transcrição, mapeou correções de regex e datas, identificou lacunas
+Sobre a transcrição da aula
+Não está completa pro que você precisa — é um bom ponto de partida, mas falta a parte que mais cai em entrevista.
+
+O que a aula cobre bem:
+
+== em primitivos vs objetos, de forma clara e com demonstração ao vivo.
+String Pool (literal vs new String()) — bate exatamente com o que já vimos.
+Mostra Carro sem equals/hashCode sobrescritos dando false mesmo com os mesmos atributos, e depois corrigindo com a IDE gerando os dois métodos — boa demonstração prática.
+Bônus real que a aula trouxe e que você deveria anotar (não estava no nosso material original): o cache de Integer — Integer.valueOf(10) == Integer.valueOf(10) dá true porque o Java cacheia objetos Integer de -128 a 127, mas 128 == 128 dá false porque sai da faixa do cache e vira comparação de referência de objetos diferentes no heap. Essa é uma pegadinha clássica de entrevista júnior que não estava no seu tópico 1.1 original — vale guardar.
+
+O que falta, e é justamente a parte mais cobrada: a aula mostra que equals/hashCode "têm que ser implementados juntos" mas não explica por quê — não entra no mecanismo de bucket/hash que fizemos aqui (o HashMap/HashSet calcula hashCode() pra decidir a "gaveta", e só usa equals() pra confirmar dentro da gaveta certa). Sem esse pedaço, você decora "tem que sobrescrever os dois" sem saber explicar o porquê — que é exatamente o que um entrevistador júnior costuma perguntar de seguida ("e por que isso quebra o HashSet?"). Recomendo usar essa aula como reforço visual do ==/equals, mas manter a explicação da gaveta/hashCode que já fizemos como a peça central do seu entendimento.
+
+Sobre o prompt — sim, aprovado, com um ajuste pequeno
+Revisei o documento que você mandou (a versão que você mesmo atualizou). Ele resolve os 3 pontos que eu tinha levantado:
+
+Item 2 (data errada do jc_1_8): corrigido escolhendo mudar a data pra 26/08 (mantendo o rótulo "Quarta"), em vez de mudar o rótulo pra "Quinta" — boa escolha, preserva o padrão Segunda/Quarta do Java Core sem exceção.
+Item 1 (formato multi-data do DSA): corrigido, pedindo detecção das duas datas via regex com flag /g.
+Item 3 (estilo de nome do dia inconsistente): corrigido, fixando nome completo em todos os caminhos calculados.
+O único ajuste que eu faria antes de rodar: o prompt descreve os 3 formatos de schedule, mas não diz explicitamente como o código decide qual dos 3 casos aplicar — fica implícito. Vale adicionar uma regra de decisão direta, tipo "conte quantas datas DD/MM aparecem no texto: 0 = formato revisão (não mexe), 1 = formato Java Core (recalcula uma data), 2 = formato DSA (recalcula as duas)". Isso evita a implementação ficar adivinhando qual if usar.
+
+Aqui está a versão final, com esse ajuste incluído, em arquivo:
+
+
+Versão final aprovada do prompt de correção do botão INICIAR, com regra de decisão explícita entre os 3 formatos de schedule

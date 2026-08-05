@@ -1,0 +1,81 @@
+Se eu te mandar um link de uma conversa que eu tive com outra conta no claude code voce consegue ler a conversa? se sim, aqui o link: https://claude.ai/share/6353aca4-9606-4cb7-887b-c6617e1035e2 leia o historico.
+
+Fetched: Claude
+Fetched: Claude
+
+Consegui acessar o link, mas a página só retornou o esqueleto do site (metadados, título, descrição) — o conteúdo real da conversa é carregado dinamicamente via JavaScript no navegador, e a ferramenta de busca que eu uso não consegue executar esse JavaScript para revelar as mensagens.
+
+Ou seja: não consigo ler o histórico dessa conversa compartilhada através do link.
+
+Se quiser que eu veja o conteúdo, você pode:
+
+Copiar e colar o texto da conversa diretamente aqui
+Tirar prints e enviar as imagens
+Exportar o conteúdo em algum formato (markdown, txt, etc.) e fazer upload do arquivo
+
+Claude, eu to fazendo um plano de estudos pra mim focado em java. To estudando o curso de ingles da kultivi e devo terminar em novembro. Porem, como eu quero entrar no mercado de java junior, estou querendo fazer um plano de estudos focado em DSA com java onde vou estudar primeiro os assuntos que ma
+
+PASTED
+
+Aqui, leia tudo:
+
+Li tudo. Aqui está um resumo do que rolou nessa conversa com a outra instância (Claude Code):
+
+Contexto: Você estava montando um plano de estudos focado em Java para conseguir sua primeira vaga júnior, balanceando isso com o inglês do Kultivi (terminando em novembro).
+
+Principais pontos da conversa:
+
+Validação do plano original — o Claude analisou seu status_projeto.md e currículo, e apontou que o plano estava pesado demais em DSA avançada (árvores, grafos, DP) e leve demais no que realmente mais cai em entrevista júnior Java no Brasil: fundamentos de Java (== vs equals, coleções, streams), SQL prático (joins, agregações) e storytelling técnico dos seus próprios projetos (CityShield, SafeWallet, Resilient Audit Batch).
+Reequilíbrio proposto — rebaixar Árvore Binária/BST e Recursão da prioridade alta, e subir Java Core + SQL + narrativa de projetos para prioridade alta, mantendo JUnit/Mockito como prioridade máxima (gap real identificado).
+Arquivo MD gerado — plano reescrito com as 5 trilhas (Java Core, DSA, Testes, SQL, Storytelling), com justificativas de mercado.
+Segundo arquivo pedido — um guia mais detalhado com tópicos pedagógicos por assunto, prática Feynman (explicar em voz alta), e um prompt para construir um "hub de calendários" mesclando o calendário de inglês do Kultivi com o novo calendário técnico — com modais mostrando os tópicos de cada assunto, usando o mesmo design do calendário de inglês existente.
+Datas reais definidas: trilha técnica de 12 semanas começando 03/08/2026, terminando 25/10/2026 (Fase 1: 03/08–13/09, Fase 2: 14/09–25/10). Inglês do Kultivi já rodando de 21/07/2026 até 10/11/2026.
+Situação de atraso — você relatou não ter estudado no dia planejado (segunda) por dúvida sobre como usar os calendários. A resposta foi: a ordem do conteúdo importa mais que o rótulo do dia da semana; nunca empilhar dois blocos no mesmo dia pra compensar; nunca pular a ordem certa só pra "bater com a data"; usar o buffer de sábado se a semana não se realinhar sozinha.
+
+Quer que eu continue esse trabalho a partir daqui — por exemplo, atualizar o plano/calendário considerando onde você está agora (hoje é 04/08, terça), ou revisar algum arquivo específico?
+
+Executou um comando
+Executou um comando
+
+00:00 Bem pessoal, depois da gente ter vivenciado nessa jornada de criação de 00:6.12 objeto, instanciação, atribuição de valores, até mesmo uma questão de 00:11.48 construtores, de construir os objetos, chegou o momento da gente aplicar o que 00:16.64 nós consideramos cruciais para qua
+
+PASTED
+
+Claude, aqui a transcrição da aula de == vs equals: esta bom ou precisa de mais ? outra coisa, nesse trecho: Quer que eu já reescreva o prompt corrigindo os itens 1 e 3 (a função ficar robusta pra qualquer formato de data), e inclua uma pergunta direta pra você decidir o item 2 (26/08 ou "Quinta" pro jc_1_8) antes de eu finalizar? execute. Entao, como a rocketseat nao ensina tudo oque preciso, devo ir pro roadmap?
+
+Identificou erro técnico em caching e solicitou esclarecimentos contextuais
+Identificou erro técnico em caching e solicitou esclarecimentos contextuais
+
+Vou responder as três partes separadamente, porque a do meio precisa de um ajuste antes de eu conseguir agir.
+
+1. Transcrição do == vs equals
+
+A parte prática está boa — a demonstração com Integer, String e a classe Carro (equals/hashCode customizado) cobre bem o essencial e é exatamente o tipo de exemplo que cai em entrevista. Mas tem um erro técnico que precisa ser corrigido antes de você levar isso pra uma entrevista:
+
+O erro: o instrutor explica que a diferença de comportamento entre 128 (dá false) e valores até 127 (dariam true) é porque "até 127 vai pro stack, depois disso vai pro heap". Isso está errado. Todo objeto Integer fica no heap, sem exceção — o stack só guarda variáveis primitivas e referências, nunca objetos. O motivo real é o Integer Cache (IntegerCache): a JVM pré-cria e reaproveita objetos Integer para valores entre -128 e 127 durante o autoboxing (Integer i = 10 reaproveita um objeto já existente do cache). Fora dessa faixa, cada autoboxing cria um objeto novo — por isso 128 == 128 (autoboxed) dá false, mas não tem nada a ver com stack vs heap.
+
+Se você citar essa explicação errada numa entrevista técnica, é o tipo de coisa que pode custar pontos justamente no assunto que mais cai. Vale corrigir mentalmente: é Integer Cache, não stack vs heap.
+
+O que eu adicionaria (não é erro, é lacuna):
+
+Contrato equals/hashCode: o vídeo mostra a IDE gerando o código, mas não explica por que eles precisam ser sobrescritos juntos — a regra é "se dois objetos são iguais por equals(), eles OBRIGATORIAMENTE devem ter o mesmo hashCode()" (senão HashMap/HashSet quebram silenciosamente). Isso é perguntado com frequência.
+Por que String é imutável — o vídeo demonstra o pool de strings na prática, mas não menciona o "porquê" (segurança, cache de hashcode, thread-safety) — vale complementar com um artigo do Baeldung ("Why String is Immutable in Java").
+
+Com essas 2 correções/complementos, o assunto fica redondo.
+
+2. O trecho que você colou
+
+Esse trecho ("Quer que eu já reescreva o prompt corrigindo os itens 1 e 3... item 2 (26/08 ou 'Quinta' pro jc_1_8)...") não apareceu nesta conversa — parece ser de outra conversa (provavelmente com o Claude Code, depois que ele leu o prompt-atualizar-hub.md e apontou problemas na implementação). Eu não tenho o que são os "itens 1, 2, 3" nem o arquivo/prompt atual que está sendo discutido lá.
+
+Pra eu executar isso direito, preciso que você me mande:
+
+O que são exatamente os itens 1, 2 e 3 (a mensagem completa da outra conversa, ou pelo menos a lista dos 3 problemas apontados)
+Se possível, o prompt atual (ou o trecho relevante) que precisa ser corrigido
+
+Sem isso eu estaria só inventando uma correção que pode não bater com o que realmente está errado.
+
+3. Rocketseat não ensina tudo — vou pro roadmap.sh?
+
+Sim, exatamente essa é a lógica que já combinamos: Rocketseat é a 1ª opção sempre que ela cobrir o assunto. Quando ela não cobrir (como aconteceu agora — Integer Cache, contrato equals/hashCode e imutabilidade de String não vieram completos nessa aula), você vai no roadmap.sh/java, acha o nó do assunto, e segue o link recomendado de lá (que geralmente cai em Baeldung ou documentação oficial). Depois usa o Baeldung como prática/aprofundamento de qualquer forma.
+
+Nesse caso específico, eu já indicaria direto: Baeldung tem artigos exatos pra tapar essas 3 lacunas — "Java Integer Cache", "Overriding equals() and hashCode()", e "Why String is Immutable in Java".
