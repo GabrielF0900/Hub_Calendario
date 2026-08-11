@@ -30,6 +30,12 @@
     .priority-high{color:#ef4444}
     .priority-mid{color:#f59e0b}
     .priority-low{color:#64748b}
+    .badge-at{display:inline-flex;align-items:center;gap:3px;border-radius:4px;padding:2px 7px;font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.04em}
+    .badge-estudar{background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.35);color:#60a5fa}
+    .badge-revisar{background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.35);color:#fbbf24}
+    .badge-pratica{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.35);color:#34d399}
+    .review-week-card{border-style:dashed!important;background:linear-gradient(135deg,rgba(245,158,11,.05) 0%,transparent 100%)}
+    .review-week-header{color:#fbbf24}
   </style>
 </head>
 <body class="bg-[#0f172a] text-slate-100 min-h-screen relative overflow-x-hidden antialiased select-none">
@@ -545,24 +551,29 @@ const NEW_TRACKS = {
       {
         "weekNum": 1,
         "dateRange": "03/08 a 09/08",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "jc_1_1",
             "title": "1.1 Igualdade e Hashing",
             "schedule": "Segunda, 03/08 às 13h",
             "estimatedTime": "1 bloco (2h)",
+            "activityType": "estudar",
             "description": "A diferença entre == e .equals() é a pergunta de Java mais repetida em entrevistas júnior. Entender o contrato hashCode/equals é obrigatório para usar HashMap corretamente.",
             "subtopics": [
               {
                 "id": "jc_1_1_1",
+                "activityType": "estudar",
                 "text": "Diferença entre == (comparação de referência) e .equals() (comparação de valor)"
               },
               {
                 "id": "jc_1_1_2",
+                "activityType": "estudar",
                 "text": "Por que String se comporta de forma 'estranha' com == (String Pool)"
               },
               {
                 "id": "jc_1_1_3",
+                "activityType": "estudar",
                 "text": "O contrato entre equals() e hashCode() — por que sobrescrever um sem o outro quebra HashMap/HashSet"
               }
             ]
@@ -572,18 +583,22 @@ const NEW_TRACKS = {
             "title": "1.2 Coleções na prática",
             "schedule": "Quarta, 05/08 às 13h",
             "estimatedTime": "1 bloco (2h)",
+            "activityType": "estudar",
             "description": "Não basta saber que ArrayList é array e LinkedList é lista. A resposta certa é saber quando o custo de inserção/remoção no meio compensa o custo de acesso aleatório.",
             "subtopics": [
               {
                 "id": "jc_1_2_1",
+                "activityType": "estudar",
                 "text": "ArrayList vs LinkedList — quando o custo de inserção/remoção no meio compensa o custo de acesso aleatório"
               },
               {
                 "id": "jc_1_2_2",
+                "activityType": "estudar",
                 "text": "HashMap vs TreeMap vs LinkedHashMap — quando ordem importa e quando não importa"
               },
               {
                 "id": "jc_1_2_3",
+                "activityType": "estudar",
                 "text": "HashSet vs TreeSet — mesma lógica aplicada a conjuntos"
               }
             ]
@@ -593,24 +608,29 @@ const NEW_TRACKS = {
       {
         "weekNum": 2,
         "dateRange": "10/08 a 16/08",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "jc_1_3",
             "title": "1.3 Streams e Lambdas",
             "schedule": "Segunda, 10/08 às 13h",
             "estimatedTime": "1 bloco (2h)",
+            "activityType": "estudar",
             "description": "Streams é como o Java moderno faz manipulação funcional de coleções. Saber transformar um for em stream — e explicar o porquê da escolha — é cobrado tanto em teoria quanto em take-home.",
             "subtopics": [
               {
                 "id": "jc_1_3_1",
+                "activityType": "estudar",
                 "text": "Diferença entre operação intermediária (filter, map) e terminal (collect, reduce)"
               },
               {
                 "id": "jc_1_3_2",
+                "activityType": "estudar",
                 "text": "Optional — por que existe, como evita NullPointerException"
               },
               {
                 "id": "jc_1_3_3",
+                "activityType": "estudar",
                 "text": "Exemplo prático: transformar um for tradicional em stream, sabendo dizer o motivo da escolha"
               }
             ]
@@ -620,18 +640,22 @@ const NEW_TRACKS = {
             "title": "1.4 Tratamento de Exceções",
             "schedule": "Quarta, 12/08 às 13h",
             "estimatedTime": "1 bloco (2h)",
+            "activityType": "estudar",
             "description": "Saber a diferença entre Checked e Unchecked exceptions explica por que o compilador força tratamento em alguns casos e não em outros — pergunta clássica de entrevista.",
             "subtopics": [
               {
                 "id": "jc_1_4_1",
+                "activityType": "estudar",
                 "text": "Checked vs Unchecked exceptions — quando o compilador obriga tratamento e quando não"
               },
               {
                 "id": "jc_1_4_2",
+                "activityType": "estudar",
                 "text": "try-with-resources — por que existe (fecha recursos automaticamente)"
               },
               {
                 "id": "jc_1_4_3",
+                "activityType": "estudar",
                 "text": "Quando vale criar uma exceção customizada"
               }
             ]
@@ -641,20 +665,24 @@ const NEW_TRACKS = {
       {
         "weekNum": 3,
         "dateRange": "17/08 a 23/08",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "jc_1_5",
             "title": "1.5 Generics",
             "schedule": "Segunda, 17/08 às 13h",
             "estimatedTime": "1 bloco (2h)",
+            "activityType": "estudar",
             "description": "Generics existem para mover ClassCastException do runtime para o tempo de compilação — uma vez que você entende isso, a sintaxe faz sentido imediatamente.",
             "subtopics": [
               {
                 "id": "jc_1_5_1",
+                "activityType": "estudar",
                 "text": "Por que existem (evitam ClassCastException em runtime, movem o erro pro tempo de compilação)"
               },
               {
                 "id": "jc_1_5_2",
+                "activityType": "estudar",
                 "text": "Sintaxe básica (List<T>) e um wildcard simples (List<? extends Number>)"
               }
             ]
@@ -664,18 +692,22 @@ const NEW_TRACKS = {
             "title": "1.6 POO Aplicada",
             "schedule": "Quarta, 19/08 às 13h",
             "estimatedTime": "1 bloco (2h)",
+            "activityType": "estudar",
             "description": "A resposta que o entrevistador quer não é a definição do dicionário — é quando usar Interface vs Abstrata e por que 'favoreça composição' é mais flexível que herança.",
             "subtopics": [
               {
                 "id": "jc_1_6_1",
+                "activityType": "estudar",
                 "text": "Interface vs Classe Abstrata — quando usar cada uma (contrato puro vs comportamento compartilhado)"
               },
               {
                 "id": "jc_1_6_2",
+                "activityType": "estudar",
                 "text": "Herança vs Composição — por que 'favoreça composição' é um princípio comum em entrevista"
               },
               {
                 "id": "jc_1_6_3",
+                "activityType": "estudar",
                 "text": "Polimorfismo com um exemplo de código, não só a definição de dicionário"
               }
             ]
@@ -685,24 +717,29 @@ const NEW_TRACKS = {
       {
         "weekNum": 4,
         "dateRange": "24/08 a 30/08",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "jc_1_7",
             "title": "1.7 Java Moderno (17/21)",
             "schedule": "Segunda, 24/08 às 13h",
             "estimatedTime": "1 bloco (2h)",
+            "activityType": "estudar",
             "description": "Muitas entrevistas 2025-2026 já perguntam sobre record e switch expressions. São recursos simples que mostram que você acompanha a evolução da linguagem.",
             "subtopics": [
               {
                 "id": "jc_1_7_1",
+                "activityType": "estudar",
                 "text": "var — inferência de tipo, quando usar e quando evitar (legibilidade)"
               },
               {
                 "id": "jc_1_7_2",
+                "activityType": "estudar",
                 "text": "record — para que serve, diferença de uma classe normal"
               },
               {
                 "id": "jc_1_7_3",
+                "activityType": "estudar",
                 "text": "switch expressions — sintaxe nova vs switch tradicional"
               }
             ]
@@ -712,18 +749,22 @@ const NEW_TRACKS = {
             "title": "1.8 Enums, Overload e Pass by Value",
             "schedule": "Quarta, 26/08 às 13h",
             "estimatedTime": "1 bloco (2h)",
+            "activityType": "estudar",
             "description": "Três tópicos que aparecem separados no roadmap.sh/java mas têm algo em comum: são perguntas onde o candidato que estudou superficialmente erra exatamente porque acha que sabe. Enum parece só 'uma constante com nome bonito' até o entrevistador perguntar 'posso ter um método dentro de um enum?'. Overloading e Overriding têm nomes parecidos e o entrevistador usa isso como armadilha. Pass by Value é o maior mito do Java — todo desenvolvedor que vem de outra linguagem acha que Java passa objetos por referência.",
             "subtopics": [
               {
                 "id": "jc_1_8_1",
+                "activityType": "estudar",
                 "text": "Enums — para que servem além de constantes, como declarar um método dentro de um enum (ex: enum com getDescricao()), e por que isso é mais seguro que usar String ou int como constante"
               },
               {
                 "id": "jc_1_8_2",
+                "activityType": "estudar",
                 "text": "Method Overloading vs Overriding — diferença prática: Overloading é mesmo nome com assinatura diferente na mesma classe (resolvido em tempo de compilação); Overriding é mesmo nome e assinatura em subclasse (resolvido em runtime via polimorfismo) — pergunta clássica de entrevista"
               },
               {
                 "id": "jc_1_8_3",
+                "activityType": "estudar",
                 "text": "Pass by Value vs Pass by Reference — Java é SEMPRE pass-by-value: para primitivos, o valor é copiado; para objetos, a referência é copiada por valor (não o objeto em si) — a pegadinha clássica: você pode mudar o estado do objeto dentro do método, mas não pode fazer a variável original apontar para outro objeto"
               }
             ]
@@ -733,20 +774,24 @@ const NEW_TRACKS = {
       {
         "weekNum": 5,
         "dateRange": "31/08 a 06/09",
+        "isReviewWeek": true,
         "topics": [
           {
             "id": "jc_rev1",
             "title": "Revisão I — Feynman em Código",
             "schedule": "Seg e Qua às 13h",
             "estimatedTime": "2 blocos (2h cada)",
+            "activityType": "revisar",
             "description": "Semana de consolidação. Para cada tópico 1.1 a 1.4, gravar um áudio de 60s e implementar pelo menos um exemplo de código no IntelliJ — sem consultar anotações.",
             "subtopics": [
               {
                 "id": "jc_rev1_1",
+                "activityType": "revisar",
                 "text": "Revisar 1.1 e 1.2: implementar um exemplo com equals()/hashCode() correto + usar HashMap, TreeMap e HashSet em código"
               },
               {
                 "id": "jc_rev1_2",
+                "activityType": "revisar",
                 "text": "Revisar 1.3 e 1.4: converter um for em stream com justificativa + criar uma exceção customizada com try-with-resources"
               }
             ]
@@ -756,24 +801,29 @@ const NEW_TRACKS = {
       {
         "weekNum": 6,
         "dateRange": "07/09 a 13/09",
+        "isReviewWeek": true,
         "topics": [
           {
             "id": "jc_rev2",
             "title": "Revisão Final — Simulado Feynman",
             "schedule": "Seg e Qua às 13h",
             "estimatedTime": "2 blocos (2h cada)",
+            "activityType": "revisar",
             "description": "Última semana do Java Core. Simular uma entrevista técnica: abrir cada tópico de 1.1 a 1.8 e explicar em voz alta sem reler material.",
             "subtopics": [
               {
                 "id": "jc_rev2_1",
+                "activityType": "revisar",
                 "text": "Revisar 1.5, 1.6 e 1.7: Generics, Interface vs Abstrata, record e switch expressions"
               },
               {
                 "id": "jc_rev2_2",
+                "activityType": "revisar",
                 "text": "Revisar 1.8: Enums com métodos, Overloading vs Overriding, Pass by Value — os três em sequência de perguntas de entrevista"
               },
               {
                 "id": "jc_rev2_3",
+                "activityType": "pratica",
                 "text": "Simulado final: responder em voz alta como entrevistador — todos os 8 tópicos em sequência"
               }
             ]
@@ -782,6 +832,7 @@ const NEW_TRACKS = {
       }
     ]
   },
+
   "dsa": {
     "id": "dsa",
     "title": "DSA",
@@ -798,6 +849,7 @@ const NEW_TRACKS = {
       {
         "weekNum": 1,
         "dateRange": "03/08 a 09/08",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "dsa_2_1",
@@ -805,18 +857,23 @@ const NEW_TRACKS = {
             "schedule": "Ter 04/08 + Qui 06/08 às 13h",
             "estimatedTime": "2 sessões (1h cada)",
             "priority": "🔥 FASE 1 — Alta probabilidade",
+            "block": "Arrays & Hashing",
+            "activityType": "estudar",
             "description": "O HashMap é a estrutura mais usada em problemas de entrevista. Entender o O(1) de lookup transforma soluções O(N²) em O(N).",
             "subtopics": [
               {
                 "id": "dsa_2_1_1",
+                "activityType": "pratica",
                 "text": "Two Sum — entenda o porquê do O(1): você guarda o complemento no mapa, não varre o array duas vezes"
               },
               {
                 "id": "dsa_2_1_2",
+                "activityType": "pratica",
                 "text": "Contains Duplicate — verificar em O(1) se elemento já foi visto"
               },
               {
                 "id": "dsa_2_1_3",
+                "activityType": "pratica",
                 "text": "Group Anagrams — usar hashCode da string ordenada como chave do agrupamento"
               }
             ]
@@ -827,14 +884,18 @@ const NEW_TRACKS = {
             "schedule": "Após cada problema",
             "estimatedTime": "Prática contínua",
             "priority": "🔥 FASE 1 — Alta probabilidade",
+            "block": "Arrays & Hashing",
+            "activityType": "estudar",
             "description": "Não se trata de decorar tabela — é saber deduzir olhando para o código. Entrevistadores perguntam 'qual a complexidade da sua solução?' logo depois que você termina.",
             "subtopics": [
               {
                 "id": "dsa_2_2_1",
+                "activityType": "estudar",
                 "text": "Como analisar a complexidade de tempo da sua própria solução — contar loops e chamadas recursivas"
               },
               {
                 "id": "dsa_2_2_2",
+                "activityType": "estudar",
                 "text": "Complexidade de espaço — quando ela importa tanto quanto tempo (ex: HashMap usa O(N) espaço)"
               }
             ]
@@ -844,6 +905,7 @@ const NEW_TRACKS = {
       {
         "weekNum": 2,
         "dateRange": "10/08 a 16/08",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "dsa_sem2",
@@ -851,18 +913,23 @@ const NEW_TRACKS = {
             "schedule": "Ter 11/08 + Qui 13/08 às 13h",
             "estimatedTime": "2 sessões",
             "priority": "🔥 FASE 1",
+            "block": "Arrays & Hashing",
+            "activityType": "pratica",
             "description": "HashMap é o padrão mais cobrado — invista uma semana inteira nele. Feynman antes de codar em todos.",
             "subtopics": [
               {
                 "id": "dsa_sem2_1",
+                "activityType": "pratica",
                 "text": "Resolver Ransom Note (HashMap para contar caracteres)"
               },
               {
                 "id": "dsa_sem2_2",
+                "activityType": "pratica",
                 "text": "Resolver Isomorphic Strings"
               },
               {
                 "id": "dsa_sem2_3",
+                "activityType": "pratica",
                 "text": "Feynman: Para cada solução, explicar em voz alta o raciocínio antes de ver o código"
               }
             ]
@@ -872,6 +939,7 @@ const NEW_TRACKS = {
       {
         "weekNum": 3,
         "dateRange": "17/08 a 23/08",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "dsa_2_3",
@@ -879,18 +947,23 @@ const NEW_TRACKS = {
             "schedule": "Ter 18/08 + Qui 20/08 às 13h",
             "estimatedTime": "2 sessões",
             "priority": "🔥 FASE 1 — Alta probabilidade",
+            "block": "Two Pointers",
+            "activityType": "estudar",
             "description": "Dois ponteiros substituem um loop aninhado O(N²) por uma passagem linear O(N). Entender quando aplicar esse padrão é fundamental.",
             "subtopics": [
               {
                 "id": "dsa_2_3_1",
+                "activityType": "pratica",
                 "text": "Valid Palindrome — ponteiro do início e do fim caminhando para o centro"
               },
               {
                 "id": "dsa_2_3_2",
+                "activityType": "pratica",
                 "text": "Merge Sorted Array — ponteiro de trás para frente evita sobrescrever elementos"
               },
               {
                 "id": "dsa_2_3_3",
+                "activityType": "estudar",
                 "text": "Padrão geral: quando dois ponteiros substituem um loop aninhado — identificar o invariante"
               }
             ]
@@ -900,6 +973,7 @@ const NEW_TRACKS = {
       {
         "weekNum": 4,
         "dateRange": "24/08 a 30/08",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "dsa_sem4",
@@ -907,14 +981,18 @@ const NEW_TRACKS = {
             "schedule": "Ter 25/08 às 13h",
             "estimatedTime": "1 sessão",
             "priority": "🔥 FASE 1",
+            "block": "Two Pointers",
+            "activityType": "pratica",
             "description": "Prática adicional de Two Pointers para solidificar o reconhecimento automático do padrão antes de avançar para Stack.",
             "subtopics": [
               {
                 "id": "dsa_sem4_1",
+                "activityType": "pratica",
                 "text": "3Sum ou Remove Duplicates from Sorted Array (Two Pointers)"
               },
               {
                 "id": "dsa_sem4_3",
+                "activityType": "pratica",
                 "text": "Feynman em cada solução antes de codar"
               }
             ]
@@ -925,14 +1003,18 @@ const NEW_TRACKS = {
             "schedule": "Qui 27/08 às 13h",
             "estimatedTime": "1 sessão",
             "priority": "🔥 FASE 1 — Alta probabilidade",
+            "block": "Stack",
+            "activityType": "estudar",
             "description": "Stack é a estrutura ideal para problemas de 'paridade' e 'rastrear histórico'. Min Stack é um clássico que testa se você pensa além do óbvio.",
             "subtopics": [
               {
                 "id": "dsa_2_4_1",
+                "activityType": "pratica",
                 "text": "Valid Parentheses — usar stack para verificar abertura/fechamento corretos"
               },
               {
                 "id": "dsa_2_4_2",
+                "activityType": "pratica",
                 "text": "Min Stack — manter pilha auxiliar para retornar mínimo em O(1)"
               }
             ]
@@ -942,6 +1024,7 @@ const NEW_TRACKS = {
       {
         "weekNum": 5,
         "dateRange": "31/08 a 06/09",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "dsa_2_5",
@@ -949,14 +1032,18 @@ const NEW_TRACKS = {
             "schedule": "Ter 01/09 + Qui 03/09 às 13h",
             "estimatedTime": "2 sessões",
             "priority": "🔥 FASE 1 — Alta probabilidade",
+            "block": "Linked List",
+            "activityType": "estudar",
             "description": "Reverse Linked List é o problema de LinkedList mais cobrado. Saber a versão iterativa e depois a recursiva mostra profundidade. Floyd (tartaruga e lebre) é um algoritmo elegante que impressiona.",
             "subtopics": [
               {
                 "id": "dsa_2_5_1",
+                "activityType": "pratica",
                 "text": "Reverse Linked List — iterativo primeiro (prev, curr, next), depois recursivo"
               },
               {
                 "id": "dsa_2_5_2",
+                "activityType": "pratica",
                 "text": "Linked List Cycle — algoritmo de Floyd (tartaruga e lebre), detectar sem memória extra O(1)"
               }
             ]
@@ -966,21 +1053,26 @@ const NEW_TRACKS = {
       {
         "weekNum": 6,
         "dateRange": "07/09 a 13/09",
+        "isReviewWeek": true,
         "topics": [
           {
             "id": "dsa_2_6",
-            "title": "2.6 Binary Search",
+            "title": "Revisão 2.6: Binary Search",
             "schedule": "Ter 08/09 às 13h",
             "estimatedTime": "1 sessão",
             "priority": "🔥 FASE 1 — Alta probabilidade",
-            "description": "Binary Search parece simples mas esconde armadilhas nos limites (off-by-one). A variação em array rotacionado é a favorita de entrevistadores para testar entendimento real.",
+            "block": "Binary Search",
+            "activityType": "revisar",
+            "description": "Revisar os conceitos de Binary Search, garantindo atenção redobrada aos limites (off-by-one). Praticar a explicação da variação em array rotacionado.",
             "subtopics": [
               {
                 "id": "dsa_2_6_1",
+                "activityType": "pratica",
                 "text": "Busca clássica — garantir que mid não causa overflow (usar left + (right-left)/2)"
               },
               {
                 "id": "dsa_2_6_2",
+                "activityType": "pratica",
                 "text": "Search in Rotated Sorted Array — identificar qual metade está ordenada em cada iteração"
               }
             ]
@@ -991,14 +1083,18 @@ const NEW_TRACKS = {
             "schedule": "Qui 10/09 às 13h",
             "estimatedTime": "1 sessão",
             "priority": "🔥 FASE 1",
+            "block": "Revisão",
+            "activityType": "revisar",
             "description": "Fechamento da Fase 1. Simular um teste técnico real com problemas mistos dos 6 padrões estudados em 1 sessão de 2h.",
             "subtopics": [
               {
                 "id": "dsa_f1_1",
+                "activityType": "pratica",
                 "text": "Simulado: 1 problema de cada padrão (HashMap, Two Pointers, Stack, LinkedList, Binary Search)"
               },
               {
                 "id": "dsa_f1_2",
+                "activityType": "revisar",
                 "text": "Para cada solução: complexidade de tempo E espaço explicada em voz alta"
               }
             ]
@@ -1008,6 +1104,7 @@ const NEW_TRACKS = {
       {
         "weekNum": 7,
         "dateRange": "14/09 a 20/09",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "dsa_2_7",
@@ -1015,14 +1112,18 @@ const NEW_TRACKS = {
             "schedule": "Ter 15/09 + Qui 17/09 às 13h",
             "estimatedTime": "2 sessões",
             "priority": "📈 FASE 2 — Probabilidade média",
+            "block": "Sliding Window",
+            "activityType": "estudar",
             "description": "Início da Fase 2. Sliding Window reduz problemas de substring/subarray de O(N²) para O(N) expandindo e contraindo uma janela. Greedy faz a escolha localmente ótima.",
             "subtopics": [
               {
                 "id": "dsa_2_7_1",
+                "activityType": "pratica",
                 "text": "Longest Substring Without Repeating Characters — expandir janela, contrair quando encontrar repetição"
               },
               {
                 "id": "dsa_2_7_2",
+                "activityType": "pratica",
                 "text": "Best Time to Buy and Sell Stock — greedy: rastrear mínimo visto e maximizar lucro"
               }
             ]
@@ -1032,6 +1133,7 @@ const NEW_TRACKS = {
       {
         "weekNum": 8,
         "dateRange": "21/09 a 27/09",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "dsa_sem8",
@@ -1039,14 +1141,18 @@ const NEW_TRACKS = {
             "schedule": "Ter 22/09 + Qui 24/09 às 13h",
             "estimatedTime": "2 sessões",
             "priority": "📈 FASE 2",
+            "block": "Sliding Window",
+            "activityType": "pratica",
             "description": "Sliding Window é o padrão que mais cai junto com HashMap em entrevistas de nível médio. Mais prática aqui é investimento direto.",
             "subtopics": [
               {
                 "id": "dsa_sem8_1",
+                "activityType": "pratica",
                 "text": "Maximum Average Subarray I (janela fixa)"
               },
               {
                 "id": "dsa_sem8_2",
+                "activityType": "pratica",
                 "text": "Minimum Size Subarray Sum (janela variável)"
               }
             ]
@@ -1056,6 +1162,7 @@ const NEW_TRACKS = {
       {
         "weekNum": 9,
         "dateRange": "28/09 a 04/10",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "dsa_2_8",
@@ -1063,14 +1170,18 @@ const NEW_TRACKS = {
             "schedule": "Ter 29/09 + Qui 01/10 às 13h",
             "estimatedTime": "2 sessões",
             "priority": "📈 FASE 2 — Probabilidade média",
+            "block": "Graphs",
+            "activityType": "estudar",
             "description": "Grafos aparecem disfarçados como grids (matrizes 2D). Number of Islands é o problema de grafos mais cobrado em entrevistas de backend.",
             "subtopics": [
               {
                 "id": "dsa_2_8_1",
+                "activityType": "estudar",
                 "text": "Representação como lista de adjacência — quando usar vs matriz de adjacência"
               },
               {
                 "id": "dsa_2_8_2",
+                "activityType": "pratica",
                 "text": "BFS e DFS aplicados a Number of Islands — tratar grid como grafo implícito (4 vizinhos)"
               }
             ]
@@ -1080,6 +1191,7 @@ const NEW_TRACKS = {
       {
         "weekNum": 10,
         "dateRange": "05/10 a 11/10",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "dsa_sem10",
@@ -1087,14 +1199,18 @@ const NEW_TRACKS = {
             "schedule": "Ter 06/10 + Qui 08/10 às 13h",
             "estimatedTime": "2 sessões",
             "priority": "📈 FASE 2",
+            "block": "Graphs",
+            "activityType": "pratica",
             "description": "Mais problemas de grid para solidificar BFS e DFS em matrizes.",
             "subtopics": [
               {
                 "id": "dsa_sem10_1",
+                "activityType": "pratica",
                 "text": "Flood Fill (pintura em grid — DFS direto)"
               },
               {
                 "id": "dsa_sem10_2",
+                "activityType": "pratica",
                 "text": "Rotting Oranges (BFS multi-source — se sentir confiança)"
               }
             ]
@@ -1104,6 +1220,7 @@ const NEW_TRACKS = {
       {
         "weekNum": 11,
         "dateRange": "12/10 a 18/10",
+        "isReviewWeek": false,
         "topics": [
           {
             "id": "dsa_2_9_10",
@@ -1111,22 +1228,28 @@ const NEW_TRACKS = {
             "schedule": "Ter 13/10 + Qui 15/10 às 13h",
             "estimatedTime": "2 sessões",
             "priority": "📈 FASE 2 — Probabilidade média",
+            "block": "Trees & Recursion",
+            "activityType": "estudar",
             "description": "Árvores introduzem recursão de forma natural. Saber os 3 percursos e validar BST são os problemas mais cobrados nessa categoria.",
             "subtopics": [
               {
                 "id": "dsa_2_9_1",
+                "activityType": "estudar",
                 "text": "Percursos: in-order (esq->raiz->dir), pre-order (raiz->esq->dir), post-order (esq->dir->raiz)"
               },
               {
                 "id": "dsa_2_9_2",
+                "activityType": "pratica",
                 "text": "Validate Binary Search Tree — usar limites min/max passados recursivamente"
               },
               {
                 "id": "dsa_2_10_1",
+                "activityType": "pratica",
                 "text": "Fibonacci com e sem memoização — sentir visualmente a diferença de O(2^N) para O(N)"
               },
               {
                 "id": "dsa_2_10_2",
+                "activityType": "pratica",
                 "text": "Subsets — gerar todos os subconjuntos via recursão com backtracking simples"
               }
             ]
@@ -1136,6 +1259,7 @@ const NEW_TRACKS = {
       {
         "weekNum": 12,
         "dateRange": "19/10 a 25/10",
+        "isReviewWeek": true,
         "topics": [
           {
             "id": "dsa_fim",
@@ -1143,22 +1267,28 @@ const NEW_TRACKS = {
             "schedule": "Ter 20/10 + Qui 22/10 às 13h",
             "estimatedTime": "2 sessões",
             "priority": "📈 FASE 2",
+            "block": "Revisão",
+            "activityType": "revisar",
             "description": "Semana final do DSA. Revisão geral com simulado misto. Opcionais abaixo só se terminar antes do prazo.",
             "subtopics": [
               {
                 "id": "dsa_fim_1",
+                "activityType": "pratica",
                 "text": "Simulado final: 1 problema de cada padrão (Fase 1 + Fase 2 misturados)"
               },
               {
                 "id": "dsa_fim_2",
+                "activityType": "pratica",
                 "text": "📊 Opcional: DP básico (Climbing Stairs / Coin Change) se sobrar tempo"
               },
               {
                 "id": "dsa_fim_3",
-                "text": "📊 Opcional: Dijkstra ou Union-Find apenas para conhecimento — não é prioridade"
+                "activityType": "revisar",
+                "text": "📊 Opcional: Revisar teoria de Dijkstra ou Union-Find — apenas para conhecimento geral, sem foco em implementação do zero"
               },
               {
                 "id": "dsa_fim_4",
+                "activityType": "pratica",
                 "text": "📊 Opcional: Trie (implementar insert e search) — só se quiser aprofundar"
               }
             ]
@@ -2175,6 +2305,7 @@ function renderTrack(container, tid) {
       <label class="text-[9px] text-slate-400 font-bold tracking-wider uppercase mono block mb-2 px-1">Selecione a Semana</label>
       <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1" id="newWeekPills"></div>
     </div>
+    ${tid==='dsa'?'<div id="dsaBlockPanel" class="bg-[#1e293b] border border-red-500/20 rounded-xl p-4"></div>':''}
     <div class="bg-gradient-to-r from-[#1e293b] to-[#1e293b]/40 border border-slate-700/50 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
       <div><h2 id="nwTitle" class="text-lg sm:text-xl font-bold">&#8212;</h2><p id="nwDate" class="text-xs text-slate-400 mt-1">&#8212;</p></div>
       <div id="nwBadges" class="flex flex-wrap gap-1.5"></div>
@@ -2195,6 +2326,7 @@ function renderTrack(container, tid) {
   renderNewWeekHeader(tr);
   renderNewTopics(tr);
   renderNewWeekMap(tr);
+  if(tid==='dsa') renderDsaBlockPanel(tr);
   const logContainer = document.getElementById('studyLogContainer');
   if(logContainer) renderStudyLog(logContainer, tid);
 }
@@ -2208,9 +2340,13 @@ function renderNewWeekPills(tr){
 }
 function renderNewWeekHeader(tr){
   const week=tr.weeks[curW]; if(!week) return;
-  document.getElementById('nwTitle').textContent=`Semana ${week.weekNum}`;
+  const isRev=!!week.isReviewWeek;
+  const titleEl=document.getElementById('nwTitle');
+  titleEl.textContent=isRev?'\uD83D\uDD04 Semana '+week.weekNum+' \u2014 Revis\u00e3o':'Semana '+week.weekNum;
+  if(isRev) titleEl.classList.add('review-week-header'); else titleEl.classList.remove('review-week-header');
   document.getElementById('nwDate').textContent=recalcDateString(week.dateRange);
-  document.getElementById('nwBadges').innerHTML=`<span class="text-[10px] mono px-2 py-1 rounded bg-[#0f172a] text-slate-300 border border-slate-600 font-bold">${week.topics.length} assunto(s)</span>`;
+  const revBadge=isRev?'<span class="badge-at badge-revisar" style="margin-left:6px">\uD83D\uDD04 Semana de Revis\u00e3o</span>':'';
+  document.getElementById('nwBadges').innerHTML='<span class="text-[10px] mono px-2 py-1 rounded bg-[#0f172a] text-slate-300 border border-slate-600 font-bold">'+week.topics.length+' assunto(s)</span>'+revBadge;
 }
 function renderNewTopics(tr){
   const c=document.getElementById('newTopicsContainer'); if(!c) return; c.innerHTML='';
@@ -2221,12 +2357,18 @@ function renderNewTopics(tr){
     else if(isDone(t.id)) done++;
     const pct=Math.round(done/tot*100); const comp=done===tot;
     const card=document.createElement('div');
-    card.className=`bg-[#1e293b] border rounded-xl p-4 sm:p-5 flex flex-col cursor-pointer hover:shadow-xl transition-all duration-200 ${comp?'lesson-done border-emerald-500/30':'border-slate-700/50 hover:border-slate-500/60'}`;
+    card.className=`bg-[#1e293b] border rounded-xl p-4 sm:p-5 flex flex-col cursor-pointer hover:shadow-xl transition-all duration-200 ${comp?'lesson-done border-emerald-500/30':'border-slate-700/50 hover:border-slate-500/60'}${week.isReviewWeek?' review-week-card':''}`;
     card.onclick=()=>openTrackModal(tr.id,t.id);
     const priHtml=t.priority?`<span class="text-[10px] mono px-2 py-0.5 rounded bg-[#0f172a] border border-slate-700">${t.priority}</span>`:'';
+    const atBadge=activityTypeBadge(t.activityType);
+    const blockBadge=t.block?`<span class="badge-at" style="background:rgba(100,116,139,.15);border:1px solid rgba(100,116,139,.35);color:#94a3b8">&#x2B21; ${t.block}</span>`:'';
     card.innerHTML=`
       <div class="flex items-start justify-between gap-3 mb-3">
-        <div class="text-[10px] mono font-bold px-2 py-1 rounded border border-slate-700/50 text-slate-300 bg-[#0f172a]">&#9201;&#65039; ${t.estimatedTime}</div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <div class="text-[10px] mono font-bold px-2 py-1 rounded border border-slate-700/50 text-slate-300 bg-[#0f172a]">&#9201;&#65039; ${t.estimatedTime}</div>
+          ${atBadge}
+          ${blockBadge}
+        </div>
         ${priHtml}
       </div>
       <div class="text-[10px] mono text-slate-500 mb-1">${recalcDateString(t.schedule||'')}</div>
@@ -2279,6 +2421,58 @@ function qToggleNew(tid,trackId){
   renderMain();
 }
 
+// -- Categorização Visual: badge por activityType --------------------------------
+function activityTypeBadge(type){
+  if(!type) return '';
+  const cfg={
+    'estudar':{label:'\uD83D\uDCD6 Estudar',cls:'badge-estudar'},
+    'revisar':{label:'\uD83D\uDD04 Revisar',cls:'badge-revisar'},
+    'pratica':{label:'\u26A1 Pr\u00e1tica',cls:'badge-pratica'}
+  };
+  const c=cfg[type]; if(!c) return '';
+  return '<span class="badge-at '+c.cls+'">'+c.label+'</span>';
+}
+
+// -- DSA Block Panel ----------------------------------------------------------
+function renderDsaBlockPanel(tr){
+  const el=document.getElementById('dsaBlockPanel'); if(!el) return;
+  const blocks={};
+  tr.weeks.forEach((w, idx)=>w.topics.forEach(t=>{
+    if(!t.block) return;
+    if(!blocks[t.block]) blocks[t.block]={total:0,done:0, firstWeek: idx};
+    if(t.subtopics&&t.subtopics.length){
+      t.subtopics.forEach(s=>{blocks[t.block].total++;if(isDone(s.id))blocks[t.block].done++;});
+    } else {blocks[t.block].total++;if(isDone(t.id))blocks[t.block].done++;}
+  }));
+  const names=Object.keys(blocks);
+  if(!names.length){el.style.display='none';return;}
+  el.style.display='';
+  el.innerHTML='<div class="text-[10px] font-bold tracking-wider uppercase text-red-400 mb-3 mono">&#x2B21; Progresso por Bloco</div>'
+    +'<div class="flex flex-wrap gap-2">'
+    +names.map(bn=>{
+      const b=blocks[bn];
+      const pct=b.total>0?Math.round(b.done/b.total*100):0;
+      const all=b.done===b.total&&b.total>0;
+      return '<div class="flex-1 min-w-[130px] bg-[#0f172a] border '+(all?'border-emerald-500/30 hover:border-emerald-500/60':'border-slate-700/50 hover:border-slate-500/80')+' rounded-lg p-2.5 cursor-pointer transition-all hover:-translate-y-0.5" onclick="jumpToDsaBlock('+b.firstWeek+')" title="Ir para a primeira ocorr\u00eancia">'
+        +'<div class="text-[9px] font-bold mono '+(all?'text-emerald-400':'text-slate-300')+' mb-1 truncate">'+bn+'</div>'
+        +'<div class="flex items-center gap-2">'
+        +'<div class="flex-1 bg-slate-800 h-1 rounded-full overflow-hidden">'
+        +'<div class="h-full rounded-full transition-all" style="width:'+pct+'%;background:'+(all?'#10b981':'#ef4444')+'"></div>'
+        +'</div>'
+        +'<span class="text-[9px] mono shrink-0 '+(all?'text-emerald-400':'text-slate-500')+'">'+b.done+'/'+b.total+'</span>'
+        +'</div></div>';
+    }).join('')
+    +'</div>';
+}
+function jumpToDsaBlock(weekIdx) {
+  curW = weekIdx;
+  renderMain();
+  const title = document.getElementById('nwTitle');
+  if (title) {
+    title.scrollIntoView({behavior: 'smooth', block: 'center'});
+  }
+}
+
 // -- Modais -------------------------------------------------------------------
 function openInglesModal(id){
   curLid=id; const l=ALL.find(x=>x.id===id); if(!l) return;
@@ -2328,7 +2522,8 @@ function openTrackModal(trackId, topicId){
       const isD=isDone(st.id); const row=document.createElement('div');
       row.className=`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${isD?'bg-emerald-500/10 border-emerald-500/30':'bg-[#0f172a] border-slate-700/50 hover:border-slate-500'}`;
       row.onclick=()=>{setDone(st.id,!isD);openTrackModal(trackId,topicId);renderMain();};
-      row.innerHTML=`<div class="mt-0.5 w-4 h-4 rounded border flex items-center justify-center shrink-0 ${isD?'bg-emerald-500 border-emerald-500 text-white':'border-slate-500'}">${isD?'<svg viewBox="0 0 14 14" fill="none" class="w-3 h-3"><path d="M3 7.5L5.5 10L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div><div class="text-[12px] ${isD?'text-slate-400 line-through':'text-slate-200'} leading-relaxed">${st.text}</div>`;
+      const stBadge=activityTypeBadge(st.activityType);
+      row.innerHTML=`<div class="mt-0.5 w-4 h-4 rounded border flex items-center justify-center shrink-0 ${isD?'bg-emerald-500 border-emerald-500 text-white':'border-slate-500'}">${isD?'<svg viewBox="0 0 14 14" fill="none" class="w-3 h-3"><path d="M3 7.5L5.5 10L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div><div class="flex-1 min-w-0">${stBadge?'<div class="mb-1">'+stBadge+'</div>':''}<div class="text-[12px] ${isD?'text-slate-400 line-through':'text-slate-200'} leading-relaxed">${st.text}</div></div>`;
       sl.appendChild(row);
     });
     document.getElementById('m-mark-btn').style.display='none';

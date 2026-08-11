@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coleções Java — Guia Didático · Gabriel Falcão</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:       #0f172a;
+      --bg2:      #1e293b;
+      --bg3:      #0f172a;
+      --border:   #334155;
+      --text:     #e2e8f0;
+      --muted:    #94a3b8;
+      --cyan:     #06b6d4;
+      --emerald:  #10b981;
+      --yellow:   #eab308;
+      --purple:   #a855f7;
+      --red:      #ef4444;
+      --blue:     #3b82f6;
+      --orange:   #f97316;
+      --teal:     #14b8a6;
+      --code-bg:  #020617;
+      --kw:       #c084fc;   /* keyword */
+      --str:      #86efac;   /* string  */
+      --cm:       #475569;   /* comment */
+      --tp:       #67e8f9;   /* type    */
+      --fn:       #fde68a;   /* function */
+      --num:      #fb923c;   /* number  */
+      --op:       #e2e8f0;   /* operator */
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 14px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ====== CAPA ====== */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f172a 0%, #1a1040 50%, #0f172a 100%);
+      text-align: center;
+      padding: 60px 40px;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(139,92,246,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(6,182,212,0.12) 0%, transparent 60%);
+    }
+    .cover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(139,92,246,0.15);
+      border: 1px solid rgba(139,92,246,0.35);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #c084fc;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .cover h1 {
+      font-size: 52px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #67e8f9, #a855f7, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .cover-sub {
+      font-size: 20px;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .cover-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .cover-chip {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .cover-chip strong { display: block; color: var(--text); font-size: 14px; margin-top: 2px; }
+    .cover-author {
+      position: relative;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    /* ====== CONTEÚDO ====== */
+    .content { max-width: 900px; margin: 0 auto; padding: 48px 40px; }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 48px 0 24px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .section-header h2 {
+      font-size: 26px;
+      font-weight: 800;
+    }
+    .section-header .badge-type {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid;
+      margin-left: auto;
+    }
+
+    /* COLORS PER STRUCTURE */
+    .c-array    { background: rgba(100,116,139,0.15); border-color: #64748b; color: #cbd5e1; }
+    .c-al       { background: rgba(6,182,212,0.15);  border-color: var(--cyan);    color: var(--cyan);    }
+    .c-ll       { background: rgba(16,185,129,0.12); border-color: var(--emerald); color: var(--emerald); }
+    .c-hs       { background: rgba(234,179,8,0.15);  border-color: var(--yellow);  color: var(--yellow);  }
+    .c-lhs      { background: rgba(249,115,22,0.15); border-color: var(--orange);  color: var(--orange);  }
+    .c-ts       { background: rgba(239,68,68,0.15);  border-color: var(--red);     color: var(--red);     }
+    .c-hm       { background: rgba(59,130,246,0.15); border-color: var(--blue);    color: var(--blue);    }
+    .c-lhm      { background: rgba(20,184,166,0.15); border-color: var(--teal);    color: var(--teal);    }
+    .c-tm       { background: rgba(168,85,247,0.15); border-color: var(--purple);  color: var(--purple);  }
+
+    /* WHAT IS */
+    .what-is {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.75;
+    }
+
+    /* SUBSECTION TITLES */
+    h3 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin: 24px 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h3::before { content: ''; flex: 1; height: 1px; background: var(--border); }
+    h3::after  { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* CODE BLOCKS */
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 12px 0;
+      page-break-inside: avoid;
+    }
+    .code-block pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.75;
+      padding: 16px 20px;
+      overflow-x: auto;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    /* Syntax colors */
+    .kw  { color: var(--kw); font-weight: 600; }
+    .str { color: var(--str); }
+    .cm  { color: var(--cm); font-style: italic; }
+    .tp  { color: var(--tp); }
+    .fn  { color: var(--fn); }
+    .num { color: var(--num); }
+    .annotation { color: #f472b6; }
+
+    /* TABLES */
+    .tbl-wrap { overflow-x: auto; margin: 12px 0; page-break-inside: avoid; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    thead tr { background: var(--bg2); }
+    thead th {
+      padding: 10px 14px;
+      text-align: left;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      border-bottom: 2px solid var(--border);
+    }
+    tbody tr { border-bottom: 1px solid rgba(51,65,85,0.5); }
+    tbody tr:nth-child(even) { background: rgba(30,41,59,0.4); }
+    tbody td {
+      padding: 9px 14px;
+      color: #cbd5e1;
+      vertical-align: top;
+    }
+    tbody td code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      background: rgba(255,255,255,0.05);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    /* ALERT BOXES */
+    .alert {
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 12px 0;
+      font-size: 12.5px;
+      line-height: 1.65;
+      page-break-inside: avoid;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .alert-note     { background: rgba(6,182,212,0.08);  border: 1px solid rgba(6,182,212,0.3);  color: #a5f3fc; }
+    .alert-tip      { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3); color: #a7f3d0; }
+    .alert-important{ background: rgba(234,179,8,0.08);  border: 1px solid rgba(234,179,8,0.3);  color: #fde68a; }
+    .alert-warning  { background: rgba(239,68,68,0.08);  border: 1px solid rgba(239,68,68,0.3);  color: #fca5a5; }
+
+    /* GRID */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 12px 0; }
+
+    /* INLINE CODE */
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      background: rgba(255,255,255,0.06);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    /* METHOD LIST */
+    .method-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin: 10px 0;
+    }
+    .method-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(30,41,59,0.6);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12.5px;
+      page-break-inside: avoid;
+    }
+    .method-sig {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--yellow);
+      min-width: 220px;
+      flex-shrink: 0;
+    }
+    .method-desc { color: var(--muted); }
+    .method-complexity {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #64748b;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* UNAVAILABLE BOX */
+    .unavailable {
+      background: rgba(239,68,68,0.06);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 12px 0;
+      page-break-inside: avoid;
+    }
+    .unavailable-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #ef4444;
+      margin-bottom: 10px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .unavail-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #fca5a5;
+      margin-bottom: 5px;
+    }
+    .unavail-item .x { color: #ef4444; font-weight: 700; font-size: 14px; }
+
+    /* WHEN TO USE */
+    .when-card {
+      background: rgba(16,185,129,0.07);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 12px 0;
+      page-break-inside: avoid;
+    }
+    .when-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--emerald);
+      margin-bottom: 8px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .when-item {
+      display: flex;
+      gap: 8px;
+      font-size: 12.5px;
+      color: #a7f3d0;
+      margin-bottom: 5px;
+    }
+    .when-item .arrow { color: var(--emerald); font-weight: 700; }
+
+    /* COMPARISON */
+    .vs-box {
+      background: rgba(234,179,8,0.06);
+      border: 1px solid rgba(234,179,8,0.2);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 12px 0;
+      page-break-inside: avoid;
+    }
+    .vs-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--yellow);
+      margin-bottom: 8px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .vs-item {
+      display: flex;
+      gap: 8px;
+      font-size: 12.5px;
+      color: #fde68a;
+      margin-bottom: 5px;
+    }
+
+    /* DECISION TREE */
+    .decision-tree {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      line-height: 2;
+      page-break-inside: avoid;
+    }
+
+    /* PATTERN BOX */
+    .pattern-box {
+      background: rgba(168,85,247,0.07);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 14px 0;
+      page-break-inside: avoid;
+    }
+    .pattern-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #c084fc;
+      margin-bottom: 10px;
+    }
+
+    /* PRINT */
+    @media print {
+      body { background: #0f172a !important; color: #e2e8f0 !important; }
+      .cover { page-break-after: always; }
+      .section-header { page-break-before: auto; }
+      .code-block, .alert, .tbl-wrap, .method-item, .unavailable, .when-card, .vs-box, .pattern-box {
+        page-break-inside: avoid;
+      }
+      @page { margin: 0; size: A4; }
+    }
+
+    /* DIVIDER */
+    hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+    /* INDEX */
+    .index-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 0;
+    }
+    .index-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(30,41,59,0.6);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12.5px;
+    }
+    .index-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .big-table th, .big-table td { font-size: 11.5px; padding: 8px 10px; text-align: center; }
+    .big-table td:first-child { text-align: left; }
+    .ok { color: var(--emerald); font-weight: 700; }
+    .no { color: var(--red); font-weight: 700; }
+    .warn { color: var(--yellow); font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================ CAPA -->
+<div class="cover">
+  <div class="cover-badge">☕ Java Júnior Prep · 2026</div>
+  <h1>Coleções Java</h1>
+  <p class="cover-sub">Guia Didático e Pedagógico — Tópicos 1.1 e 1.2</p>
+
+  <div class="cover-grid">
+    <div class="cover-chip">📦 Estruturas<strong>9 cobertas</strong></div>
+    <div class="cover-chip">🔧 Métodos<strong>+80 exemplos</strong></div>
+    <div class="cover-chip">❌ Proibidos<strong>Por estrutura</strong></div>
+    <div class="cover-chip">⚖️ Comparações<strong>Quando usar X vs Y</strong></div>
+    <div class="cover-chip">🎯 Entrevista<strong>4 padrões clássicos</strong></div>
+    <div class="cover-chip">📊 Complexidades<strong>O(1) · O(N) · O(log N)</strong></div>
+  </div>
+
+  <div class="cover-author">
+    Gabriel Falcão &nbsp;·&nbsp; gabriel.falcao@outlook.com &nbsp;·&nbsp;
+    Arrays · List · Set · Map
+  </div>
+</div>
+
+<!-- ============================================================ CONTEÚDO -->
+<div class="content">
+
+  <!-- ÍNDICE -->
+  <div class="section-header" style="margin-top:0">
+    <div class="section-num" style="background:rgba(148,163,184,0.12);color:#94a3b8">📑</div>
+    <h2 style="color:#94a3b8">Índice</h2>
+  </div>
+  <div class="index-grid">
+    <div class="index-item"><span class="index-num">#1</span> <span>Array <code>[]</code></span></div>
+    <div class="index-item"><span class="index-num">#2</span> <span>ArrayList <code>List&lt;T&gt;</code></span></div>
+    <div class="index-item"><span class="index-num">#3</span> <span>LinkedList <code>Deque&lt;T&gt;</code></span></div>
+    <div class="index-item"><span class="index-num">#4</span> <span>HashSet <code>Set&lt;T&gt;</code></span></div>
+    <div class="index-item"><span class="index-num">#5</span> <span>LinkedHashSet <code>Set&lt;T&gt;</code></span></div>
+    <div class="index-item"><span class="index-num">#6</span> <span>TreeSet <code>SortedSet&lt;T&gt;</code></span></div>
+    <div class="index-item"><span class="index-num">#7</span> <span>HashMap <code>Map&lt;K,V&gt;</code></span></div>
+    <div class="index-item"><span class="index-num">#8</span> <span>LinkedHashMap <code>Map&lt;K,V&gt;</code></span></div>
+    <div class="index-item"><span class="index-num">#9</span> <span>TreeMap <code>SortedMap&lt;K,V&gt;</code></span></div>
+  </div>
+
+  <hr/>
+
+  <!-- ===== 1. ARRAY ===== -->
+  <div class="section-header">
+    <div class="section-num c-array">#1</div>
+    <h2>Array &nbsp;<code style="font-size:18px">int[]</code></h2>
+    <span class="badge-type c-array">Primitivo</span>
+  </div>
+
+  <div class="what-is">
+    Um <strong>Array</strong> é a estrutura mais básica do Java. Tem tamanho <strong>fixo</strong> definido na criação — não cresce nem encolhe. É a base de quase todas as outras estruturas. Acesso por índice é <strong>O(1)</strong>.
+  </div>
+
+  <h3>Como Criar</h3>
+  <div class="code-block"><pre><span class="cm">// Forma 1 — valores inline</span>
+<span class="kw">int</span>[] numeros = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>, <span class="num">50</span>};
+
+<span class="cm">// Forma 2 — tamanho fixo, preencher depois</span>
+<span class="tp">String</span>[] nomes = <span class="kw">new</span> <span class="tp">String</span>[<span class="num">3</span>];
+nomes[<span class="num">0</span>] = <span class="str">"Ana"</span>;
+nomes[<span class="num">1</span>] = <span class="str">"Carlos"</span>;
+nomes[<span class="num">2</span>] = <span class="str">"Maria"</span>;
+
+<span class="cm">// Forma 3 — objetos</span>
+<span class="tp">Pessoa</span>[] pessoas = <span class="kw">new</span> <span class="tp">Pessoa</span>[<span class="num">2</span>];
+pessoas[<span class="num">0</span>] = <span class="kw">new</span> <span class="tp">Pessoa</span>(<span class="str">"Gabriel"</span>);</pre></div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Trecho</th><th>Significado</th></tr></thead>
+      <tbody>
+        <tr><td><code>int[]</code></td><td>Array de inteiros primitivos</td></tr>
+        <tr><td><code>new String[3]</code></td><td>Reserva espaço para 3 Strings na memória</td></tr>
+        <tr><td><code>nomes[0]</code></td><td>Acessa índice 0 — índices começam em <strong>0</strong></td></tr>
+        <tr><td><code>numeros.length</code></td><td>Propriedade (não método!) que retorna o tamanho</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Métodos e Operações — <code>Arrays.*</code></h3>
+  <div class="code-block"><pre><span class="kw">int</span>[] nums = {<span class="num">5</span>, <span class="num">3</span>, <span class="num">1</span>, <span class="num">4</span>, <span class="num">2</span>};
+
+<span class="cm">// Acessar e modificar</span>
+<span class="tp">System</span>.out.<span class="fn">println</span>(nums[<span class="num">0</span>]);          <span class="cm">// → 5</span>
+nums[<span class="num">0</span>] = <span class="num">99</span>;
+
+<span class="cm">// Percorrer</span>
+<span class="kw">for</span> (<span class="kw">int</span> n : nums) <span class="tp">System</span>.out.<span class="fn">println</span>(n);
+
+<span class="cm">// Ordenar (modifica o array original)</span>
+<span class="tp">Arrays</span>.<span class="fn">sort</span>(nums);                    <span class="cm">// {1, 2, 3, 4, 5}</span>
+
+<span class="cm">// Busca binária (só em array ORDENADO)</span>
+<span class="kw">int</span> pos = <span class="tp">Arrays</span>.<span class="fn">binarySearch</span>(nums, <span class="num">3</span>); <span class="cm">// → índice do 3</span>
+
+<span class="cm">// Copiar</span>
+<span class="kw">int</span>[] copia = <span class="tp">Arrays</span>.<span class="fn">copyOf</span>(nums, nums.length);
+<span class="kw">int</span>[] faixa = <span class="tp">Arrays</span>.<span class="fn">copyOfRange</span>(nums, <span class="num">1</span>, <span class="num">3</span>); <span class="cm">// → {2, 3}</span>
+
+<span class="cm">// Preencher com um valor</span>
+<span class="tp">Arrays</span>.<span class="fn">fill</span>(nums, <span class="num">0</span>);               <span class="cm">// {0,0,0,0,0}</span>
+
+<span class="cm">// Imprimir como texto</span>
+<span class="tp">System</span>.out.<span class="fn">println</span>(<span class="tp">Arrays</span>.<span class="fn">toString</span>(nums)); <span class="cm">// "[1, 2, 3, 4, 5]"</span>
+
+<span class="cm">// Comparar dois arrays</span>
+<span class="tp">Arrays</span>.<span class="fn">equals</span>(<span class="kw">new</span> <span class="kw">int</span>[]{<span class="num">1</span>,<span class="num">2</span>}, <span class="kw">new</span> <span class="kw">int</span>[]{<span class="num">1</span>,<span class="num">2</span>}); <span class="cm">// → true</span></pre></div>
+
+  <div class="unavailable">
+    <div class="unavailable-title">❌ Não existe em Array</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>nums.add(4)</code> → Array não tem <code>.add()</code> — tamanho fixo</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>nums.remove(0)</code> → Sem <code>.remove()</code></div>
+    <div class="unavail-item"><span class="x">✕</span> <code>nums.size()</code> → É <code>.length</code> (propriedade), não <code>.size()</code> (método)</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>nums.contains(1)</code> → Sem <code>.contains()</code></div>
+  </div>
+
+  <hr/>
+
+  <!-- ===== 2. ARRAYLIST ===== -->
+  <div class="section-header">
+    <div class="section-num c-al">#2</div>
+    <h2>ArrayList &nbsp;<code style="font-size:16px">List&lt;T&gt;</code></h2>
+    <span class="badge-type c-al">Array Dinâmico</span>
+  </div>
+
+  <div class="what-is">
+    ArrayList é um <strong>array que cresce automaticamente</strong>. Internamente usa um array, mas quando fica cheio, cria um array maior e copia tudo. <strong>Acesso por índice: O(1)</strong>. Inserção/remoção no meio: <strong>O(N)</strong> — precisa deslocar os elementos.
+  </div>
+
+  <h3>Como Criar</h3>
+  <div class="code-block"><pre><span class="kw">import</span> java.util.ArrayList;
+<span class="kw">import</span> java.util.List;
+
+<span class="cm">// ✅ Recomendado — declarar como interface</span>
+<span class="tp">List</span>&lt;<span class="tp">String</span>&gt; nomes = <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;();
+
+<span class="cm">// Com capacidade inicial pré-alocada (evita redimensionamentos)</span>
+<span class="tp">List</span>&lt;<span class="tp">Integer</span>&gt; numeros = <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;(<span class="num">100</span>);
+
+<span class="cm">// Já inicializado com valores</span>
+<span class="tp">List</span>&lt;<span class="tp">String</span>&gt; cores = <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;(<span class="tp">List</span>.<span class="fn">of</span>(<span class="str">"azul"</span>, <span class="str">"verde"</span>, <span class="str">"vermelho"</span>));</pre></div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Trecho</th><th>Significado</th></tr></thead>
+      <tbody>
+        <tr><td><code>List&lt;String&gt;</code></td><td>Declara pela <strong>interface</strong> — boa prática de flexibilidade</td></tr>
+        <tr><td><code>new ArrayList&lt;&gt;()</code></td><td>O <code>&lt;&gt;</code> (diamond) infere o tipo da declaração automaticamente</td></tr>
+        <tr><td><code>&lt;String&gt;</code></td><td>Tipo genérico — o compilador rejeita qualquer outro tipo</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Métodos Disponíveis</h3>
+  <div class="code-block"><pre><span class="tp">List</span>&lt;<span class="tp">String</span>&gt; lista = <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;();
+
+lista.<span class="fn">add</span>(<span class="str">"Ana"</span>);                  <span class="cm">// adiciona no final — O(1) amortizado</span>
+lista.<span class="fn">add</span>(<span class="num">1</span>, <span class="str">"Bruno"</span>);             <span class="cm">// insere na posição 1 — O(N)</span>
+lista.<span class="fn">get</span>(<span class="num">0</span>);                      <span class="cm">// acessa índice — O(1)</span>
+lista.<span class="fn">set</span>(<span class="num">0</span>, <span class="str">"Alice"</span>);            <span class="cm">// substitui na posição</span>
+lista.<span class="fn">remove</span>(<span class="num">1</span>);                  <span class="cm">// remove por índice — O(N)</span>
+lista.<span class="fn">remove</span>(<span class="str">"Ana"</span>);              <span class="cm">// remove por valor — O(N)</span>
+lista.<span class="fn">size</span>();                      <span class="cm">// quantidade de elementos</span>
+lista.<span class="fn">isEmpty</span>();                   <span class="cm">// true se tamanho == 0</span>
+lista.<span class="fn">contains</span>(<span class="str">"Alice"</span>);         <span class="cm">// busca linear — O(N)</span>
+lista.<span class="fn">indexOf</span>(<span class="str">"Alice"</span>);          <span class="cm">// retorna índice ou -1</span>
+lista.<span class="fn">sort</span>(<span class="tp">Comparator</span>.<span class="fn">reverseOrder</span>()); <span class="cm">// ordena in-place</span>
+lista.<span class="fn">subList</span>(<span class="num">0</span>, <span class="num">2</span>);              <span class="cm">// visão parcial [0, 2)</span>
+lista.<span class="fn">addAll</span>(<span class="tp">List</span>.<span class="fn">of</span>(<span class="str">"X"</span>, <span class="str">"Y"</span>));  <span class="cm">// adiciona coleção inteira</span>
+lista.<span class="fn">toArray</span>(<span class="kw">new</span> <span class="tp">String</span>[<span class="num">0</span>]);    <span class="cm">// converte para array</span>
+lista.<span class="fn">clear</span>();                     <span class="cm">// remove todos</span>
+lista.<span class="fn">forEach</span>(n -> <span class="tp">System</span>.out.<span class="fn">println</span>(n)); <span class="cm">// forEach + lambda</span></pre></div>
+
+  <div class="unavailable">
+    <div class="unavailable-title">❌ Não existe em ArrayList</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>lista.push("C")</code> → <code>push()</code> é de Stack/Deque</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>lista.poll()</code> → <code>poll()</code> é de Queue</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>lista.addFirst("X")</code> → <code>addFirst()</code> é de LinkedList</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>lista.put("k","v")</code> → <code>put()</code> é de Map</div>
+  </div>
+
+  <div class="alert alert-tip">
+    <span class="alert-icon">💡</span>
+    <div><strong>Regra de ouro:</strong> Declare sempre como <code>List&lt;T&gt;</code>, não como <code>ArrayList&lt;T&gt;</code>. Se precisar trocar para LinkedList depois, só muda a linha de instanciação.</div>
+  </div>
+
+  <hr/>
+
+  <!-- ===== 3. LINKEDLIST ===== -->
+  <div class="section-header">
+    <div class="section-num c-ll">#3</div>
+    <h2>LinkedList &nbsp;<code style="font-size:16px">Deque&lt;T&gt;</code></h2>
+    <span class="badge-type c-ll">Lista Encadeada</span>
+  </div>
+
+  <div class="what-is">
+    Lista <strong>duplamente encadeada</strong>. Cada elemento (nó) guarda o valor + referência para o próximo e para o anterior. Inserção/remoção no início ou fim: <strong>O(1)</strong>. Acesso por índice: <strong>O(N)</strong> (precisa percorrer os nós).
+    <br/><br/>
+    <code style="color:#94a3b8">[null] ← [Ana] ↔ [Carlos] ↔ [Maria] → [null]</code>
+  </div>
+
+  <h3>Como Criar</h3>
+  <div class="code-block"><pre><span class="kw">import</span> java.util.LinkedList;
+<span class="kw">import</span> java.util.Deque;
+
+<span class="cm">// Como List (comportamento de lista)</span>
+<span class="tp">List</span>&lt;<span class="tp">String</span>&gt; lista = <span class="kw">new</span> <span class="tp">LinkedList</span>&lt;&gt;();
+
+<span class="cm">// Como Deque (fila dupla — mais comum)</span>
+<span class="tp">Deque</span>&lt;<span class="tp">String</span>&gt; fila = <span class="kw">new</span> <span class="tp">LinkedList</span>&lt;&gt;();
+
+<span class="cm">// Concreto (acessa TODOS os métodos específicos)</span>
+<span class="tp">LinkedList</span>&lt;<span class="tp">String</span>&gt; ll = <span class="kw">new</span> <span class="tp">LinkedList</span>&lt;&gt;();</pre></div>
+
+  <h3>Métodos Extras (Exclusivos do LinkedList / Deque)</h3>
+  <div class="code-block"><pre><span class="tp">LinkedList</span>&lt;<span class="tp">String</span>&gt; ll = <span class="kw">new</span> <span class="tp">LinkedList</span>&lt;&gt;();
+
+<span class="cm">// ── INÍCIO ──────────────────────────────────────────────</span>
+ll.<span class="fn">addFirst</span>(<span class="str">"primeiro"</span>);   <span class="cm">// insere no início — O(1)</span>
+ll.<span class="fn">offerFirst</span>(<span class="str">"X"</span>);        <span class="cm">// igual ao addFirst, retorna boolean</span>
+ll.<span class="fn">removeFirst</span>();          <span class="cm">// remove início — lança exceção se vazio</span>
+ll.<span class="fn">pollFirst</span>();            <span class="cm">// remove início — retorna null se vazio ✅</span>
+ll.<span class="fn">peekFirst</span>();            <span class="cm">// vê o início sem remover — null se vazio</span>
+ll.<span class="fn">getFirst</span>();             <span class="cm">// vê o início — lança exceção se vazio</span>
+
+<span class="cm">// ── FIM ─────────────────────────────────────────────────</span>
+ll.<span class="fn">addLast</span>(<span class="str">"ultimo"</span>);      <span class="cm">// insere no final — O(1)</span>
+ll.<span class="fn">removeLast</span>();           <span class="cm">// remove o final</span>
+ll.<span class="fn">pollLast</span>();             <span class="cm">// remove o final — null se vazio ✅</span>
+ll.<span class="fn">peekLast</span>();             <span class="cm">// vê o final sem remover</span>
+
+<span class="cm">// ── COMO STACK (LIFO — Last In, First Out) ──────────────</span>
+ll.<span class="fn">push</span>(<span class="str">"topo"</span>);           <span class="cm">// = addFirst</span>
+ll.<span class="fn">pop</span>();                  <span class="cm">// = removeFirst</span>
+ll.<span class="fn">peek</span>();                 <span class="cm">// vê o topo sem remover</span>
+
+<span class="cm">// ── COMO QUEUE (FIFO — First In, First Out) ─────────────</span>
+ll.<span class="fn">offer</span>(<span class="str">"novo"</span>);          <span class="cm">// = addLast</span>
+ll.<span class="fn">poll</span>();                 <span class="cm">// remove o início</span>
+ll.<span class="fn">peek</span>();                 <span class="cm">// vê o início sem remover</span></pre></div>
+
+  <div class="vs-box">
+    <div class="vs-title">⚖️ ArrayList vs LinkedList</div>
+    <div class="vs-item"><span class="arrow">→</span> Muitas leituras por índice → <strong>ArrayList</strong></div>
+    <div class="vs-item"><span class="arrow">→</span> Inserção/remoção no <strong>início</strong> em O(1) → <strong>LinkedList</strong></div>
+    <div class="vs-item"><span class="arrow">→</span> Implementar fila BFS ou pilha → <strong>LinkedList</strong></div>
+    <div class="vs-item"><span class="arrow">→</span> Caso geral → <strong>ArrayList</strong> (melhor uso de cache da CPU)</div>
+  </div>
+
+  <hr/>
+
+  <!-- ===== 4. HASHSET ===== -->
+  <div class="section-header">
+    <div class="section-num c-hs">#4</div>
+    <h2>HashSet &nbsp;<code style="font-size:16px">Set&lt;T&gt;</code></h2>
+    <span class="badge-type c-hs">Sem Duplicatas</span>
+  </div>
+
+  <div class="what-is">
+    Coleção que <strong>não admite duplicatas</strong>. Internamente usa um HashMap. Sem ordem garantida. <code>contains()</code>, <code>add()</code> e <code>remove()</code> são <strong>O(1)</strong>. Depende de <code>equals()</code> e <code>hashCode()</code> corretos nas chaves.
+  </div>
+
+  <h3>Como Criar</h3>
+  <div class="code-block"><pre><span class="kw">import</span> java.util.HashSet;
+<span class="kw">import</span> java.util.Set;
+
+<span class="tp">Set</span>&lt;<span class="tp">String</span>&gt; set = <span class="kw">new</span> <span class="tp">HashSet</span>&lt;&gt;();
+
+<span class="cm">// Já com valores</span>
+<span class="tp">Set</span>&lt;<span class="tp">Integer</span>&gt; nums = <span class="kw">new</span> <span class="tp">HashSet</span>&lt;&gt;(<span class="tp">Set</span>.<span class="fn">of</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>));
+
+<span class="cm">// Eliminar duplicatas de uma lista</span>
+<span class="tp">List</span>&lt;<span class="tp">String</span>&gt; comDup = <span class="tp">List</span>.<span class="fn">of</span>(<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="str">"a"</span>, <span class="str">"c"</span>);
+<span class="tp">Set</span>&lt;<span class="tp">String</span>&gt; semDup = <span class="kw">new</span> <span class="tp">HashSet</span>&lt;&gt;(comDup); <span class="cm">// {a, b, c}</span></pre></div>
+
+  <h3>Métodos Disponíveis</h3>
+  <div class="code-block"><pre><span class="tp">Set</span>&lt;<span class="tp">String</span>&gt; set = <span class="kw">new</span> <span class="tp">HashSet</span>&lt;&gt;();
+
+<span class="cm">// Retorna true se adicionou, false se já existia</span>
+<span class="kw">boolean</span> ok  = set.<span class="fn">add</span>(<span class="str">"Ana"</span>);    <span class="cm">// → true</span>
+<span class="kw">boolean</span> dup = set.<span class="fn">add</span>(<span class="str">"Ana"</span>);    <span class="cm">// → false (duplicata ignorada)</span>
+
+set.<span class="fn">contains</span>(<span class="str">"Ana"</span>);            <span class="cm">// → true — O(1) ← SUPERPOWER</span>
+set.<span class="fn">remove</span>(<span class="str">"Ana"</span>);              <span class="cm">// retorna true se removeu</span>
+set.<span class="fn">size</span>();
+set.<span class="fn">isEmpty</span>();
+set.<span class="fn">clear</span>();
+
+<span class="cm">// Percorrer (sem ordem garantida)</span>
+<span class="kw">for</span> (<span class="tp">String</span> s : set) <span class="tp">System</span>.out.<span class="fn">println</span>(s);
+
+<span class="cm">// ── OPERAÇÕES DE CONJUNTO ────────────────────────────────</span>
+<span class="tp">Set</span>&lt;<span class="tp">String</span>&gt; a = <span class="kw">new</span> <span class="tp">HashSet</span>&lt;&gt;(<span class="tp">Set</span>.<span class="fn">of</span>(<span class="str">"x"</span>, <span class="str">"y"</span>, <span class="str">"z"</span>));
+<span class="tp">Set</span>&lt;<span class="tp">String</span>&gt; b = <span class="kw">new</span> <span class="tp">HashSet</span>&lt;&gt;(<span class="tp">Set</span>.<span class="fn">of</span>(<span class="str">"y"</span>, <span class="str">"z"</span>, <span class="str">"w"</span>));
+
+a.<span class="fn">addAll</span>(b);     <span class="cm">// União      → {x, y, z, w}</span>
+a.<span class="fn">retainAll</span>(b);  <span class="cm">// Interseção → {y, z, w}</span>
+a.<span class="fn">removeAll</span>(b);  <span class="cm">// Diferença  → {x}</span></pre></div>
+
+  <div class="unavailable">
+    <div class="unavailable-title">❌ Não existe em HashSet</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>set.get(0)</code> → Set não tem acesso por índice</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>set.add(0, "X")</code> → Sem inserção em posição específica</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>set.indexOf("Ana")</code> → Sem índices em Set</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>set.first() / set.last()</code> → Sem ordem → impossível "primeiro" ou "último"</div>
+  </div>
+
+  <div class="alert alert-warning">
+    <span class="alert-icon">⚠️</span>
+    <div><strong>Atenção ao hashCode/equals:</strong> Se você usar objetos personalizados (ex: <code>Pessoa</code>) sem sobrescrever <code>equals()</code> e <code>hashCode()</code>, dois objetos com os mesmos dados serão tratados como <strong>diferentes</strong> pelo HashSet!</div>
+  </div>
+
+  <hr/>
+
+  <!-- ===== 5. LINKEDHASHSET ===== -->
+  <div class="section-header">
+    <div class="section-num c-lhs">#5</div>
+    <h2>LinkedHashSet &nbsp;<code style="font-size:16px">Set&lt;T&gt;</code></h2>
+    <span class="badge-type c-lhs">Sem Dup + Ordem</span>
+  </div>
+
+  <div class="what-is">
+    Igual ao HashSet (sem duplicatas, O(1) para contains/add/remove), mas <strong>mantém a ordem de inserção</strong> na iteração. Usa mais memória por manter a lista encadeada internamente.
+  </div>
+
+  <div class="code-block"><pre><span class="tp">Set</span>&lt;<span class="tp">String</span>&gt; set = <span class="kw">new</span> <span class="tp">LinkedHashSet</span>&lt;&gt;();
+set.<span class="fn">add</span>(<span class="str">"Banana"</span>);
+set.<span class="fn">add</span>(<span class="str">"Maçã"</span>);
+set.<span class="fn">add</span>(<span class="str">"Uva"</span>);
+set.<span class="fn">add</span>(<span class="str">"Banana"</span>); <span class="cm">// duplicata ignorada</span>
+
+<span class="kw">for</span> (<span class="tp">String</span> s : set) <span class="tp">System</span>.out.<span class="fn">println</span>(s);
+<span class="cm">// Banana  ← mantém ordem de inserção</span>
+<span class="cm">// Maçã</span>
+<span class="cm">// Uva</span></pre></div>
+
+  <div class="vs-box">
+    <div class="vs-title">⚖️ HashSet vs LinkedHashSet</div>
+    <div class="vs-item"><span class="arrow">→</span> Só quer unicidade, ordem não importa → <strong>HashSet</strong> (levemente mais rápido)</div>
+    <div class="vs-item"><span class="arrow">→</span> Precisa unicidade E manter ordem de inserção → <strong>LinkedHashSet</strong></div>
+  </div>
+
+  <div class="alert alert-note">
+    <span class="alert-icon">ℹ️</span>
+    <div><strong>Métodos:</strong> Exatamente os mesmos do HashSet. A única diferença é comportamental — a ordem de inserção é preservada na iteração.</div>
+  </div>
+
+  <hr/>
+
+  <!-- ===== 6. TREESET ===== -->
+  <div class="section-header">
+    <div class="section-num c-ts">#6</div>
+    <h2>TreeSet &nbsp;<code style="font-size:16px">SortedSet&lt;T&gt;</code></h2>
+    <span class="badge-type c-ts">Ordenado Naturalmente</span>
+  </div>
+
+  <div class="what-is">
+    Set que <strong>mantém os elementos ordenados</strong> automaticamente (ordem natural ou por Comparator). Internamente usa uma árvore Red-Black. Todas as operações são <strong>O(log N)</strong>.
+  </div>
+
+  <h3>Como Criar</h3>
+  <div class="code-block"><pre><span class="cm">// Ordem natural (Integer: crescente; String: alfabética)</span>
+<span class="tp">SortedSet</span>&lt;<span class="tp">Integer</span>&gt; ts = <span class="kw">new</span> <span class="tp">TreeSet</span>&lt;&gt;();
+ts.<span class="fn">add</span>(<span class="num">5</span>); ts.<span class="fn">add</span>(<span class="num">1</span>); ts.<span class="fn">add</span>(<span class="num">3</span>);
+<span class="cm">// Internamente: {1, 3, 5}</span>
+
+<span class="cm">// Ordem customizada com Comparator</span>
+<span class="tp">TreeSet</span>&lt;<span class="tp">Integer</span>&gt; dec = <span class="kw">new</span> <span class="tp">TreeSet</span>&lt;&gt;(<span class="tp">Comparator</span>.<span class="fn">reverseOrder</span>());
+<span class="cm">// {5, 3, 1}</span></pre></div>
+
+  <h3>Métodos Exclusivos de Navegação</h3>
+  <div class="code-block"><pre><span class="tp">TreeSet</span>&lt;<span class="tp">Integer</span>&gt; ts = <span class="kw">new</span> <span class="tp">TreeSet</span>&lt;&gt;(<span class="tp">Set</span>.<span class="fn">of</span>(<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>, <span class="num">50</span>));
+
+ts.<span class="fn">first</span>();          <span class="cm">// → 10  — menor elemento</span>
+ts.<span class="fn">last</span>();           <span class="cm">// → 50  — maior elemento</span>
+
+ts.<span class="fn">lower</span>(<span class="num">30</span>);        <span class="cm">// → 20  — maior elemento MENOR que 30</span>
+ts.<span class="fn">floor</span>(<span class="num">30</span>);        <span class="cm">// → 30  — maior elemento MENOR OU IGUAL a 30</span>
+ts.<span class="fn">higher</span>(<span class="num">30</span>);       <span class="cm">// → 40  — menor elemento MAIOR que 30</span>
+ts.<span class="fn">ceiling</span>(<span class="num">30</span>);      <span class="cm">// → 30  — menor elemento MAIOR OU IGUAL a 30</span>
+
+ts.<span class="fn">subSet</span>(<span class="num">20</span>, <span class="num">40</span>);   <span class="cm">// → {20, 30}  — de 20 incluso a 40 excluso</span>
+ts.<span class="fn">headSet</span>(<span class="num">30</span>);     <span class="cm">// → {10, 20}  — do início até 30 excluso</span>
+ts.<span class="fn">tailSet</span>(<span class="num">30</span>);     <span class="cm">// → {30, 40, 50} — de 30 incluso até o fim</span></pre></div>
+
+  <div class="alert alert-important">
+    <span class="alert-icon">🔑</span>
+    <div><strong>TreeSet requer Comparable:</strong> Ao usar objetos personalizados, eles <strong>devem implementar</strong> <code>Comparable&lt;T&gt;</code> ou você deve passar um <code>Comparator</code> no construtor — caso contrário, ocorre <code>ClassCastException</code> em runtime.</div>
+  </div>
+
+  <hr/>
+
+  <!-- ===== 7. HASHMAP ===== -->
+  <div class="section-header">
+    <div class="section-num c-hm">#7</div>
+    <h2>HashMap &nbsp;<code style="font-size:16px">Map&lt;K,V&gt;</code></h2>
+    <span class="badge-type c-hm">Chave → Valor</span>
+  </div>
+
+  <div class="what-is">
+    Estrutura <strong>chave → valor</strong>. Cada chave é única. A chave é hasheada para encontrar a posição do valor. Busca por chave: <strong>O(1)</strong>. Sem ordem garantida. Depende de <code>equals()</code> e <code>hashCode()</code> nas <strong>chaves</strong>.
+  </div>
+
+  <h3>Como Criar</h3>
+  <div class="code-block"><pre><span class="kw">import</span> java.util.HashMap;
+<span class="kw">import</span> java.util.Map;
+
+<span class="tp">Map</span>&lt;<span class="tp">String</span>, <span class="tp">Integer</span>&gt; idades = <span class="kw">new</span> <span class="tp">HashMap</span>&lt;&gt;();
+
+<span class="cm">// Já inicializado (Java 9+)</span>
+<span class="tp">Map</span>&lt;<span class="tp">String</span>, <span class="tp">Integer</span>&gt; cfg = <span class="kw">new</span> <span class="tp">HashMap</span>&lt;&gt;(<span class="tp">Map</span>.<span class="fn">of</span>(
+    <span class="str">"timeout"</span>, <span class="num">30</span>,
+    <span class="str">"maxRetry"</span>, <span class="num">3</span>
+));
+
+<span class="cm">// Mapa de String para Lista</span>
+<span class="tp">Map</span>&lt;<span class="tp">String</span>, <span class="tp">List</span>&lt;<span class="tp">String</span>&gt;&gt; grupos = <span class="kw">new</span> <span class="tp">HashMap</span>&lt;&gt;();</pre></div>
+
+  <h3>Métodos Disponíveis</h3>
+  <div class="code-block"><pre><span class="tp">Map</span>&lt;<span class="tp">String</span>, <span class="tp">Integer</span>&gt; m = <span class="kw">new</span> <span class="tp">HashMap</span>&lt;&gt;();
+
+m.<span class="fn">put</span>(<span class="str">"Ana"</span>, <span class="num">25</span>);                  <span class="cm">// insere ou substitui</span>
+m.<span class="fn">get</span>(<span class="str">"Ana"</span>);                      <span class="cm">// → 25 — O(1)</span>
+m.<span class="fn">get</span>(<span class="str">"Zé"</span>);                       <span class="cm">// → null se não existe</span>
+m.<span class="fn">getOrDefault</span>(<span class="str">"Zé"</span>, <span class="num">0</span>);          <span class="cm">// → 0 (evita null)</span>
+m.<span class="fn">containsKey</span>(<span class="str">"Ana"</span>);             <span class="cm">// → true — O(1)</span>
+m.<span class="fn">containsValue</span>(<span class="num">25</span>);              <span class="cm">// → true — O(N)</span>
+m.<span class="fn">remove</span>(<span class="str">"Ana"</span>);                   <span class="cm">// remove pela chave</span>
+m.<span class="fn">remove</span>(<span class="str">"Ana"</span>, <span class="num">99</span>);               <span class="cm">// remove só se valor == 99</span>
+m.<span class="fn">putIfAbsent</span>(<span class="str">"Novo"</span>, <span class="num">99</span>);         <span class="cm">// insere só se chave não existir</span>
+m.<span class="fn">size</span>(); m.<span class="fn">isEmpty</span>(); m.<span class="fn">clear</span>();
+
+<span class="cm">// ── PERCORRER ───────────────────────────────────────────</span>
+<span class="kw">for</span> (<span class="tp">Map</span>.<span class="tp">Entry</span>&lt;<span class="tp">String</span>, <span class="tp">Integer</span>&gt; e : m.<span class="fn">entrySet</span>()) {
+    <span class="tp">System</span>.out.<span class="fn">println</span>(e.<span class="fn">getKey</span>() + <span class="str">" → "</span> + e.<span class="fn">getValue</span>());
+}
+m.<span class="fn">forEach</span>((k, v) -> <span class="tp">System</span>.out.<span class="fn">println</span>(k + <span class="str">": "</span> + v));
+
+<span class="cm">// ── PADRÕES AVANÇADOS ────────────────────────────────────</span>
+<span class="cm">// Contador de frequências (muito usado em entrevista)</span>
+m.<span class="fn">merge</span>(<span class="str">"Ana"</span>, <span class="num">1</span>, <span class="tp">Integer</span>::sum);   <span class="cm">// Ana=0 → 1; Ana=1 → 2</span>
+
+<span class="cm">// Criar lista se chave não existir</span>
+<span class="tp">Map</span>&lt;<span class="tp">String</span>, <span class="tp">List</span>&lt;<span class="tp">String</span>&gt;&gt; g = <span class="kw">new</span> <span class="tp">HashMap</span>&lt;&gt;();
+g.<span class="fn">computeIfAbsent</span>(<span class="str">"time_a"</span>, k -> <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;()).<span class="fn">add</span>(<span class="str">"Ana"</span>);</pre></div>
+
+  <div class="unavailable">
+    <div class="unavailable-title">❌ Não existe em HashMap</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>m.get(0)</code> → <code>get()</code> recebe a CHAVE, não um índice inteiro</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>m.add("Ana", 25)</code> → em Map é <code>put()</code>, não <code>add()</code></div>
+    <div class="unavail-item"><span class="x">✕</span> <code>m.remove(0)</code> → <code>remove()</code> recebe a CHAVE</div>
+    <div class="unavail-item"><span class="x">✕</span> <code>m.first() / m.last()</code> → sem ordem, esses são do TreeMap</div>
+  </div>
+
+  <div class="alert alert-warning">
+    <span class="alert-icon">⚠️</span>
+    <div><strong>Contrato hashCode/equals nas Chaves:</strong> Se usar objetos personalizados como chave, sem sobrescrever <code>hashCode()</code> e <code>equals()</code>, você jamais encontrará o valor depois de inserir — é como criar uma gaveta sem rótulo.</div>
+  </div>
+
+  <hr/>
+
+  <!-- ===== 8. LINKEDHASHMAP ===== -->
+  <div class="section-header">
+    <div class="section-num c-lhm">#8</div>
+    <h2>LinkedHashMap &nbsp;<code style="font-size:16px">Map&lt;K,V&gt;</code></h2>
+    <span class="badge-type c-lhm">Chave-Valor + Ordem</span>
+  </div>
+
+  <div class="what-is">
+    Igual ao HashMap (chave única, O(1) para get/put/remove), mas <strong>mantém a ordem de inserção</strong> na iteração.
+  </div>
+
+  <div class="code-block"><pre><span class="tp">Map</span>&lt;<span class="tp">String</span>, <span class="tp">Integer</span>&gt; m = <span class="kw">new</span> <span class="tp">LinkedHashMap</span>&lt;&gt;();
+m.<span class="fn">put</span>(<span class="str">"Banana"</span>, <span class="num">3</span>);
+m.<span class="fn">put</span>(<span class="str">"Maçã"</span>, <span class="num">1</span>);
+m.<span class="fn">put</span>(<span class="str">"Uva"</span>, <span class="num">5</span>);
+
+<span class="kw">for</span> (<span class="tp">Map</span>.<span class="tp">Entry</span>&lt;<span class="tp">String</span>, <span class="tp">Integer</span>&gt; e : m.<span class="fn">entrySet</span>()) {
+    <span class="tp">System</span>.out.<span class="fn">println</span>(e.<span class="fn">getKey</span>() + <span class="str">": "</span> + e.<span class="fn">getValue</span>());
+}
+<span class="cm">// Banana: 3  ← ordem de inserção garantida</span>
+<span class="cm">// Maçã: 1</span>
+<span class="cm">// Uva: 5</span></pre></div>
+
+  <div class="vs-box">
+    <div class="vs-title">⚖️ HashMap vs LinkedHashMap</div>
+    <div class="vs-item"><span class="arrow">→</span> Ordem não importa → <strong>HashMap</strong></div>
+    <div class="vs-item"><span class="arrow">→</span> Precisa de ordem de inserção → <strong>LinkedHashMap</strong></div>
+    <div class="vs-item"><span class="arrow">→</span> Cache LRU (remover mais antigo) → <strong>LinkedHashMap</strong> com construtor especial</div>
+  </div>
+
+  <hr/>
+
+  <!-- ===== 9. TREEMAP ===== -->
+  <div class="section-header">
+    <div class="section-num c-tm">#9</div>
+    <h2>TreeMap &nbsp;<code style="font-size:16px">SortedMap&lt;K,V&gt;</code></h2>
+    <span class="badge-type c-tm">Chaves Ordenadas</span>
+  </div>
+
+  <div class="what-is">
+    Map onde as <strong>chaves são mantidas em ordem natural</strong> (ou por Comparator). Internamente usa árvore Red-Black. Todas as operações são <strong>O(log N)</strong>. Permite navegação pelas chaves.
+  </div>
+
+  <h3>Métodos Exclusivos de Navegação</h3>
+  <div class="code-block"><pre><span class="tp">TreeMap</span>&lt;<span class="tp">Integer</span>, <span class="tp">String</span>&gt; tm = <span class="kw">new</span> <span class="tp">TreeMap</span>&lt;&gt;();
+tm.<span class="fn">put</span>(<span class="num">10</span>, <span class="str">"dez"</span>); tm.<span class="fn">put</span>(<span class="num">30</span>, <span class="str">"trinta"</span>);
+tm.<span class="fn">put</span>(<span class="num">20</span>, <span class="str">"vinte"</span>); tm.<span class="fn">put</span>(<span class="num">40</span>, <span class="str">"quarenta"</span>);
+
+tm.<span class="fn">firstKey</span>();          <span class="cm">// → 10  — menor chave</span>
+tm.<span class="fn">lastKey</span>();           <span class="cm">// → 40  — maior chave</span>
+
+tm.<span class="fn">lowerKey</span>(<span class="num">30</span>);        <span class="cm">// → 20  — maior chave MENOR que 30</span>
+tm.<span class="fn">floorKey</span>(<span class="num">30</span>);        <span class="cm">// → 30  — maior chave MENOR OU IGUAL a 30</span>
+tm.<span class="fn">higherKey</span>(<span class="num">30</span>);       <span class="cm">// → 40  — menor chave MAIOR que 30</span>
+tm.<span class="fn">ceilingKey</span>(<span class="num">20</span>);      <span class="cm">// → 20  — menor chave MAIOR OU IGUAL a 20</span>
+
+tm.<span class="fn">firstEntry</span>();        <span class="cm">// → {10="dez"}  — entrada completa</span>
+tm.<span class="fn">lastEntry</span>();         <span class="cm">// → {40="quarenta"}</span>
+
+tm.<span class="fn">subMap</span>(<span class="num">20</span>, <span class="num">40</span>);      <span class="cm">// → {20="vinte", 30="trinta"}</span>
+tm.<span class="fn">headMap</span>(<span class="num">30</span>);        <span class="cm">// → {10="dez", 20="vinte"}</span>
+tm.<span class="fn">tailMap</span>(<span class="num">30</span>);        <span class="cm">// → {30="trinta", 40="quarenta"}</span></pre></div>
+
+  <div class="alert alert-note">
+    <span class="alert-icon">ℹ️</span>
+    <div><strong>Quando usar TreeMap?</strong> Quando precisar manter chaves ordenadas e fazer consultas por faixa — ex: "todos os registros entre a data X e Y" ou "todas as chaves maiores que K".</div>
+  </div>
+
+  <hr/>
+
+  <!-- ===== TABELA COMPARATIVA ===== -->
+  <div class="section-header">
+    <div class="section-num" style="background:rgba(148,163,184,0.12);color:#94a3b8">📊</div>
+    <h2 style="color:#e2e8f0">Tabela Comparativa Final</h2>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="big-table">
+      <thead>
+        <tr>
+          <th>Estrutura</th>
+          <th>Duplicatas</th>
+          <th>Ordem</th>
+          <th>get(i)</th>
+          <th>contains</th>
+          <th>add / put</th>
+          <th>remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Array</strong> <code>[]</code></td><td class="ok">✅ Sim</td><td>Posição fixa</td><td class="ok">O(1)</td><td class="no">❌</td><td class="no">❌</td><td class="no">❌</td></tr>
+        <tr><td><strong>ArrayList</strong></td><td class="ok">✅ Sim</td><td>Inserção</td><td class="ok">O(1)</td><td class="warn">O(N)</td><td class="ok">O(1)*</td><td class="warn">O(N)</td></tr>
+        <tr><td><strong>LinkedList</strong></td><td class="ok">✅ Sim</td><td>Inserção</td><td class="warn">O(N)</td><td class="warn">O(N)</td><td class="ok">O(1)†</td><td class="ok">O(1)†</td></tr>
+        <tr><td><strong>HashSet</strong></td><td class="no">❌ Não</td><td>Nenhuma</td><td class="no">❌</td><td class="ok">O(1)</td><td class="ok">O(1)</td><td class="ok">O(1)</td></tr>
+        <tr><td><strong>LinkedHashSet</strong></td><td class="no">❌ Não</td><td>Inserção</td><td class="no">❌</td><td class="ok">O(1)</td><td class="ok">O(1)</td><td class="ok">O(1)</td></tr>
+        <tr><td><strong>TreeSet</strong></td><td class="no">❌ Não</td><td>Natural/Custom</td><td class="no">❌</td><td class="warn">O(log N)</td><td class="warn">O(log N)</td><td class="warn">O(log N)</td></tr>
+        <tr><td><strong>HashMap</strong></td><td class="no">❌ chaves</td><td>Nenhuma</td><td class="no">❌</td><td class="ok">O(1)</td><td class="ok">O(1)</td><td class="ok">O(1)</td></tr>
+        <tr><td><strong>LinkedHashMap</strong></td><td class="no">❌ chaves</td><td>Inserção</td><td class="no">❌</td><td class="ok">O(1)</td><td class="ok">O(1)</td><td class="ok">O(1)</td></tr>
+        <tr><td><strong>TreeMap</strong></td><td class="no">❌ chaves</td><td>Natural/Custom</td><td class="no">❌</td><td class="warn">O(log N)</td><td class="warn">O(log N)</td><td class="warn">O(log N)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px;color:#475569;margin-top:6px">* amortizado &nbsp;† apenas nas extremidades</p>
+
+  <h3>Guia de Decisão</h3>
+  <div class="decision-tree">
+<span style="color:#c084fc;font-weight:700">Precisa de par CHAVE → VALOR?</span>
+├── <span style="color:#fde68a">SIM</span> → use <strong>Map</strong>
+│   ├── Ordem não importa?       → <span style="color:#60a5fa">HashMap</span>       (mais rápido)
+│   ├── Manter ordem inserção?   → <span style="color:#2dd4bf">LinkedHashMap</span>
+│   └── Chaves ordenadas?        → <span style="color:#c084fc">TreeMap</span>
+│
+└── <span style="color:#fde68a">NÃO</span> → use <strong>Collection</strong>
+    │
+    <span style="color:#c084fc;font-weight:700">Precisa de índice (get(i))?</span>
+    ├── <span style="color:#fde68a">SIM</span> → use <strong>List</strong>
+    │   ├── Muitas leituras?       → <span style="color:#06b6d4">ArrayList</span>
+    │   └── Fila / pilha?          → <span style="color:#10b981">LinkedList</span>
+    │
+    └── <span style="color:#fde68a">NÃO</span> → use <strong>Set</strong> (unicidade)
+        ├── Ordem não importa?     → <span style="color:#eab308">HashSet</span>       (mais rápido)
+        ├── Manter ordem inserção? → <span style="color:#f97316">LinkedHashSet</span>
+        └── Elementos ordenados?   → <span style="color:#ef4444">TreeSet</span>
+  </div>
+
+  <hr/>
+
+  <!-- ===== PADRÕES DE ENTREVISTA ===== -->
+  <div class="section-header">
+    <div class="section-num" style="background:rgba(168,85,247,0.15);color:#a855f7">🎯</div>
+    <h2 style="color:#e2e8f0">Padrões de Entrevista</h2>
+  </div>
+
+  <div class="pattern-box">
+    <div class="pattern-title">🔴 1. Contador de Frequências — Two Sum, Group Anagrams, Ransom Note</div>
+    <div class="code-block"><pre><span class="tp">Map</span>&lt;<span class="tp">Character</span>, <span class="tp">Integer</span>&gt; freq = <span class="kw">new</span> <span class="tp">HashMap</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="kw">char</span> c : <span class="str">"banana"</span>.<span class="fn">toCharArray</span>()) {
+    freq.<span class="fn">merge</span>(c, <span class="num">1</span>, <span class="tp">Integer</span>::sum);
+}
+<span class="cm">// {b=1, a=3, n=2}</span></pre></div>
+  </div>
+
+  <div class="pattern-box">
+    <div class="pattern-title">🟡 2. Eliminar Duplicatas Mantendo Ordem</div>
+    <div class="code-block"><pre><span class="tp">List</span>&lt;<span class="tp">String</span>&gt; comDup = <span class="tp">List</span>.<span class="fn">of</span>(<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="str">"a"</span>, <span class="str">"c"</span>, <span class="str">"b"</span>);
+<span class="tp">Set</span>&lt;<span class="tp">String</span>&gt; semDup = <span class="kw">new</span> <span class="tp">LinkedHashSet</span>&lt;&gt;(comDup);
+<span class="cm">// [a, b, c] — mantém ordem de inserção</span></pre></div>
+  </div>
+
+  <div class="pattern-box">
+    <div class="pattern-title">🟢 3. Verificar Elemento Já Visto — Contains Duplicate</div>
+    <div class="code-block"><pre><span class="tp">Set</span>&lt;<span class="tp">Integer</span>&gt; vistos = <span class="kw">new</span> <span class="tp">HashSet</span>&lt;&gt;();
+<span class="kw">int</span>[] nums = {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">1</span>};
+<span class="kw">for</span> (<span class="kw">int</span> n : nums) {
+    <span class="kw">if</span> (!vistos.<span class="fn">add</span>(n)) {
+        <span class="tp">System</span>.out.<span class="fn">println</span>(<span class="str">"Duplicata: "</span> + n); <span class="cm">// → 1</span>
+    }
+}</pre></div>
+  </div>
+
+  <div class="pattern-box">
+    <div class="pattern-title">🔵 4. Agrupar por Categoria — Group Anagrams</div>
+    <div class="code-block"><pre><span class="tp">Map</span>&lt;<span class="tp">String</span>, <span class="tp">List</span>&lt;<span class="tp">String</span>&gt;&gt; grupos = <span class="kw">new</span> <span class="tp">HashMap</span>&lt;&gt;();
+<span class="tp">String</span>[] palavras = {<span class="str">"eat"</span>, <span class="str">"tea"</span>, <span class="str">"tan"</span>, <span class="str">"ate"</span>, <span class="str">"nat"</span>, <span class="str">"bat"</span>};
+<span class="kw">for</span> (<span class="tp">String</span> p : palavras) {
+    <span class="kw">char</span>[] chars = p.<span class="fn">toCharArray</span>();
+    <span class="tp">Arrays</span>.<span class="fn">sort</span>(chars);
+    <span class="tp">String</span> chave = <span class="kw">new</span> <span class="tp">String</span>(chars); <span class="cm">// anagrama ordenado</span>
+    grupos.<span class="fn">computeIfAbsent</span>(chave, k -> <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;()).<span class="fn">add</span>(p);
+}
+<span class="cm">// {aet=[eat, tea, ate], ant=[tan, nat], abt=[bat]}</span></pre></div>
+  </div>
+
+  <div style="text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid #1e293b;font-family:'JetBrains Mono',monospace;font-size:11px;color:#334155">
+    Gabriel Falcão · Java Júnior Prep · 2026 · Tópicos 1.1 e 1.2 · Arrays · List · Set · Map
+  </div>
+
+</div>
+</body>
+</html>
