@@ -128,8 +128,8 @@
         <div class="bg-[#0f172a] border border-cyan-400/40 rounded-lg p-3 text-center">
           <div class="text-xl mb-1.5">&#x1F5C4;&#xFE0F;</div>
           <div class="text-[10px] font-bold mono text-cyan-300 mb-1">&#9316; SQL</div>
-          <div class="text-[9px] text-slate-400 leading-tight">S&aacute;b 08/08/2026</div>
-          <div class="text-[9px] text-slate-500 mt-1 mono">S&aacute;b &middot; 13h-13h50</div>
+          <div class="text-[9px] text-slate-400 leading-tight"><span id="sqlEntryDate">Segunda da semana 1</span></div>
+          <div class="text-[9px] text-slate-500 mt-1 mono">Seg–Sex &middot; manhã &middot; 45–90 min</div>
         </div>
         <div class="bg-[#0f172a] border border-purple-500/40 rounded-lg p-3 text-center">
           <div class="text-xl mb-1.5">&#x1F399;&#xFE0F;</div>
@@ -147,14 +147,14 @@
   <div class="bg-gradient-to-r from-[#1e293b] to-[#1a2744] border border-slate-600/50 rounded-xl p-4">
     <div class="flex items-center gap-2 mb-3 flex-wrap">
       <span class="text-base">&#128197;</span>
-      <h3 class="font-bold text-slate-100 text-sm">Bloco do S&aacute;bado — 13h &agrave;s 15h (2 horas no total)</h3>
+      <h3 class="font-bold text-slate-100 text-sm">Bloco do S&aacute;bado — Storytelling e buffer opcional</h3>
       <span class="text-[9px] mono bg-[#0f172a] border border-slate-700 rounded px-2 py-0.5 text-slate-400 ml-auto">Todo s&aacute;bado</span>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
       <div class="bg-[#0f172a] border border-cyan-500/40 rounded-lg p-3">
-        <div class="text-[11px] font-bold mono text-cyan-400 mb-2">&#9200; 13h00 &ndash; 13h50 &middot; 50min</div>
-        <div class="text-sm font-bold text-slate-100 mb-1.5">&#x1F5C4;&#xFE0F; SQL</div>
-        <div class="text-[11px] text-slate-400 leading-relaxed">Conte&uacute;do da trilha SQL da semana. Come&ccedil;a em 08/08/2026 e ocorre todo s&aacute;bado.</div>
+        <div class="text-[11px] font-bold mono text-cyan-400 mb-2">&#9200; Manhã &middot; opcional</div>
+        <div class="text-sm font-bold text-slate-100 mb-1.5">&#x1F5C4;&#xFE0F; SQL — Buffer / Revisão</div>
+        <div class="text-[11px] text-slate-400 leading-relaxed">Use apenas se houver conteúdo SQL pendente na semana. Se estiver em dia, utilize para revisão leve ou descanso. O estudo regular de SQL acontece de segunda a sexta pela manhã.</div>
       </div>
       <div class="bg-[#0f172a] border border-purple-500/40 rounded-lg p-3">
         <div class="text-[11px] font-bold mono text-purple-400 mb-2">&#9200; 13h50 &ndash; 14h20 &middot; 30min</div>
@@ -260,7 +260,7 @@
           </div>
           <div class="mt-1 pt-2 border-t border-slate-700/40 text-[11px] text-slate-400 leading-relaxed">
             <span class="text-red-400 font-bold">DSA:</span> NeetCode (prim&aacute;ria) + LeetCode/HackerRank (pr&aacute;tica) &nbsp;&middot;&nbsp;
-            <span class="text-cyan-400 font-bold">SQL:</span> SQLZoo (prim&aacute;ria) + HackerRank SQL (pr&aacute;tica)
+            <span class="text-cyan-400 font-bold">SQL:</span> 1ª Rocketseat — jornada Banco de Dados (ensino); 2ª SQLZoo (prática complementar); 3ª HackerRank SQL (exercícios); 4ª PostgreSQL Documentation (consulta técnica opcional). Pratique nas plataformas somente depois de estudar o assunto na Rocketseat.
           </div>
         </div>
       </div>
@@ -271,6 +271,8 @@
         <p class="text-[12px] text-slate-300 leading-relaxed">Grave em voz alta explicando o t&oacute;pico <strong>como se fosse para um entrevistador</strong>, sem jarg&atilde;o n&atilde;o explicado. Ou&ccedil;a de volta e marque onde travou.</p>
         <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">Se voc&ecirc; disser &ldquo;por causa do contrato de hashCode&rdquo;, pause e explique o que &eacute; esse contrato antes de continuar. O travamento &eacute; o dado &mdash; ele aponta exatamente onde o entendimento ainda &eacute; superficial.</p>
       </div>
+
+      <p class="text-[11px] text-cyan-300 leading-relaxed">SQL — Feynman: Depois de escrever uma query, explique em voz alta linha por linha o que ela faz. Se não souber explicar uma cláusula, revise apenas aquela parte.</p>
 
       <!-- c) Regra de recupera&ccedil;&atilde;o -->
       <div class="bg-[#0f172a] border border-amber-500/20 rounded-xl p-4">
@@ -1606,35 +1608,153 @@ const NEW_TRACKS = {
   },
   "sql": {
     "id": "sql",
-    "title": "SQL",
+    "title": "SQL + PostgreSQL",
     "emoji": "🗄️",
     "order": 5,
-    "totalWeeks": 12,
-    "startDate": "08/08/2026",
-    "endDate": "24/10/2026",
+    "totalWeeks": 14,
+    "startDate": "Ao iniciar o Hub",
+    "endDate": "Sexta da semana 14",
     "color": "#06b6d4",
-    "frequency": "Sábado, 13h-13h50 (50min)",
-    "whyStudy": "Citado com frequência em relatos de entrevista júnior. Você já usa PostgreSQL nos projetos, mas não há treino ativo de escrever query sob pressão — é uma trilha barata (pouco tempo) com retorno alto.",
-    "feynmanPractice": "Depois de escrever uma query, explique em voz alta linha por linha o que ela faz, como se estivesse ensinando alguém que nunca viu SQL. Se a explicação de uma linha for 'isso aqui eu não sei bem por que funciona', volte e estude só aquela cláusula.",
+    "frequency": "Segunda a sexta · manhã · 45–90 min",
+    "source": "Rocketseat — Banco de Dados",
+    "courseTitle": "Banco de dados, na prática: do básico ao avançado com PostgreSQL",
+    "sourceUrl": "https://app.rocketseat.com.br/journey/banco-de-dados/contents",
+    "whyStudy": "Jornada Rocketseat Banco de Dados, do básico ao avançado com PostgreSQL, com foco em Backend Java. Assista às aulas correspondentes aos conceitos da sessão, execute os comandos, escreva algumas queries manualmente e revise os erros. Os tempos incluem estudo e prática; não são durações oficiais de vídeos. Se o bloco terminar, retome do ponto em que parou, sem acumular sessões.",
+    "feynmanPractice": "Depois de escrever uma query, explique em voz alta linha por linha o que ela faz. Se não souber explicar uma cláusula, revise apenas aquela parte.",
     "weeks": [
       {
         "weekNum": 1,
-        "dateRange": "08/08 (Sáb)",
+        "startOffset": 0,
+        "dateRange": "Semana 1 · segunda a sexta · manhã",
+        "isReviewWeek": false,
         "topics": [
           {
-            "id": "sql_4_1a",
-            "title": "4.1 INNER JOIN",
-            "schedule": "Sábado, 08/08 às 13h (13h-13h50, 50min)",
-            "estimatedTime": "50 minutos",
-            "description": "INNER JOIN retorna somente as linhas que têm correspondência nas duas tabelas — a interseção do conjunto.",
+            "id": "sql_rs_session_01",
+            "title": "Introdução a bancos de dados",
+            "dayOffset": 0,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "60 minutos",
+            "activityType": "estudar",
+            "block": "Introdução ao Mundo dos Bancos de Dados",
+            "description": "Nível 1 · Introdução ao Mundo dos Bancos de Dados. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
             "subtopics": [
               {
-                "id": "sql_4_1a_1",
-                "text": "INNER JOIN: retorna somente linhas com correspondência em ambas as tabelas"
+                "id": "sql_rs_01_01",
+                "activityType": "estudar",
+                "text": "Introdução ao professor; introdução ao mundo dos bancos de dados"
               },
               {
-                "id": "sql_4_1a_2",
-                "text": "Escrever 2 queries com INNER JOIN usando o banco do SafeWallet (ex: usuário + transações)"
+                "id": "sql_rs_01_02",
+                "activityType": "estudar",
+                "text": "Importância, tipos de bancos de dados e bancos relacionais"
+              },
+              {
+                "id": "sql_rs_01_03",
+                "activityType": "pratica",
+                "text": "Identificar dados e relações em um sistema do cotidiano"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_02",
+            "title": "SQL e preparação do PostgreSQL",
+            "dayOffset": 1,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Introdução ao Mundo dos Bancos de Dados",
+            "description": "Nível 1 · Introdução ao Mundo dos Bancos de Dados. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_02_01",
+                "activityType": "estudar",
+                "text": "Introdução ao SQL e ao PostgreSQL"
+              },
+              {
+                "id": "sql_rs_02_02",
+                "activityType": "estudar",
+                "text": "Instalação e configuração do PostgreSQL"
+              },
+              {
+                "id": "sql_rs_02_03",
+                "activityType": "pratica",
+                "text": "Conferir a instalação e a conexão local"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_03",
+            "title": "Beekeeper Studio e primeiro banco",
+            "dayOffset": 2,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "60 minutos",
+            "activityType": "estudar",
+            "block": "Introdução ao Mundo dos Bancos de Dados",
+            "description": "Nível 1 · Introdução ao Mundo dos Bancos de Dados. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_03_01",
+                "activityType": "estudar",
+                "text": "Instalação e configuração do Beekeeper Studio"
+              },
+              {
+                "id": "sql_rs_03_02",
+                "activityType": "estudar",
+                "text": "Criação do primeiro banco de dados"
+              },
+              {
+                "id": "sql_rs_03_03",
+                "activityType": "pratica",
+                "text": "Conectar o Beekeeper ao PostgreSQL e criar um banco de estudo"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_04",
+            "title": "Entendendo tabelas",
+            "dayOffset": 3,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "45 minutos",
+            "activityType": "estudar",
+            "block": "Introdução ao Mundo dos Bancos de Dados",
+            "description": "Nível 1 · Introdução ao Mundo dos Bancos de Dados. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_04_01",
+                "activityType": "estudar",
+                "text": "Conceito de tabela; reconhecer linhas, colunas e relações"
+              },
+              {
+                "id": "sql_rs_04_02",
+                "activityType": "pratica",
+                "text": "Explorar o primeiro banco e desenhar uma tabela simples no papel"
+              },
+              {
+                "id": "sql_rs_04_03",
+                "activityType": "revisar",
+                "text": "Explicar a relação entre banco, tabela e registro"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_05",
+            "title": "Consolidação da introdução",
+            "dayOffset": 4,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "45 minutos",
+            "activityType": "revisar",
+            "block": "Introdução ao Mundo dos Bancos de Dados",
+            "description": "Nível 1 · Introdução ao Mundo dos Bancos de Dados. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_05_01",
+                "activityType": "pratica",
+                "text": "Atividade/quiz do módulo Introdução ao Mundo dos Bancos de Dados"
+              },
+              {
+                "id": "sql_rs_05_02",
+                "activityType": "revisar",
+                "text": "Revisar somente os erros e conferir PostgreSQL + Beekeeper funcionando"
               }
             ]
           }
@@ -1642,22 +1762,152 @@ const NEW_TRACKS = {
       },
       {
         "weekNum": 2,
-        "dateRange": "15/08 (Sáb)",
+        "startOffset": 7,
+        "dateRange": "Semana 2 · segunda a sexta · manhã",
+        "isReviewWeek": false,
         "topics": [
           {
-            "id": "sql_4_1b",
-            "title": "4.1 LEFT e RIGHT JOIN",
-            "schedule": "Sábado, 15/08 às 13h (13h-13h50, 50min)",
-            "estimatedTime": "50 minutos",
-            "description": "LEFT JOIN retorna tudo da tabela esquerda mesmo sem correspondência — ideal para 'todos os usuários, mesmo os sem transações'.",
+            "id": "sql_rs_session_06",
+            "title": "CREATE e tipos numéricos",
+            "dayOffset": 7,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Manipulação Básica de Dados",
+            "description": "Nível 1 · Manipulação Básica de Dados. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
             "subtopics": [
               {
-                "id": "sql_4_1b_1",
-                "text": "LEFT JOIN — tudo da esquerda, mesmo sem correspondência à direita (NULL para colunas da direita)"
+                "id": "sql_rs_06_01",
+                "activityType": "estudar",
+                "text": "Operações básicas; estrutura e execução do CREATE"
               },
               {
-                "id": "sql_4_1b_2",
-                "text": "RIGHT JOIN — espelho do LEFT; quando usar (geralmente LEFT é preferido para clareza)"
+                "id": "sql_rs_06_02",
+                "activityType": "estudar",
+                "text": "Tipos de dados numéricos no PostgreSQL"
+              },
+              {
+                "id": "sql_rs_06_03",
+                "activityType": "pratica",
+                "text": "Escrever manualmente um CREATE TABLE e conferir a estrutura no Beekeeper"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_07",
+            "title": "Escolhendo os tipos de dados",
+            "dayOffset": 8,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Manipulação Básica de Dados",
+            "description": "Nível 1 · Manipulação Básica de Dados. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_07_01",
+                "activityType": "estudar",
+                "text": "Tipos textuais e booleanos"
+              },
+              {
+                "id": "sql_rs_07_02",
+                "activityType": "estudar",
+                "text": "UUID, tipos seriais, ARRAY e JSON"
+              },
+              {
+                "id": "sql_rs_07_03",
+                "activityType": "pratica",
+                "text": "Criar uma pequena tabela de teste com os tipos apresentados"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_08",
+            "title": "INSERT e SELECT",
+            "dayOffset": 9,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Manipulação Básica de Dados",
+            "description": "Nível 1 · Manipulação Básica de Dados. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_08_01",
+                "activityType": "estudar",
+                "text": "Estrutura e execução do INSERT"
+              },
+              {
+                "id": "sql_rs_08_02",
+                "activityType": "estudar",
+                "text": "Visualização da estrutura da tabela no Beekeeper; estrutura e execução do SELECT"
+              },
+              {
+                "id": "sql_rs_08_03",
+                "activityType": "pratica",
+                "text": "Inserir poucos registros e escrever 2 consultas SELECT manualmente"
+              },
+              {
+                "id": "sql_rs_08_04",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar INSERT e SELECT linha por linha"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_09",
+            "title": "UPDATE e DELETE",
+            "dayOffset": 10,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Manipulação Básica de Dados",
+            "description": "Nível 1 · Manipulação Básica de Dados. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_09_01",
+                "activityType": "estudar",
+                "text": "Estrutura e execução do UPDATE"
+              },
+              {
+                "id": "sql_rs_09_02",
+                "activityType": "estudar",
+                "text": "Estrutura e execução do DELETE"
+              },
+              {
+                "id": "sql_rs_09_03",
+                "activityType": "pratica",
+                "text": "Reproduzir os comandos em dados de estudo e conferir o resultado com SELECT"
+              },
+              {
+                "id": "sql_rs_09_04",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar as alterações e o alcance de cada comando"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_10",
+            "title": "Revisão de CRUD",
+            "dayOffset": 11,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "60 minutos",
+            "activityType": "revisar",
+            "block": "Manipulação Básica de Dados",
+            "description": "Nível 1 · Manipulação Básica de Dados. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_10_01",
+                "activityType": "pratica",
+                "text": "Atividade/quiz do módulo Manipulação Básica de Dados"
+              },
+              {
+                "id": "sql_rs_10_02",
+                "activityType": "pratica",
+                "text": "Escrever um pequeno fluxo CREATE, INSERT, SELECT, UPDATE e DELETE"
+              },
+              {
+                "id": "sql_rs_10_03",
+                "activityType": "revisar",
+                "text": "Revisar erros de CRUD e explicar uma query sem consultar"
               }
             ]
           }
@@ -1665,22 +1915,152 @@ const NEW_TRACKS = {
       },
       {
         "weekNum": 3,
-        "dateRange": "22/08 (Sáb)",
+        "startOffset": 14,
+        "dateRange": "Semana 3 · segunda a sexta · manhã",
+        "isReviewWeek": false,
         "topics": [
           {
-            "id": "sql_4_2a",
-            "title": "4.2 GROUP BY e Funções de Agregação",
-            "schedule": "Sábado, 22/08 às 13h (13h-13h50, 50min)",
-            "estimatedTime": "50 minutos",
-            "description": "GROUP BY é a base de qualquer relatório. Sem ele, COUNT, SUM e AVG operam em toda a tabela.",
+            "id": "sql_rs_session_11",
+            "title": "Modelo Entidade-Relacionamento",
+            "dayOffset": 14,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Modelagem de Dados Essencial",
+            "description": "Nível 1 · Modelagem de Dados Essencial. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
             "subtopics": [
               {
-                "id": "sql_4_2a_1",
-                "text": "GROUP BY com COUNT — contar transações por usuário"
+                "id": "sql_rs_11_01",
+                "activityType": "estudar",
+                "text": "Introdução à modelagem de dados e ao Modelo Entidade-Relacionamento"
               },
               {
-                "id": "sql_4_2a_2",
-                "text": "GROUP BY com SUM e AVG — soma e média de valores por categoria"
+                "id": "sql_rs_11_02",
+                "activityType": "estudar",
+                "text": "Entidades, atributos, relacionamentos e cardinalidade"
+              },
+              {
+                "id": "sql_rs_11_03",
+                "activityType": "pratica",
+                "text": "Rascunhar um modelo ER com 3 entidades"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_12",
+            "title": "Chaves e integridade",
+            "dayOffset": 15,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Modelagem de Dados Essencial",
+            "description": "Nível 1 · Modelagem de Dados Essencial. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_12_01",
+                "activityType": "estudar",
+                "text": "Chaves primárias (PK) e chaves estrangeiras (FK)"
+              },
+              {
+                "id": "sql_rs_12_02",
+                "activityType": "pratica",
+                "text": "Definir PK/FK e cardinalidades no modelo de estudo"
+              },
+              {
+                "id": "sql_rs_12_03",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar como PK/FK protegem os relacionamentos"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_13",
+            "title": "Introdução à normalização",
+            "dayOffset": 16,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Modelagem de Dados Essencial",
+            "description": "Nível 1 · Modelagem de Dados Essencial. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_13_01",
+                "activityType": "estudar",
+                "text": "Funcionamento da normalização; regras de transformação"
+              },
+              {
+                "id": "sql_rs_13_02",
+                "activityType": "estudar",
+                "text": "Conceitos de formas normais e redundância"
+              },
+              {
+                "id": "sql_rs_13_03",
+                "activityType": "pratica",
+                "text": "Identificar redundâncias em uma tabela de exemplo"
+              },
+              {
+                "id": "sql_rs_13_04",
+                "activityType": "revisar",
+                "text": "Explicar o problema que a normalização resolve"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_14",
+            "title": "Primeira e segunda formas normais",
+            "dayOffset": 17,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Modelagem de Dados Essencial",
+            "description": "Nível 1 · Modelagem de Dados Essencial. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_14_01",
+                "activityType": "estudar",
+                "text": "1FN e 2FN"
+              },
+              {
+                "id": "sql_rs_14_02",
+                "activityType": "pratica",
+                "text": "Transformar um exemplo em 1FN e depois em 2FN"
+              },
+              {
+                "id": "sql_rs_14_03",
+                "activityType": "revisar",
+                "text": "Feynman curto: justificar cada separação de tabela"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_15",
+            "title": "Terceira forma normal e DER",
+            "dayOffset": 18,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Modelagem de Dados Essencial",
+            "description": "Nível 1 · Modelagem de Dados Essencial. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_15_01",
+                "activityType": "estudar",
+                "text": "3FN; formas normais adicionais quando apresentadas pela Rocketseat"
+              },
+              {
+                "id": "sql_rs_15_02",
+                "activityType": "estudar",
+                "text": "Diagramas ER / DER e exemplos práticos"
+              },
+              {
+                "id": "sql_rs_15_03",
+                "activityType": "pratica",
+                "text": "Aplicar 3FN e atualizar o DER"
+              },
+              {
+                "id": "sql_rs_15_04",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar a normalização do modelo"
               }
             ]
           }
@@ -1688,22 +2068,137 @@ const NEW_TRACKS = {
       },
       {
         "weekNum": 4,
-        "dateRange": "29/08 (Sáb)",
+        "startOffset": 21,
+        "dateRange": "Semana 4 · segunda a sexta · manhã",
+        "isReviewWeek": false,
         "topics": [
           {
-            "id": "sql_4_2b",
-            "title": "4.2 WHERE vs HAVING",
-            "schedule": "Sábado, 29/08 às 13h (13h-13h50, 50min)",
-            "estimatedTime": "50 minutos",
-            "description": "WHERE filtra linhas individuais antes do agrupamento. HAVING filtra grupos depois. A diferença impacta diretamente performance e resultado.",
+            "id": "sql_rs_session_16",
+            "title": "Do ER para tabelas e constraints",
+            "dayOffset": 21,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Modelagem de Dados Essencial",
+            "description": "Nível 1 · Modelagem de Dados Essencial. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
             "subtopics": [
               {
-                "id": "sql_4_2b_1",
-                "text": "WHERE filtra antes do GROUP BY — não pode usar funções de agregação"
+                "id": "sql_rs_16_01",
+                "activityType": "estudar",
+                "text": "Mapeamento ER para modelo relacional"
               },
               {
-                "id": "sql_4_2b_2",
-                "text": "HAVING filtra depois do GROUP BY — pode usar COUNT, SUM, etc. Ex: HAVING COUNT(*) > 5"
+                "id": "sql_rs_16_02",
+                "activityType": "estudar",
+                "text": "Tabelas e constraints; criação de tabelas e constraints"
+              },
+              {
+                "id": "sql_rs_16_03",
+                "activityType": "pratica",
+                "text": "Implementar o modelo relacional com PK/FK e constraints no PostgreSQL"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_17",
+            "title": "CRUD aplicado e revisão de fundamentos",
+            "dayOffset": 22,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "revisar",
+            "block": "Modelagem de Dados Essencial",
+            "description": "Nível 1 · Modelagem de Dados Essencial. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_17_01",
+                "activityType": "pratica",
+                "text": "Aplicar INSERT, SELECT, UPDATE e DELETE ao modelo"
+              },
+              {
+                "id": "sql_rs_17_02",
+                "activityType": "pratica",
+                "text": "Atividade/quiz de Modelagem de Dados Essencial e Quiz - Fundamentos"
+              },
+              {
+                "id": "sql_rs_17_03",
+                "activityType": "revisar",
+                "text": "Revisar erros de CRUD, PK/FK e normalização; explicar uma query"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_18",
+            "title": "Mini projeto: gestão educacional",
+            "dayOffset": 23,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "pratica",
+            "block": "Mini Projeto: Modelando um sistema simples",
+            "description": "Nível 1 · Mini Projeto: Modelando um sistema simples. Sessão de consolidação: pratique e revise apenas os pontos de dúvida. Projeto oficial do nível Fundamentos.",
+            "subtopics": [
+              {
+                "id": "sql_rs_18_01",
+                "activityType": "pratica",
+                "text": "Acompanhar a proposta do sistema de gestão educacional na Rocketseat"
+              },
+              {
+                "id": "sql_rs_18_02",
+                "activityType": "pratica",
+                "text": "Identificar entidades, atributos e relacionamentos"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_19",
+            "title": "Mini projeto: normalização e DER",
+            "dayOffset": 24,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "pratica",
+            "block": "Mini Projeto: Modelando um sistema simples",
+            "description": "Nível 1 · Mini Projeto: Modelando um sistema simples. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_19_01",
+                "activityType": "pratica",
+                "text": "Normalizar os dados do sistema educacional"
+              },
+              {
+                "id": "sql_rs_19_02",
+                "activityType": "pratica",
+                "text": "Elaborar DER e mapear para o modelo relacional"
+              },
+              {
+                "id": "sql_rs_19_03",
+                "activityType": "revisar",
+                "text": "Explicar as cardinalidades e as escolhas de PK/FK"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_20",
+            "title": "Mini projeto: implementação",
+            "dayOffset": 25,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "pratica",
+            "block": "Mini Projeto: Modelando um sistema simples",
+            "description": "Nível 1 · Mini Projeto: Modelando um sistema simples. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_20_01",
+                "activityType": "pratica",
+                "text": "Implementar as tabelas do sistema educacional no PostgreSQL"
+              },
+              {
+                "id": "sql_rs_20_02",
+                "activityType": "pratica",
+                "text": "Validar constraints e inserir poucos dados para conferir o modelo"
+              },
+              {
+                "id": "sql_rs_20_03",
+                "activityType": "revisar",
+                "text": "Revisar o mini projeto com o material Rocketseat"
               }
             ]
           }
@@ -1711,22 +2206,142 @@ const NEW_TRACKS = {
       },
       {
         "weekNum": 5,
-        "dateRange": "05/09 (Sáb)",
+        "startOffset": 28,
+        "dateRange": "Semana 5 · segunda a sexta · manhã",
+        "isReviewWeek": false,
         "topics": [
           {
-            "id": "sql_4_3a",
-            "title": "4.3 Subqueries Básicas",
-            "schedule": "Sábado, 05/09 às 13h (13h-13h50, 50min)",
-            "estimatedTime": "50 minutos",
-            "description": "Subquery é uma query dentro de outra. A mais comum é dentro do WHERE para filtrar com base em um conjunto dinâmico.",
+            "id": "sql_rs_session_21",
+            "title": "WHERE e operadores",
+            "dayOffset": 28,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "60 minutos",
+            "activityType": "estudar",
+            "block": "Consultas Avançadas",
+            "description": "Nível 2 · Consultas Avançadas. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
             "subtopics": [
               {
-                "id": "sql_4_3a_1",
-                "text": "Subquery no WHERE: SELECT * FROM pedidos WHERE usuario_id IN (SELECT id FROM usuarios WHERE ativo = true)"
+                "id": "sql_rs_21_01",
+                "activityType": "estudar",
+                "text": "Subtipos/tipos relevantes do SQL apresentados no curso"
               },
               {
-                "id": "sql_4_3a_2",
-                "text": "Subquery no SELECT (subquery escalar): retorna um único valor por linha"
+                "id": "sql_rs_21_02",
+                "activityType": "estudar",
+                "text": "WHERE, operadores de comparação, AND e OR"
+              },
+              {
+                "id": "sql_rs_21_03",
+                "activityType": "pratica",
+                "text": "Escrever 3 filtros manuais em dados de estudo"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_22",
+            "title": "Filtros e resultados ordenados",
+            "dayOffset": 29,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Consultas Avançadas",
+            "description": "Nível 2 · Consultas Avançadas. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_22_01",
+                "activityType": "estudar",
+                "text": "IN, NOT IN, BETWEEN e LIKE"
+              },
+              {
+                "id": "sql_rs_22_02",
+                "activityType": "estudar",
+                "text": "DISTINCT, ORDER BY e LIMIT"
+              },
+              {
+                "id": "sql_rs_22_03",
+                "activityType": "pratica",
+                "text": "Prática complementar: 3 a 5 exercícios de WHERE no SQLZoo após as aulas"
+              },
+              {
+                "id": "sql_rs_22_04",
+                "activityType": "revisar",
+                "text": "Revisar os erros dos filtros"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_23",
+            "title": "Funções de agregação",
+            "dayOffset": 30,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "60 minutos",
+            "activityType": "estudar",
+            "block": "Consultas Avançadas",
+            "description": "Nível 2 · Consultas Avançadas. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_23_01",
+                "activityType": "estudar",
+                "text": "COUNT, SUM, AVG, MAX e MIN"
+              },
+              {
+                "id": "sql_rs_23_02",
+                "activityType": "pratica",
+                "text": "Escrever 3 consultas de agregação e conferir os resultados"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_24",
+            "title": "GROUP BY e HAVING",
+            "dayOffset": 31,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Consultas Avançadas",
+            "description": "Nível 2 · Consultas Avançadas. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão. Opcional: relatório de total de transações por usuário no SafeWallet.",
+            "subtopics": [
+              {
+                "id": "sql_rs_24_01",
+                "activityType": "estudar",
+                "text": "GROUP BY, HAVING e agregações"
+              },
+              {
+                "id": "sql_rs_24_02",
+                "activityType": "pratica",
+                "text": "Criar um relatório agrupado e filtrar os grupos"
+              },
+              {
+                "id": "sql_rs_24_03",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar GROUP BY, HAVING e a diferença para WHERE"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_25",
+            "title": "Funções e relatórios",
+            "dayOffset": 32,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Consultas Avançadas",
+            "description": "Nível 2 · Consultas Avançadas. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_25_01",
+                "activityType": "estudar",
+                "text": "Manipulação de strings e números"
+              },
+              {
+                "id": "sql_rs_25_02",
+                "activityType": "estudar",
+                "text": "Manipulação de datas quando abordada; consultas de relatório"
+              },
+              {
+                "id": "sql_rs_25_03",
+                "activityType": "pratica",
+                "text": "Reproduzir as funções ensinadas e escrever um relatório curto"
               }
             ]
           }
@@ -1734,22 +2349,147 @@ const NEW_TRACKS = {
       },
       {
         "weekNum": 6,
-        "dateRange": "12/09 (Sáb)",
+        "startOffset": 35,
+        "dateRange": "Semana 6 · segunda a sexta · manhã",
+        "isReviewWeek": false,
         "topics": [
           {
-            "id": "sql_4_3b",
-            "title": "4.3 JOIN vs Subquery",
-            "schedule": "Sábado, 12/09 às 13h (13h-13h50, 50min)",
-            "estimatedTime": "50 minutos",
-            "description": "Nem sempre a subquery é melhor que JOIN. Saber quando uma é mais clara ou mais performática é o que o entrevistador quer ouvir.",
+            "id": "sql_rs_session_26",
+            "title": "Relacionamentos nas consultas",
+            "dayOffset": 35,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Consultas Avançadas",
+            "description": "Nível 2 · Consultas Avançadas. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
             "subtopics": [
               {
-                "id": "sql_4_3b_1",
-                "text": "Quando subquery é mais clara (filtro simples em subcondição)"
+                "id": "sql_rs_26_01",
+                "activityType": "estudar",
+                "text": "Revisão de relacionamentos e JOINs abordados no módulo"
               },
               {
-                "id": "sql_4_3b_2",
-                "text": "Quando JOIN é melhor (múltiplas colunas da tabela relacionada necessárias no resultado)"
+                "id": "sql_rs_26_02",
+                "activityType": "pratica",
+                "text": "Reproduzir uma junção do curso e verificar as correspondências"
+              },
+              {
+                "id": "sql_rs_26_03",
+                "activityType": "revisar",
+                "text": "Explicar a ligação entre PK/FK e a consulta"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_27",
+            "title": "Consolidação de consultas",
+            "dayOffset": 36,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "60 minutos",
+            "activityType": "revisar",
+            "block": "Consultas Avançadas",
+            "description": "Nível 2 · Consultas Avançadas. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_27_01",
+                "activityType": "pratica",
+                "text": "Atividade/quiz do módulo Consultas Avançadas"
+              },
+              {
+                "id": "sql_rs_27_02",
+                "activityType": "pratica",
+                "text": "Prática complementar: 2 a 3 exercícios de agregação no HackerRank SQL Basic/Intermediate"
+              },
+              {
+                "id": "sql_rs_27_03",
+                "activityType": "revisar",
+                "text": "Revisar WHERE, GROUP BY e HAVING com base nos erros"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_28",
+            "title": "INNER JOIN e LEFT JOIN",
+            "dayOffset": 37,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Relacionamentos e Junções",
+            "description": "Nível 2 · Relacionamentos e Junções. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão. Opcional: consultar usuários + transações no banco do SafeWallet.",
+            "subtopics": [
+              {
+                "id": "sql_rs_28_01",
+                "activityType": "estudar",
+                "text": "INNER JOIN e LEFT JOIN"
+              },
+              {
+                "id": "sql_rs_28_02",
+                "activityType": "pratica",
+                "text": "Escrever duas consultas e comparar linhas com e sem correspondência"
+              },
+              {
+                "id": "sql_rs_28_03",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar JOIN linha por linha"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_29",
+            "title": "Consultas com múltiplas tabelas",
+            "dayOffset": 38,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Relacionamentos e Junções",
+            "description": "Nível 2 · Relacionamentos e Junções. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_29_01",
+                "activityType": "estudar",
+                "text": "Relacionamentos entre tabelas e consultas com múltiplas tabelas"
+              },
+              {
+                "id": "sql_rs_29_02",
+                "activityType": "estudar",
+                "text": "RIGHT JOIN e FULL JOIN, caso constem no conteúdo Rocketseat"
+              },
+              {
+                "id": "sql_rs_29_03",
+                "activityType": "pratica",
+                "text": "Consultar 3 tabelas e conferir cardinalidade e duplicações"
+              },
+              {
+                "id": "sql_rs_29_04",
+                "activityType": "revisar",
+                "text": "Revisar somente as junções que causaram dúvida"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_30",
+            "title": "Subqueries",
+            "dayOffset": 39,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Relacionamentos e Junções",
+            "description": "Nível 2 · Relacionamentos e Junções. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_30_01",
+                "activityType": "estudar",
+                "text": "Subqueries; subconsultas correlacionadas quando abordadas"
+              },
+              {
+                "id": "sql_rs_30_02",
+                "activityType": "pratica",
+                "text": "Escrever 2 subconsultas a partir dos exemplos do curso"
+              },
+              {
+                "id": "sql_rs_30_03",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar a consulta interna e a externa"
               }
             ]
           }
@@ -1757,22 +2497,132 @@ const NEW_TRACKS = {
       },
       {
         "weekNum": 7,
-        "dateRange": "19/09 (Sáb)",
+        "startOffset": 42,
+        "dateRange": "Semana 7 · segunda a sexta · manhã",
+        "isReviewWeek": false,
         "topics": [
           {
-            "id": "sql_4_4a",
-            "title": "4.4 Índices — Como funcionam",
-            "schedule": "Sábado, 19/09 às 13h (13h-13h50, 50min)",
-            "estimatedTime": "50 minutos",
-            "description": "Um índice é uma estrutura de busca auxiliar (geralmente B-Tree) que permite encontrar linhas sem varrer a tabela inteira.",
+            "id": "sql_rs_session_31",
+            "title": "Common Table Expressions",
+            "dayOffset": 42,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Relacionamentos e Junções",
+            "description": "Nível 2 · Relacionamentos e Junções. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
             "subtopics": [
               {
-                "id": "sql_4_4a_1",
-                "text": "Por que um índice acelera busca: comparar full table scan O(N) vs B-Tree O(log N)"
+                "id": "sql_rs_31_01",
+                "activityType": "estudar",
+                "text": "Common Table Expressions (CTE) e WITH"
               },
               {
-                "id": "sql_4_4a_2",
-                "text": "Índice em coluna de chave estrangeira: quando é criado automaticamente e quando não é"
+                "id": "sql_rs_31_02",
+                "activityType": "pratica",
+                "text": "Reescrever uma consulta em etapas com WITH"
+              },
+              {
+                "id": "sql_rs_31_03",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar cada CTE e o resultado final"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_32",
+            "title": "Operações de conjunto",
+            "dayOffset": 43,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Relacionamentos e Junções",
+            "description": "Nível 2 · Relacionamentos e Junções. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_32_01",
+                "activityType": "estudar",
+                "text": "UNION, INTERSECT e operações de conjunto"
+              },
+              {
+                "id": "sql_rs_32_02",
+                "activityType": "pratica",
+                "text": "Comparar os resultados de duas operações sobre dados pequenos"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_33",
+            "title": "Window Functions",
+            "dayOffset": 44,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Relacionamentos e Junções",
+            "description": "Nível 2 · Relacionamentos e Junções. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_33_01",
+                "activityType": "estudar",
+                "text": "Window Functions / funções de janela"
+              },
+              {
+                "id": "sql_rs_33_02",
+                "activityType": "pratica",
+                "text": "Reproduzir uma função de janela e comparar com GROUP BY"
+              },
+              {
+                "id": "sql_rs_33_03",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar o que a janela calcula sem perder as linhas"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_34",
+            "title": "Consultas analíticas",
+            "dayOffset": 45,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Relacionamentos e Junções",
+            "description": "Nível 2 · Relacionamentos e Junções. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_34_01",
+                "activityType": "estudar",
+                "text": "Consultas analíticas combinando os conceitos do módulo"
+              },
+              {
+                "id": "sql_rs_34_02",
+                "activityType": "pratica",
+                "text": "Escrever uma consulta analítica e conferir o resultado manualmente"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_35",
+            "title": "Revisão de consultas e modelagem",
+            "dayOffset": 46,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "revisar",
+            "block": "Relacionamentos e Junções",
+            "description": "Nível 2 · Relacionamentos e Junções. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_35_01",
+                "activityType": "pratica",
+                "text": "Atividade/quiz de Relacionamentos e Junções e Quiz - Consultas e Modelagem"
+              },
+              {
+                "id": "sql_rs_35_02",
+                "activityType": "pratica",
+                "text": "Prática complementar: 2 exercícios de JOIN no SQLZoo ou HackerRank"
+              },
+              {
+                "id": "sql_rs_35_03",
+                "activityType": "revisar",
+                "text": "Revisar erros de JOIN, subquery, CTE e funções de janela"
               }
             ]
           }
@@ -1780,22 +2630,137 @@ const NEW_TRACKS = {
       },
       {
         "weekNum": 8,
-        "dateRange": "26/09 (Sáb)",
+        "startOffset": 49,
+        "dateRange": "Semana 8 · segunda a sexta · manhã",
+        "isReviewWeek": false,
         "topics": [
           {
-            "id": "sql_4_4b",
-            "title": "4.4 Índices — Trade-offs",
-            "schedule": "Sábado, 26/09 às 13h (13h-13h50, 50min)",
-            "estimatedTime": "50 minutos",
-            "description": "Índice não é gratuito: ocupa espaço e torna INSERT/UPDATE/DELETE mais lentos porque o índice precisa ser atualizado.",
+            "id": "sql_rs_session_36",
+            "title": "Consultas complexas e estratégias",
+            "dayOffset": 49,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Consultas Avançadas e Subconsultas",
+            "description": "Nível 3 · Consultas Avançadas e Subconsultas. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
             "subtopics": [
               {
-                "id": "sql_4_4b_1",
-                "text": "Quando NAO criar índice: tabelas pequenas, colunas de baixa cardinalidade (ex: booleano), tabelas de escrita intensiva"
+                "id": "sql_rs_36_01",
+                "activityType": "estudar",
+                "text": "Consultas complexas, subconsultas e estratégias de consulta"
               },
               {
-                "id": "sql_4_4b_2",
-                "text": "Índice composto: quando (coluna_a, coluna_b) juntos são melhores que dois índices separados"
+                "id": "sql_rs_36_02",
+                "activityType": "pratica",
+                "text": "Comparar duas formas de escrever uma consulta com o mesmo resultado"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_37",
+            "title": "Índices na prática",
+            "dayOffset": 50,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Consultas Avançadas e Subconsultas",
+            "description": "Nível 3 · Consultas Avançadas e Subconsultas. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_37_01",
+                "activityType": "estudar",
+                "text": "Índices: criação e utilização"
+              },
+              {
+                "id": "sql_rs_37_02",
+                "activityType": "pratica",
+                "text": "Criar um índice em uma tabela de estudo e testar a consulta"
+              },
+              {
+                "id": "sql_rs_37_03",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar o benefício e o custo do índice"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_38",
+            "title": "Planos de execução",
+            "dayOffset": 51,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Consultas Avançadas e Subconsultas",
+            "description": "Nível 3 · Consultas Avançadas e Subconsultas. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão. Opcional: usar EXPLAIN ANALYZE em uma consulta de leitura do SafeWallet.",
+            "subtopics": [
+              {
+                "id": "sql_rs_38_01",
+                "activityType": "estudar",
+                "text": "Análise de performance e planos de execução"
+              },
+              {
+                "id": "sql_rs_38_02",
+                "activityType": "estudar",
+                "text": "EXPLAIN e EXPLAIN ANALYZE"
+              },
+              {
+                "id": "sql_rs_38_03",
+                "activityType": "pratica",
+                "text": "Comparar os planos de uma consulta antes e depois de um índice"
+              },
+              {
+                "id": "sql_rs_38_04",
+                "activityType": "revisar",
+                "text": "Explicar as diferenças observadas no plano"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_39",
+            "title": "Particionamento e volume de dados",
+            "dayOffset": 52,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Consultas Avançadas e Subconsultas",
+            "description": "Nível 3 · Consultas Avançadas e Subconsultas. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_39_01",
+                "activityType": "estudar",
+                "text": "Particionamento; boas práticas de performance"
+              },
+              {
+                "id": "sql_rs_39_02",
+                "activityType": "pratica",
+                "text": "Reproduzir o exemplo de particionamento apresentado e registrar quando faz sentido"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_40",
+            "title": "Normalização vs denormalização",
+            "dayOffset": 53,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Consultas Avançadas e Subconsultas",
+            "description": "Nível 3 · Consultas Avançadas e Subconsultas. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_40_01",
+                "activityType": "estudar",
+                "text": "Normalização vs denormalização e otimização de consultas"
+              },
+              {
+                "id": "sql_rs_40_02",
+                "activityType": "pratica",
+                "text": "Atividade/quiz do módulo Consultas Avançadas e Subconsultas"
+              },
+              {
+                "id": "sql_rs_40_03",
+                "activityType": "revisar",
+                "text": "Justificar o trade-off em um exemplo do curso"
               }
             ]
           }
@@ -1803,22 +2768,127 @@ const NEW_TRACKS = {
       },
       {
         "weekNum": 9,
-        "dateRange": "03/10 (Sáb)",
+        "startOffset": 56,
+        "dateRange": "Semana 9 · segunda a sexta · manhã",
+        "isReviewWeek": false,
         "topics": [
           {
-            "id": "sql_rev1",
-            "title": "Prática: JOIN + Agregação (HackerRank)",
-            "schedule": "Sábado, 03/10 às 13h (13h-13h50, 50min)",
-            "estimatedTime": "50 minutos",
-            "description": "Resolver problemas reais de SQL em plataforma de prática.",
+            "id": "sql_rs_session_41",
+            "title": "Otimização e Performance: conteúdo do módulo",
+            "dayOffset": 56,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Otimização e Performance",
+            "description": "Nível 3 · Otimização e Performance. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão. A descrição pública deste módulo repete a de Recursos Avançados do Postgres. Os títulos individuais não estão disponíveis; siga as aulas reais, inclusive se introduzirem views, funções ou transações.",
             "subtopics": [
               {
-                "id": "sql_rev1_1",
-                "text": "Resolver 2 problemas de JOIN no HackerRank ou LeetCode SQL"
+                "id": "sql_rs_41_01",
+                "activityType": "estudar",
+                "text": "Acompanhar o início do módulo Otimização e Performance na ordem da plataforma"
               },
               {
-                "id": "sql_rev1_2",
-                "text": "Feynman: Explicar cada query linha por linha como se ensinasse SQL pela primeira vez"
+                "id": "sql_rs_41_02",
+                "activityType": "pratica",
+                "text": "Executar os exemplos apresentados nesta primeira parte"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_42",
+            "title": "Otimização e Performance: continuação",
+            "dayOffset": 57,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Otimização e Performance",
+            "description": "Nível 3 · Otimização e Performance. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão. Retome do ponto anterior; os blocos são estimativas de estudo com prática, não títulos oficiais de vídeos.",
+            "subtopics": [
+              {
+                "id": "sql_rs_42_01",
+                "activityType": "estudar",
+                "text": "Continuar as aulas do módulo Otimização e Performance na ordem da plataforma"
+              },
+              {
+                "id": "sql_rs_42_02",
+                "activityType": "pratica",
+                "text": "Executar os exemplos restantes e registrar dúvidas"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_43",
+            "title": "Análise e execução eficiente",
+            "dayOffset": 58,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "pratica",
+            "block": "Otimização e Performance",
+            "description": "Nível 3 · Otimização e Performance. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_43_01",
+                "activityType": "pratica",
+                "text": "Prática de consolidação: analisar uma consulta já estudada com EXPLAIN ANALYZE"
+              },
+              {
+                "id": "sql_rs_43_02",
+                "activityType": "pratica",
+                "text": "Testar uma melhoria de consulta ou índice e comparar resultado e plano"
+              },
+              {
+                "id": "sql_rs_43_03",
+                "activityType": "revisar",
+                "text": "Revisar erros e justificar a estratégia de otimização"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_44",
+            "title": "Estratégias para grandes volumes",
+            "dayOffset": 59,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "revisar",
+            "block": "Otimização e Performance",
+            "description": "Nível 3 · Otimização e Performance. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_44_01",
+                "activityType": "pratica",
+                "text": "Consolidar performance de banco: relacionar índices, particionamento e volume de dados"
+              },
+              {
+                "id": "sql_rs_44_02",
+                "activityType": "pratica",
+                "text": "Registrar uma estratégia de execução eficiente baseada nos exemplos estudados"
+              },
+              {
+                "id": "sql_rs_44_03",
+                "activityType": "revisar",
+                "text": "Explicar os limites da estratégia escolhida"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_45",
+            "title": "Consolidação de performance",
+            "dayOffset": 60,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "60 minutos",
+            "activityType": "revisar",
+            "block": "Otimização e Performance",
+            "description": "Nível 3 · Otimização e Performance. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_45_01",
+                "activityType": "pratica",
+                "text": "Atividade/quiz do módulo Otimização e Performance"
+              },
+              {
+                "id": "sql_rs_45_02",
+                "activityType": "revisar",
+                "text": "Revisar somente dúvidas sobre análise de consultas e os recursos efetivamente apresentados"
               }
             ]
           }
@@ -1826,22 +2896,137 @@ const NEW_TRACKS = {
       },
       {
         "weekNum": 10,
-        "dateRange": "10/10 (Sáb)",
+        "startOffset": 63,
+        "dateRange": "Semana 10 · segunda a sexta · manhã",
+        "isReviewWeek": false,
         "topics": [
           {
-            "id": "sql_rev2",
-            "title": "Prática: Agregação Avançada",
-            "schedule": "Sábado, 10/10 às 13h (13h-13h50, 50min)",
-            "estimatedTime": "50 minutos",
-            "description": "Foco em GROUP BY + HAVING em cenários mais complexos.",
+            "id": "sql_rs_session_46",
+            "title": "Views e tabelas temporárias",
+            "dayOffset": 63,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Recursos Avançados do Postgres",
+            "description": "Nível 3 · Recursos Avançados do Postgres. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
             "subtopics": [
               {
-                "id": "sql_rev2_1",
-                "text": "Resolver problema com GROUP BY + HAVING + JOIN combinados"
+                "id": "sql_rs_46_01",
+                "activityType": "estudar",
+                "text": "Views, criação de Views e tabelas temporárias"
               },
               {
-                "id": "sql_rev2_2",
-                "text": "Usar o banco do SafeWallet para gerar um relatório real (ex: total por categoria por mês)"
+                "id": "sql_rs_46_02",
+                "activityType": "pratica",
+                "text": "Criar uma View e reproduzir o uso de uma tabela temporária"
+              },
+              {
+                "id": "sql_rs_46_03",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar a consulta da View"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_47",
+            "title": "Funções PostgreSQL",
+            "dayOffset": 64,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Recursos Avançados do Postgres",
+            "description": "Nível 3 · Recursos Avançados do Postgres. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_47_01",
+                "activityType": "estudar",
+                "text": "Funções PostgreSQL"
+              },
+              {
+                "id": "sql_rs_47_02",
+                "activityType": "pratica",
+                "text": "Criar e executar uma função simples seguindo o curso"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_48",
+            "title": "PL/pgSQL",
+            "dayOffset": 65,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Recursos Avançados do Postgres",
+            "description": "Nível 3 · Recursos Avançados do Postgres. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_48_01",
+                "activityType": "estudar",
+                "text": "PL/pgSQL e funções no contexto apresentado"
+              },
+              {
+                "id": "sql_rs_48_02",
+                "activityType": "pratica",
+                "text": "Implementar um exemplo curto de função em PL/pgSQL"
+              },
+              {
+                "id": "sql_rs_48_03",
+                "activityType": "revisar",
+                "text": "Explicar entradas, processamento e retorno"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_49",
+            "title": "Triggers",
+            "dayOffset": 66,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Recursos Avançados do Postgres",
+            "description": "Nível 3 · Recursos Avançados do Postgres. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_49_01",
+                "activityType": "estudar",
+                "text": "Triggers e automação no PostgreSQL"
+              },
+              {
+                "id": "sql_rs_49_02",
+                "activityType": "pratica",
+                "text": "Criar uma trigger e validar o evento que a aciona"
+              },
+              {
+                "id": "sql_rs_49_03",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar quando e por que a trigger executa"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_50",
+            "title": "Stored procedures",
+            "dayOffset": 67,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Recursos Avançados do Postgres",
+            "description": "Nível 3 · Recursos Avançados do Postgres. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_50_01",
+                "activityType": "estudar",
+                "text": "Stored procedures e sua utilização"
+              },
+              {
+                "id": "sql_rs_50_02",
+                "activityType": "pratica",
+                "text": "Reproduzir uma procedure do curso e conferir os efeitos"
+              },
+              {
+                "id": "sql_rs_50_03",
+                "activityType": "revisar",
+                "text": "Distinguir as responsabilidades de função, trigger e procedure"
               }
             ]
           }
@@ -1849,22 +3034,147 @@ const NEW_TRACKS = {
       },
       {
         "weekNum": 11,
-        "dateRange": "17/10 (Sáb)",
+        "startOffset": 70,
+        "dateRange": "Semana 11 · segunda a sexta · manhã",
+        "isReviewWeek": false,
         "topics": [
           {
-            "id": "sql_rev3",
-            "title": "Prática com Banco Real (SafeWallet)",
-            "schedule": "Sábado, 17/10 às 13h (13h-13h50, 50min)",
-            "estimatedTime": "50 minutos",
-            "description": "Aplicar os conhecimentos no banco PostgreSQL real do seu projeto.",
+            "id": "sql_rs_session_51",
+            "title": "Transações",
+            "dayOffset": 70,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Recursos Avançados do Postgres",
+            "description": "Nível 3 · Recursos Avançados do Postgres. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão. Opcional: relacionar o conceito com @Transactional no Spring; a aplicação Java fica para depois.",
             "subtopics": [
               {
-                "id": "sql_rev3_1",
-                "text": "Escrever 3 queries úteis para o SafeWallet (relatórios, auditorias, buscas complexas)"
+                "id": "sql_rs_51_01",
+                "activityType": "estudar",
+                "text": "Transactions: BEGIN, COMMIT e ROLLBACK"
               },
               {
-                "id": "sql_rev3_2",
-                "text": "Identificar onde um índice ajudaria e criar via EXPLAIN ANALYZE"
+                "id": "sql_rs_51_02",
+                "activityType": "estudar",
+                "text": "Propriedades e conceitos transacionais abordados no curso"
+              },
+              {
+                "id": "sql_rs_51_03",
+                "activityType": "pratica",
+                "text": "Executar um fluxo com COMMIT e outro com ROLLBACK em dados de estudo"
+              },
+              {
+                "id": "sql_rs_51_04",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar a unidade de trabalho da transação"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_52",
+            "title": "Segurança e permissões",
+            "dayOffset": 71,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Recursos Avançados do Postgres",
+            "description": "Nível 3 · Recursos Avançados do Postgres. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_52_01",
+                "activityType": "estudar",
+                "text": "Segurança, usuários, roles e permissões"
+              },
+              {
+                "id": "sql_rs_52_02",
+                "activityType": "estudar",
+                "text": "GRANT e REVOKE"
+              },
+              {
+                "id": "sql_rs_52_03",
+                "activityType": "pratica",
+                "text": "Criar uma role de estudo e testar concessão e revogação de acesso"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_53",
+            "title": "Backup e restauração",
+            "dayOffset": 72,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "estudar",
+            "block": "Recursos Avançados do Postgres",
+            "description": "Nível 3 · Recursos Avançados do Postgres. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_53_01",
+                "activityType": "estudar",
+                "text": "Backup, restauração e administração básica de PostgreSQL"
+              },
+              {
+                "id": "sql_rs_53_02",
+                "activityType": "pratica",
+                "text": "Gerar um backup do banco de estudo e restaurar em outro banco"
+              },
+              {
+                "id": "sql_rs_53_03",
+                "activityType": "pratica",
+                "text": "Conferir tabelas e dados restaurados"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_54",
+            "title": "Revisão avançada aplicada",
+            "dayOffset": 73,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "revisar",
+            "block": "Recursos Avançados do Postgres",
+            "description": "Nível 3 · Recursos Avançados do Postgres. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_54_01",
+                "activityType": "pratica",
+                "text": "Revisar uma consulta com subquery/CTE e seu índice"
+              },
+              {
+                "id": "sql_rs_54_02",
+                "activityType": "pratica",
+                "text": "Validar uma transação e uma View em um cenário pequeno"
+              },
+              {
+                "id": "sql_rs_54_03",
+                "activityType": "revisar",
+                "text": "Feynman curto: explicar índice, transação, View e trigger; revisar só os pontos de dúvida"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_55",
+            "title": "Fechamento de técnicas avançadas",
+            "dayOffset": 74,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "60 minutos",
+            "activityType": "revisar",
+            "block": "Recursos Avançados do Postgres",
+            "description": "Nível 3 · Recursos Avançados do Postgres. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_55_01",
+                "activityType": "pratica",
+                "text": "Exercícios e atividade/quiz de Recursos Avançados do Postgres"
+              },
+              {
+                "id": "sql_rs_55_02",
+                "activityType": "pratica",
+                "text": "Quiz - Técnicas Avançadas"
+              },
+              {
+                "id": "sql_rs_55_03",
+                "activityType": "revisar",
+                "text": "Revisar os erros antes de iniciar o projeto final"
               }
             ]
           }
@@ -1872,22 +3182,388 @@ const NEW_TRACKS = {
       },
       {
         "weekNum": 12,
-        "dateRange": "24/10 (Sáb)",
+        "startOffset": 77,
+        "dateRange": "Semana 12 · segunda a sexta · manhã",
+        "isReviewWeek": false,
         "topics": [
           {
-            "id": "sql_fim",
-            "title": "Conclusão SQL",
-            "schedule": "Sábado, 24/10 às 13h (13h-13h50, 50min)",
-            "estimatedTime": "50 minutos",
-            "description": "Semana final do SQL.",
+            "id": "sql_rs_session_56",
+            "title": "Biblioteca Universitária: levantamento",
+            "dayOffset": 77,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "pratica",
+            "block": "Projeto Final",
+            "description": "Nível 4 · Projeto Final. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
             "subtopics": [
               {
-                "id": "sql_fim_1",
-                "text": "Feynman de 60s para cada tópico: JOIN, Agregação, Subquery, Índice"
+                "id": "sql_rs_56_01",
+                "activityType": "pratica",
+                "text": "Acompanhar a proposta oficial do Sistema de Biblioteca Universitária"
               },
               {
-                "id": "sql_fim_2",
-                "text": "Qual query seria mais eficiente para buscar transações de alto valor de usuários ativos? Desenhar em papel e justificar"
+                "id": "sql_rs_56_02",
+                "activityType": "pratica",
+                "text": "Levantar requisitos e identificar entidades, atributos e regras"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_57",
+            "title": "Biblioteca: modelo conceitual e DER",
+            "dayOffset": 78,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "pratica",
+            "block": "Projeto Final",
+            "description": "Nível 4 · Projeto Final. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_57_01",
+                "activityType": "pratica",
+                "text": "Construir o modelo conceitual"
+              },
+              {
+                "id": "sql_rs_57_02",
+                "activityType": "pratica",
+                "text": "Elaborar o DER com relacionamentos e cardinalidades"
+              },
+              {
+                "id": "sql_rs_57_03",
+                "activityType": "revisar",
+                "text": "Justificar a modelagem com base nos requisitos"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_58",
+            "title": "Biblioteca: modelo relacional",
+            "dayOffset": 79,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "pratica",
+            "block": "Projeto Final",
+            "description": "Nível 4 · Projeto Final. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_58_01",
+                "activityType": "pratica",
+                "text": "Mapear o DER para o modelo relacional"
+              },
+              {
+                "id": "sql_rs_58_02",
+                "activityType": "pratica",
+                "text": "Definir tabelas, constraints, PK e FK"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_59",
+            "title": "Biblioteca: criação do banco",
+            "dayOffset": 80,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "pratica",
+            "block": "Projeto Final",
+            "description": "Nível 4 · Projeto Final. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_59_01",
+                "activityType": "pratica",
+                "text": "Criar o banco e as tabelas no PostgreSQL"
+              },
+              {
+                "id": "sql_rs_59_02",
+                "activityType": "pratica",
+                "text": "Implementar constraints e PK/FK; conferir a estrutura"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_60",
+            "title": "Biblioteca: população e CRUD",
+            "dayOffset": 81,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "pratica",
+            "block": "Projeto Final",
+            "description": "Nível 4 · Projeto Final. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_60_01",
+                "activityType": "pratica",
+                "text": "Popular dados de exemplo seguindo a formação"
+              },
+              {
+                "id": "sql_rs_60_02",
+                "activityType": "pratica",
+                "text": "Implementar e validar INSERT, SELECT, UPDATE e DELETE"
+              },
+              {
+                "id": "sql_rs_60_03",
+                "activityType": "revisar",
+                "text": "Explicar um fluxo CRUD do projeto"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 13,
+        "startOffset": 84,
+        "dateRange": "Semana 13 · segunda a sexta · manhã",
+        "isReviewWeek": false,
+        "topics": [
+          {
+            "id": "sql_rs_session_61",
+            "title": "Biblioteca: consultas e joins",
+            "dayOffset": 84,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "pratica",
+            "block": "Projeto Final",
+            "description": "Nível 4 · Projeto Final. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_61_01",
+                "activityType": "pratica",
+                "text": "Implementar consultas e relatórios com relacionamentos/joins"
+              },
+              {
+                "id": "sql_rs_61_02",
+                "activityType": "pratica",
+                "text": "Adicionar consultas avançadas com os recursos adequados já estudados"
+              },
+              {
+                "id": "sql_rs_61_03",
+                "activityType": "revisar",
+                "text": "Conferir resultados e explicar uma consulta avançada"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_62",
+            "title": "Biblioteca: otimização e índices",
+            "dayOffset": 85,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "pratica",
+            "block": "Projeto Final",
+            "description": "Nível 4 · Projeto Final. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_62_01",
+                "activityType": "pratica",
+                "text": "Analisar planos de execução das consultas do projeto"
+              },
+              {
+                "id": "sql_rs_62_02",
+                "activityType": "pratica",
+                "text": "Criar índices pertinentes e comparar a performance"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_63",
+            "title": "Biblioteca: views e triggers",
+            "dayOffset": 86,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "pratica",
+            "block": "Projeto Final",
+            "description": "Nível 4 · Projeto Final. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_63_01",
+                "activityType": "pratica",
+                "text": "Criar views previstas no projeto"
+              },
+              {
+                "id": "sql_rs_63_02",
+                "activityType": "pratica",
+                "text": "Implementar triggers e validar seu comportamento"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_64",
+            "title": "Biblioteca: procedures e segurança",
+            "dayOffset": 87,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "pratica",
+            "block": "Projeto Final",
+            "description": "Nível 4 · Projeto Final. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_64_01",
+                "activityType": "pratica",
+                "text": "Implementar stored procedures quando aplicável ao projeto"
+              },
+              {
+                "id": "sql_rs_64_02",
+                "activityType": "pratica",
+                "text": "Configurar roles/permissões e testar os acessos previstos"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_65",
+            "title": "Biblioteca: validação final",
+            "dayOffset": 88,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "90 minutos",
+            "activityType": "pratica",
+            "block": "Projeto Final",
+            "description": "Nível 4 · Projeto Final. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_65_01",
+                "activityType": "pratica",
+                "text": "Validar modelagem, integridade, CRUD, consultas e recursos avançados"
+              },
+              {
+                "id": "sql_rs_65_02",
+                "activityType": "pratica",
+                "text": "Concluir a atividade do Projeto Final e registrar a revisão final"
+              },
+              {
+                "id": "sql_rs_65_03",
+                "activityType": "revisar",
+                "text": "Explicar o projeto e revisar somente falhas encontradas"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "weekNum": 14,
+        "startOffset": 91,
+        "dateRange": "Semana 14 · segunda a sexta · manhã",
+        "isReviewWeek": false,
+        "topics": [
+          {
+            "id": "sql_rs_session_66",
+            "title": "Big Data e integração com API",
+            "dayOffset": 91,
+            "schedule": "Segunda · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Tópicos Especiais para o Mercado",
+            "description": "Nível 4 · Tópicos Especiais para o Mercado. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão. Na trilha, a Rocketseat demonstra com Node.js. Foque no conceito; posteriormente ele será aplicado em Java/Spring.",
+            "subtopics": [
+              {
+                "id": "sql_rs_66_01",
+                "activityType": "estudar",
+                "text": "Big Data relacionado a bancos relacionais"
+              },
+              {
+                "id": "sql_rs_66_02",
+                "activityType": "estudar",
+                "text": "Integração banco + API usando Node.js — conceito transferível"
+              },
+              {
+                "id": "sql_rs_66_03",
+                "activityType": "pratica",
+                "text": "Acompanhar a demonstração e identificar o caminho da requisição até o banco"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_67",
+            "title": "CRUD por API — conceito transferível",
+            "dayOffset": 92,
+            "schedule": "Terça · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Tópicos Especiais para o Mercado",
+            "description": "Nível 4 · Tópicos Especiais para o Mercado. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão. Na trilha, a Rocketseat demonstra com Node.js. Foque no conceito; posteriormente ele será aplicado em Java/Spring.",
+            "subtopics": [
+              {
+                "id": "sql_rs_67_01",
+                "activityType": "estudar",
+                "text": "Conceitos de CRUD por API; Node.js apenas no contexto da formação"
+              },
+              {
+                "id": "sql_rs_67_02",
+                "activityType": "pratica",
+                "text": "Reproduzir o exemplo do curso e relacionar as operações da API ao SQL"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_68",
+            "title": "NoSQL e MongoDB",
+            "dayOffset": 93,
+            "schedule": "Quarta · manhã",
+            "estimatedTime": "60 minutos",
+            "activityType": "estudar",
+            "block": "Tópicos Especiais para o Mercado",
+            "description": "Nível 4 · Tópicos Especiais para o Mercado. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_68_01",
+                "activityType": "estudar",
+                "text": "Bancos NoSQL e MongoDB"
+              },
+              {
+                "id": "sql_rs_68_02",
+                "activityType": "pratica",
+                "text": "Comparar o modelo de documentos apresentado com um modelo relacional"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_69",
+            "title": "JSON, tipos complexos e produção",
+            "dayOffset": 94,
+            "schedule": "Quinta · manhã",
+            "estimatedTime": "75 minutos",
+            "activityType": "estudar",
+            "block": "Tópicos Especiais para o Mercado",
+            "description": "Nível 4 · Tópicos Especiais para o Mercado. Assista às aulas correspondentes na Rocketseat e execute os exemplos. Inclua a prática abaixo dentro do tempo da sessão.",
+            "subtopics": [
+              {
+                "id": "sql_rs_69_01",
+                "activityType": "estudar",
+                "text": "JSON e tipos complexos no PostgreSQL"
+              },
+              {
+                "id": "sql_rs_69_02",
+                "activityType": "estudar",
+                "text": "Monitoramento de bancos em produção e manutenção de banco"
+              },
+              {
+                "id": "sql_rs_69_03",
+                "activityType": "pratica",
+                "text": "Executar um exemplo de JSON e registrar os cuidados de monitoramento apresentados"
+              }
+            ]
+          },
+          {
+            "id": "sql_rs_session_70",
+            "title": "Tendências e conclusão da jornada",
+            "dayOffset": 95,
+            "schedule": "Sexta · manhã",
+            "estimatedTime": "60 minutos",
+            "activityType": "revisar",
+            "block": "Tópicos Especiais para o Mercado",
+            "description": "Nível 4 · Tópicos Especiais para o Mercado. Sessão de consolidação: pratique e revise apenas os pontos de dúvida.",
+            "subtopics": [
+              {
+                "id": "sql_rs_70_01",
+                "activityType": "estudar",
+                "text": "Tendências e evolução dos bancos de dados"
+              },
+              {
+                "id": "sql_rs_70_02",
+                "activityType": "pratica",
+                "text": "Atividade/quiz de Tópicos Especiais para o Mercado e Quiz - Projeto e Aplicações Práticas"
+              },
+              {
+                "id": "sql_rs_70_03",
+                "activityType": "revisar",
+                "text": "Revisar os erros e registrar próximos passos de aplicação em Backend Java"
               }
             ]
           }
@@ -2169,7 +3845,9 @@ function updateHeader(tid) {
     const dynDates = getEffectiveTrackDates(tid);
     const startLabel = dynDates ? dynDates.startDate : tr.startDate;
     const endLabel   = dynDates ? dynDates.endDate   : tr.endDate;
-    sub.textContent=`${tr.emoji} Ordem #${tr.order} \u00b7 ${tr.totalWeeks} semanas \u00b7 ${tr.frequency}`;
+    sub.textContent=tid==='sql'
+      ? `${tr.emoji} ${tr.title} · ${tr.totalWeeks} semanas · ${trackTotal(tid)} subtópicos · manhã · Rocketseat`
+      : `${tr.emoji} Ordem #${tr.order} \u00b7 ${tr.totalWeeks} semanas \u00b7 ${tr.frequency}`;
     const badges=badge('In\u00edcio',startLabel,'text-cyan-400')+badge('T\u00e9rmino',endLabel,'text-emerald-400');
     bdg.innerHTML=badges;
     if(methodBtn) bdg.appendChild(methodBtn);
@@ -2180,6 +3858,8 @@ function badge(label,val,cls){return `<div class="bg-[#0f172a] border border-sla
 // -- Render Principal ---------------------------------------------------------
 function renderMain(){
   updateProgress();
+  const sqlEntry=document.getElementById('sqlEntryDate');
+  if(sqlEntry) sqlEntry.textContent=getHubStartDate() ? 'Seg '+getEffectiveTrackDates('sql').startDate : 'Segunda da semana 1';
   const mc=document.getElementById('mainContainer');
   mc.innerHTML='';
   if(activeTab==='ingles') renderIngles(mc);
@@ -2296,11 +3976,46 @@ function selWeek(i){curW=i;curD=null;renderMain();}
 function selDay(k){curD=k;renderMain();}
 function qToggle(id){setDone(id,!isDone(id));renderMain();}
 
+// SQL usa deslocamentos explícitos, sem interpretar datas antigas em texto.
+function formatTrackWeek(tr, week) {
+  if(tr.id!=='sql') return recalcDateString(week.dateRange);
+  const first=hubDateFromOffset(week.startOffset);
+  const last=hubDateFromOffset(week.startOffset+4);
+  return first ? `${fmtDDMM(first)} a ${fmtDDMM(last)} · manhã` : week.dateRange;
+}
+function formatTopicSchedule(tr, topic) {
+  if(tr.id!=='sql') return recalcDateString(topic.schedule||'');
+  const date=hubDateFromOffset(topic.dayOffset);
+  return date ? `${DIAS_PT_FULL[date.getDay()]}, ${fmtDDMM(date)} · manhã` : topic.schedule;
+}
+function renderSqlOverview(tr) {
+  const dates=getEffectiveTrackDates('sql');
+  const period=dates ? `${dates.startDate} → ${dates.endDate}` : 'Período definido ao iniciar o Hub';
+  const sessions=tr.weeks.reduce((sum,w)=>sum+w.topics.length,0);
+  return `<div class="bg-[#1e293b] border border-cyan-500/30 rounded-xl p-4">
+    <h2 class="text-lg font-bold text-cyan-300">${tr.emoji} ${tr.title}</h2>
+    <p class="text-sm font-bold text-slate-200 mt-1">${tr.source}</p>
+    <p class="text-xs text-slate-400 mt-1">${tr.courseTitle}</p>
+    <p class="text-[11px] mono text-cyan-300 mt-3">${tr.totalWeeks} semanas · ${sessions} sessões · ${trackTotal('sql')} subtópicos</p>
+    <p class="text-[11px] mono text-slate-400 mt-1">${period} · ${tr.frequency}</p>
+    <p class="text-xs text-slate-400 leading-relaxed mt-3">Reserve um bloco da manhã para SQL, separado do Inglês. Java Core/DSA/Testes seguem a partir das 13h; 19h–22h ficam para a Escola da Nuvem — Developer. Tempos estimados incluem aulas, comandos e prática curta. Retome pendências na ordem, sem dobrar a carga.</p>
+    <p class="text-xs text-slate-400 leading-relaxed mt-2">Assista → execute os comandos → escreva algumas queries → revise erros → Feynman curto. Sábado: buffer, revisão leve ou descanso. Complementos SafeWallet são opcionais e não entram no progresso.</p>
+    <div class="flex flex-wrap gap-3 text-[11px] text-cyan-300 mt-3">
+      <a href="${tr.sourceUrl}" target="_blank" rel="noopener noreferrer" class="underline">1ª Rocketseat · fonte principal</a>
+      <a href="https://sqlzoo.net/wiki/SQL_Tutorial" target="_blank" rel="noopener noreferrer" class="underline">2ª SQLZoo · complemento</a>
+      <a href="https://www.hackerrank.com/domains/sql" target="_blank" rel="noopener noreferrer" class="underline">3ª HackerRank SQL · exercícios</a>
+      <a href="https://www.postgresql.org/docs/" target="_blank" rel="noopener noreferrer" class="underline">4ª PostgreSQL Documentation · consulta opcional</a>
+    </div>
+    <p class="text-[10px] text-slate-500 leading-relaxed mt-3">Sessões agrupam conceitos do material e da descrição da jornada; seus títulos não representam nomes oficiais de vídeos. A descrição pública de Otimização e Performance repete Recursos Avançados do Postgres: siga a ordem real da plataforma nesses blocos. Progresso SQL anterior fica armazenado, mas não conclui automaticamente a nova jornada.</p>
+  </div>`;
+}
+
 // -- Novas Trilhas ------------------------------------------------------------
 function renderTrack(container, tid) {
   const tr=NEW_TRACKS[tid];
   container.innerHTML=`
   <div class="lg:col-span-3 flex flex-col gap-4">
+    ${tid==='sql'?renderSqlOverview(tr):''}
     <div class="bg-[#1e293b] border border-slate-700/50 rounded-xl p-3">
       <label class="text-[9px] text-slate-400 font-bold tracking-wider uppercase mono block mb-2 px-1">Selecione a Semana</label>
       <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1" id="newWeekPills"></div>
@@ -2344,7 +4059,7 @@ function renderNewWeekHeader(tr){
   const titleEl=document.getElementById('nwTitle');
   titleEl.textContent=isRev?'\uD83D\uDD04 Semana '+week.weekNum+' \u2014 Revis\u00e3o':'Semana '+week.weekNum;
   if(isRev) titleEl.classList.add('review-week-header'); else titleEl.classList.remove('review-week-header');
-  document.getElementById('nwDate').textContent=recalcDateString(week.dateRange);
+  document.getElementById('nwDate').textContent=formatTrackWeek(tr,week);
   const revBadge=isRev?'<span class="badge-at badge-revisar" style="margin-left:6px">\uD83D\uDD04 Semana de Revis\u00e3o</span>':'';
   document.getElementById('nwBadges').innerHTML='<span class="text-[10px] mono px-2 py-1 rounded bg-[#0f172a] text-slate-300 border border-slate-600 font-bold">'+week.topics.length+' assunto(s)</span>'+revBadge;
 }
@@ -2371,7 +4086,7 @@ function renderNewTopics(tr){
         </div>
         ${priHtml}
       </div>
-      <div class="text-[10px] mono text-slate-500 mb-1">${recalcDateString(t.schedule||'')}</div>
+      <div class="text-[10px] mono text-slate-500 mb-1">${formatTopicSchedule(tr,t)}</div>
       <h3 class="lesson-title text-base sm:text-lg font-bold text-slate-100 leading-snug mb-2">${t.title}</h3>
       <p class="text-xs text-slate-400 mb-4 leading-relaxed">${t.description}</p>
       <div class="mt-auto">
@@ -2403,7 +4118,7 @@ function renderNewWeekMap(tr){
     const pct=tot>0?Math.round(done/tot*100):0; const isActive=i===curW; const allDone=done===tot&&tot>0;
     const row=document.createElement('div'); row.className=`flex items-center gap-2 p-1.5 rounded-lg cursor-pointer transition-all ${isActive?'bg-[#0f172a]/80 border border-cyan-500/25':'hover:bg-[#0f172a]/40'}`;
     row.onclick=()=>{curW=i;renderMain();};
-    row.innerHTML=`<div class="text-[10px] mono font-bold w-6 shrink-0 ${isActive?'text-cyan-400':allDone?'text-emerald-400':'text-slate-500'}">S${w.weekNum}</div><div class="flex-1 min-w-0"><div class="text-[9px] text-slate-400 truncate">${recalcDateString(w.dateRange)}</div><div class="flex items-center gap-1 mt-0.5"><div class="flex-1 bg-slate-800 h-1 rounded-full overflow-hidden"><div class="h-full rounded-full transition-all" style="width:${pct}%;background:${allDone?'#10b981':tr.color}"></div></div><span class="text-[8px] mono text-slate-500 shrink-0">${done}/${tot}</span></div></div>`;
+    row.innerHTML=`<div class="text-[10px] mono font-bold w-6 shrink-0 ${isActive?'text-cyan-400':allDone?'text-emerald-400':'text-slate-500'}">S${w.weekNum}</div><div class="flex-1 min-w-0"><div class="text-[9px] text-slate-400 truncate">${formatTrackWeek(tr,w)}</div><div class="flex items-center gap-1 mt-0.5"><div class="flex-1 bg-slate-800 h-1 rounded-full overflow-hidden"><div class="h-full rounded-full transition-all" style="width:${pct}%;background:${allDone?'#10b981':tr.color}"></div></div><span class="text-[8px] mono text-slate-500 shrink-0">${done}/${tot}</span></div></div>`;
     el.appendChild(row);
   });
 }
@@ -2507,13 +4222,19 @@ function openTrackModal(trackId, topicId){
   curLid=topicId;
   set('m-badge',tr.title,tr.color);
   document.getElementById('m-title').textContent=topic.title;
-  document.getElementById('m-schedule').textContent=recalcDateString(topic.schedule||'');
+  document.getElementById('m-schedule').textContent=formatTopicSchedule(tr,topic);
   document.getElementById('m-time').textContent=`\u23f1 ${topic.estimatedTime}`;
   document.getElementById('m-ingles-stats').innerHTML='';
   document.getElementById('m-ingles-day').classList.add('hidden');
   const why=document.getElementById('m-why');
   if(tr.whyStudy){why.innerHTML=`<span class="text-[9px] font-bold uppercase tracking-wider text-slate-400 mono block mb-1.5">&#128161; Por que estudar esta trilha</span>${tr.whyStudy}`;why.classList.remove('hidden');}
   else why.classList.add('hidden');
+  if(trackId==='sql') {
+    const sessionInfo=document.createElement('p');
+    sessionInfo.className='mt-2 text-cyan-300';
+    sessionInfo.textContent=topic.description;
+    why.appendChild(sessionInfo);
+  }
   const sl=document.getElementById('m-subtopics-list'); sl.innerHTML='';
   if(topic.subtopics&&topic.subtopics.length){
     document.getElementById('m-subtopics').classList.remove('hidden');
@@ -2661,7 +4382,7 @@ const TRACK_OFFSETS = {
   javacore:     { startOff: 0,  totalDays: 41 },  // 03/08 → 13/09 = 41 dias
   dsa:          { startOff: 1,  totalDays: 82 },  // 04/08 → 25/10 = 82 dias
   testes:       { startOff: 4,  totalDays: 79 },  // 07/08 → 25/10 = 79 dias
-  sql:          { startOff: 5,  totalDays: 77 },  // 08/08 → 24/10 = 77 dias
+  sql:          { startOff: 0,  totalDays: NEW_TRACKS.sql.weeks.at(-1).topics.at(-1).dayOffset }, // Segunda da S1 até sexta da última semana
   storytelling: { startOff: 47, totalDays: 35 },  // 19/09 → 24/10 = 35 dias
 };
 
@@ -2861,10 +4582,9 @@ function renderIniciarBanner(container) {
     const dates = calcHubDates(startISO);
     const [y,m,d] = startISO.split('-');
     const fmtStart = `${d}/${m}/${y}`;
-    // "Término geral" = data de fim da última trilha (maior endDate entre todas)
-    // storytelling e sql terminam por último (~77-82 dias após início)
-    // Usamos dsa.endDate ou testes.endDate como referência (ambos terminam ~mesmo dia)
-    const hubEnd = dates.dsa.endDate; // DSA é a trilha com maior duração
+    // Maior deslocamento entre as trilhas que acompanham o início do Hub.
+    const lastOffset = Math.max(...Object.values(TRACK_OFFSETS).map(o=>o.startOff+o.totalDays));
+    const hubEnd = fmtDateBR(addDaysToISO(startISO,lastOffset));
     banner.className = 'lg:col-span-4 bg-gradient-to-r from-emerald-900/20 to-teal-900/15 border border-emerald-500/25 rounded-xl p-3 flex flex-col sm:flex-row items-center justify-between gap-2 fadein';
     banner.innerHTML = `
       <div class="flex items-center gap-2 flex-wrap gap-y-1">
