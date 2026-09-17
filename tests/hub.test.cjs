@@ -29,6 +29,7 @@ function context(source = code) {
 const {local,nodes,run} = context();
 const tracks = JSON.parse(run('JSON.stringify(NEW_TRACKS)'));
 const english = JSON.parse(run('JSON.stringify(ALL)'));
+const routine = JSON.parse(run('JSON.stringify(WEEKLY_ROUTINE)'));
 assert.equal(english.length,225,'English must keep 225 lessons');
 assert.equal(run('SKEY'),'hubGabrielV3');
 assert.equal(run('HUB_START_KEY'),'hub_startedAt');
@@ -48,6 +49,19 @@ assert.equal(tracks.sql.weeks.length,13);
 assert.equal(tracks.testes.weeks.length,11);
 assert.equal(tracks.systemdesign.weeks.length,8);
 assert.equal(tracks.mockinterview.weeks.length,6);
+assert.equal(routine.length,7,'Weekly routine has Monday through Sunday');
+assert.deepEqual([...routine.map(day=>day.day)].sort(),[0,1,2,3,4,5,6]);
+assert(routine.every(day=>day.items.some(item=>item.time==='11:00–12:00'&&item.title==='Almoço')),'Lunch every day');
+for(const day of routine.filter(day=>day.day>=1&&day.day<=5)) {
+  assert(day.items.some(item=>item.track==='sql'),'SQL on weekday mornings');
+  assert(day.items.some(item=>item.title.includes('Escola da Nuvem')),'School on weekdays');
+}
+assert(routine.flatMap(day=>day.items).filter(item=>item.track).every(item=>item.track==='ingles'||tracks[item.track]),'Routine links valid tracks');
+assert(!routine.flatMap(day=>day.items).some(item=>item.id),'Routine must not create progress IDs');
+const progressBeforeRoutine = local.get('hubGabrielV3');
+run('renderWeeklyRoutine()');
+assert.equal(local.get('hubGabrielV3'),progressBeforeRoutine,'Rendering routine does not alter progress');
+assert(nodes.get('weeklyRoutineGrid').innerHTML.includes('HOJE'),'Current day is highlighted');
 
 for (const track of Object.values(tracks)) {
   assert.equal(track.totalWeeks,track.weeks.length,`${track.id} totalWeeks`);

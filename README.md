@@ -23,6 +23,10 @@ O SafeWallet e o laboratorio principal. A sequencia recomendada e: conceito → 
 7. **System Design:** oito drills semanais para problemas realistas de backend.
 8. **Mock Interview:** rotacao curta de segunda a sabado usando ChatGPT por voz, sem integracao de API.
 
+## Minha Semana
+
+O painel semanal fica no topo do Hub e organiza segunda a domingo por energia, horario e tipo de atividade. Seus cards abrem as trilhas existentes, mas nao criam IDs nem progresso duplicado. Almoco, pausas, Escola da Nuvem, buffers, candidaturas e lazer aparecem como partes explicitas de uma rotina sustentavel.
+
 ## Filosofia de estudo
 
 Estudar → implementar → explicar → ser questionado → corrigir → repetir → demonstrar em projeto real.
