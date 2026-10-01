@@ -905,22 +905,22 @@ const NEW_TRACKS = {
             "priority": "🔥 FASE 1 — Alta probabilidade",
             "block": "Arrays & Hashing",
             "activityType": "estudar",
-            "description": "O HashMap é a estrutura mais usada em problemas de entrevista. Entender o O(1) de lookup transforma soluções O(N²) em O(N).",
+            "description": "Em problemas como Two Sum e Contains Duplicate, substituir buscas repetidas por consultas médias O(1) em estruturas hash pode reduzir uma solução quadrática para uma solução linear média.",
             "subtopics": [
               {
                 "id": "dsa_2_1_1",
                 "activityType": "pratica",
-                "text": "Two Sum — entenda o porquê do O(1): você guarda o complemento no mapa, não varre o array duas vezes"
+                "text": "Two Sum — calcular e procurar o complemento no HashMap; guardar cada número já visto associado ao seu índice"
               },
               {
                 "id": "dsa_2_1_2",
                 "activityType": "pratica",
-                "text": "Contains Duplicate — verificar em O(1) se elemento já foi visto"
+                "text": "Contains Duplicate — usar HashSet para verificar em O(1) médio se o elemento já foi visto, percorrendo o array uma vez"
               },
               {
                 "id": "dsa_2_1_3",
                 "activityType": "pratica",
-                "text": "Group Anagrams — usar hashCode da string ordenada como chave do agrupamento"
+                "text": "Group Anagrams — ordenar caracteres, criar uma String canônica e usá-la como chave; o HashMap usa hashCode() internamente"
               }
             ]
           },
@@ -932,7 +932,7 @@ const NEW_TRACKS = {
             "priority": "🔥 FASE 1 — Alta probabilidade",
             "block": "Arrays & Hashing",
             "activityType": "estudar",
-            "description": "Não se trata de decorar tabela — é saber deduzir olhando para o código. Entrevistadores perguntam 'qual a complexidade da sua solução?' logo depois que você termina.",
+            "description": "Big O mede como o custo cresce quando a entrada cresce. Não é cronômetro nem tabela para decorar.",
             "subtopics": [
               {
                 "id": "dsa_2_2_1",
@@ -955,7 +955,7 @@ const NEW_TRACKS = {
         "topics": [
           {
             "id": "dsa_sem2",
-            "title": "Consolidação: HashMap + 3 problemas extras",
+            "title": "Consolidação: HashMap · Ransom Note + Isomorphic Strings",
             "schedule": "Ter 11/08 + Qui 13/08 às 13h",
             "estimatedTime": "2 sessões",
             "priority": "🔥 FASE 1",
@@ -3882,6 +3882,101 @@ NEW_TRACKS.dsa.weeks.forEach((week,index)=>week.topics.forEach(topic=>{
   if(!topic.priority) topic.priority = index < 6 ? 'P0 · essencial' : index < 9 ? 'P1 · util' : index < 11 ? 'P2 · aprofundamento' : 'Opcional · so depois';
 }));
 
+// -- V4.1: Java prepara, DSA aplica, Big O analisa ---------------------------
+// IDs anteriores continuam intactos. A ponte usa IDs de subtópicos porque são
+// eles que representam conclusão no progresso/localStorage existente.
+const JAVA_CI_WEEK = {
+  weekNum:0,dateRange:'27/07 a 02/08',isReviewWeek:false,
+  topics:[
+    {id:'jc_ci_fundamentos',title:'Java para Coding Interviews · execução essencial',schedule:'Segunda · antes do primeiro bloco DSA',estimatedTime:'1 bloco (2h)',priority:'P0',activityType:'estudar',
+      description:'Fluência mínima para ler uma assinatura, percorrer arrays e Strings e transformar a estratégia em código sem aprender sintaxe e algoritmo ao mesmo tempo.',
+      usedBy:['Two Sum','Contains Duplicate','Group Anagrams','Two Pointers','Binary Search'],subtopics:[
+        {id:'jc_ci_arrays_indices',activityType:'estudar',text:'Arrays, índices, length, acesso e atualização; diferença inicial entre array e Collection'},
+        {id:'jc_ci_strings_chars',activityType:'estudar',text:'String e imutabilidade básica; char, charAt(), char[], toCharArray() e Arrays.sort()'},
+        {id:'jc_ci_fluxo_metodos',activityType:'pratica',text:'for, while, for-each, condições, variáveis locais, métodos, parâmetros, retorno e leitura de assinatura simples'}]},
+    {id:'jc_ci_collections',title:'Java para Coding Interviews · Collections essenciais',schedule:'Quarta · antes de Group Anagrams',estimatedTime:'1 bloco (2h)',priority:'P0',activityType:'estudar',
+      description:'Usar as estruturas pelo que guardam e pelas operações necessárias, com Generics apenas no nível exigido pelos primeiros problemas.',
+      usedBy:['Two Sum','Contains Duplicate','Group Anagrams','Ransom Note','Isomorphic Strings'],subtopics:[
+        {id:'jc_ci_list_arraylist',activityType:'estudar',text:'List e ArrayList: add, get, acesso e atualização básicos'},
+        {id:'jc_ci_map_hashmap',activityType:'estudar',text:'Map e HashMap: chave x valor, get, put e containsKey'},
+        {id:'jc_ci_set_hashset',activityType:'estudar',text:'Set e HashSet: add e contains para registrar itens já vistos'},
+        {id:'jc_ci_generics_basico',activityType:'estudar',text:'Ler List<String>, Set<Integer>, Map<String, Integer> e Map<String, List<String>>'},
+        {id:'jc_ci_hashing_checkpoint',activityType:'pratica',text:'Checkpoint: explicar ==, equals(), contrato equals/hashCode, colisão e por que a chave real não é o hashCode retornado'}]}
+  ]
+};
+NEW_TRACKS.javacore.weeks.unshift(JAVA_CI_WEEK);
+NEW_TRACKS.javacore.totalWeeks = NEW_TRACKS.javacore.weeks.length;
+NEW_TRACKS.javacore.startDate = '27/07/2026';
+
+const JAVA_CI_REVIEWS = [
+  {week:3,topic:{id:'jc_ci_two_pointers',title:'Checkpoint Java · índices e invariantes',schedule:'Imediatamente antes de Two Pointers',estimatedTime:'20 minutos',priority:'P0',activityType:'revisar',description:'Revisão curta de left/right, while, condição de parada, array ordenado, invariante e off-by-one.',usedBy:['Valid Palindrome','Merge Sorted Array'],subtopics:[{id:'jc_ci_two_pointers_check',activityType:'pratica',text:'Reconstruir um loop left/right e explicar condição de parada, array ordenado, invariante e off-by-one'}]}},
+  {week:4,topic:{id:'jc_ci_deque',title:'Checkpoint Java · Deque / ArrayDeque',schedule:'Imediatamente antes de Stack / Queue',estimatedTime:'20–30 minutos',priority:'P0',activityType:'revisar',description:'Revisar LIFO, FIFO e operações nas duas extremidades usando a API moderna.',usedBy:['Valid Parentheses','Min Stack'],subtopics:[{id:'jc_ci_deque_check',activityType:'pratica',text:'LIFO, FIFO, Deque, ArrayDeque, operações equivalentes a push/pop/peek, operações nas extremidades e por que não iniciar pelo Stack legado'}]}},
+  {week:5,topic:{id:'jc_ci_refs_nodes',title:'Checkpoint Java · referências e nós',schedule:'Imediatamente antes de Linked List',estimatedTime:'20–30 minutos',priority:'P0',activityType:'revisar',description:'Revisar o modelo de referências exigido para alterar e percorrer uma lista ligada.',usedBy:['Reverse Linked List','Linked List Cycle'],subtopics:[{id:'jc_ci_refs_nodes_check',activityType:'pratica',text:'Objeto, referência, null, nó, next, alteração de referências, percurso e por que percorrer não equivale a acesso por índice'}]}},
+  {week:6,topic:{id:'jc_ci_binary_search',title:'Checkpoint Java · limites da busca binária',schedule:'Imediatamente antes de Binary Search',estimatedTime:'20 minutos',priority:'P0',activityType:'revisar',description:'Consolidar array ordenado, left, right, mid, while, condição de parada e limites.',usedBy:['Busca clássica','Search in Rotated Sorted Array'],subtopics:[{id:'jc_ci_binary_search_check',activityType:'pratica',text:'Implementar o esqueleto com mid seguro e testar condições de parada e casos de off-by-one'}]}},
+  {week:7,maintenance:true,topic:{id:'jc_ci_window',title:'Checkpoint Java · estado de janela',schedule:'Micro-revisão antes de Sliding Window',estimatedTime:'20–30 minutos',priority:'P1',activityType:'revisar',description:'Java Core · Manutenção para DSA: revisar apenas o estado necessário para expandir e contrair a janela.',usedBy:['Sliding Window','Longest Substring','Best Time to Buy and Sell Stock'],subtopics:[{id:'jc_ci_window_check',activityType:'pratica',text:'Substring/subarray, left/right, expandir, contrair, estado da janela e Map/Set quando necessário'}]}},
+  {week:9,maintenance:true,topic:{id:'jc_ci_graphs',title:'Checkpoint Java · matriz, visitados e fila',schedule:'Micro-revisão antes de Graphs / Grid',estimatedTime:'30 minutos',priority:'P1',activityType:'revisar',description:'Java Core · Manutenção para DSA: preparar travessias em matriz e controle de visitados.',usedBy:['BFS','DFS','Number of Islands','Flood Fill'],subtopics:[{id:'jc_ci_graphs_check',activityType:'pratica',text:'Matriz 2D, linhas, colunas, vizinhos, List/Map, Set de visitados e Queue/Deque'}]}},
+  {week:11,maintenance:true,topic:{id:'jc_ci_recursion_trees',title:'Checkpoint Java · recursão e árvores',schedule:'Micro-revisão antes de Trees / Recursion',estimatedTime:'30 minutos',priority:'P1',activityType:'revisar',description:'Java Core · Manutenção para DSA: aproximar o modelo recursivo do uso em árvores.',usedBy:['Traversals','Validate BST'],subtopics:[{id:'jc_ci_recursion_check',activityType:'pratica',text:'Nó, referência, caso base, chamada recursiva, retorno e call stack em nível conceitual'}]}}
+];
+JAVA_CI_REVIEWS.forEach(item=>{
+  let week=NEW_TRACKS.javacore.weeks.find(w=>w.weekNum===item.week);
+  if(!week){week={weekNum:item.week,dateRange:`Semana ${item.week} · manutenção para DSA`,isReviewWeek:true,maintenance:true,topics:[]};NEW_TRACKS.javacore.weeks.push(week);}
+  week.topics.unshift(item.topic);
+});
+NEW_TRACKS.javacore.weeks.sort((a,b)=>a.weekNum-b.weekNum);
+NEW_TRACKS.javacore.totalWeeks=NEW_TRACKS.javacore.weeks.length;
+NEW_TRACKS.javacore.endDate='18/10/2026';
+
+const DSA_PREREQUISITES = {
+  dsa_2_1_1:['jc_ci_arrays_indices','jc_ci_fluxo_metodos','jc_ci_map_hashmap','jc_ci_generics_basico'],
+  dsa_2_1_2:['jc_ci_arrays_indices','jc_ci_fluxo_metodos','jc_ci_set_hashset','jc_ci_generics_basico','jc_ci_hashing_checkpoint'],
+  dsa_2_1_3:['jc_ci_strings_chars','jc_ci_fluxo_metodos','jc_ci_list_arraylist','jc_ci_map_hashmap','jc_ci_generics_basico','jc_ci_hashing_checkpoint'],
+  dsa_sem2_1:['jc_ci_strings_chars','jc_ci_fluxo_metodos','jc_ci_map_hashmap','jc_ci_generics_basico'],
+  dsa_sem2_2:['jc_ci_strings_chars','jc_ci_fluxo_metodos','jc_ci_map_hashmap','jc_ci_generics_basico','jc_ci_hashing_checkpoint'],
+  dsa_2_3:['jc_ci_arrays_indices','jc_ci_strings_chars','jc_ci_fluxo_metodos','jc_ci_two_pointers_check'],dsa_sem4:['jc_ci_arrays_indices','jc_ci_fluxo_metodos','jc_ci_two_pointers_check'],
+  dsa_2_4:['jc_ci_fluxo_metodos','jc_ci_deque_check'],dsa_2_5:['jc_ci_fluxo_metodos','jc_ci_refs_nodes_check'],dsa_2_6:['jc_ci_arrays_indices','jc_ci_fluxo_metodos','jc_ci_binary_search_check'],
+  dsa_fim_f1:['jc_ci_map_hashmap','jc_ci_two_pointers_check','jc_ci_deque_check','jc_ci_refs_nodes_check','jc_ci_binary_search_check'],
+  dsa_2_7:['jc_ci_strings_chars','jc_ci_map_hashmap','jc_ci_set_hashset','jc_ci_two_pointers_check','jc_ci_window_check'],dsa_sem8:['jc_ci_strings_chars','jc_ci_two_pointers_check','jc_ci_window_check'],
+  dsa_2_8:['jc_ci_list_arraylist','jc_ci_map_hashmap','jc_ci_set_hashset','jc_ci_deque_check','jc_ci_graphs_check'],dsa_sem10:['jc_ci_set_hashset','jc_ci_deque_check','jc_ci_graphs_check'],
+  dsa_2_9_10:['jc_ci_refs_nodes_check','jc_ci_recursion_check'],dsa_fim:['jc_ci_map_hashmap','jc_ci_deque_check','jc_ci_graphs_check','jc_ci_recursion_check']
+};
+NEW_TRACKS.dsa.weeks.forEach(w=>w.topics.forEach(t=>{
+  if(DSA_PREREQUISITES[t.id]) (t.subtopics||[]).forEach(st=>st.javaPrerequisites=[...DSA_PREREQUISITES[t.id]]);
+  (t.subtopics||[]).forEach(st=>{if(DSA_PREREQUISITES[st.id])st.javaPrerequisites=[...DSA_PREREQUISITES[st.id]];});
+}));
+const arraysHashingTopic=NEW_TRACKS.dsa.weeks.flatMap(w=>w.topics).find(t=>t.id==='dsa_2_1');
+const groupAnagrams=arraysHashingTopic?.subtopics.find(s=>s.id==='dsa_2_1_3');
+if(groupAnagrams) groupAnagrams.text='Group Anagrams — ordenar os caracteres, construir uma String canônica e usar essa String como chave do HashMap, agrupando as palavras originais em List<String>. O HashMap usa hashCode() internamente.';
+if(arraysHashingTopic){
+  arraysHashingTopic.description='Em problemas como Two Sum e Contains Duplicate, substituir buscas repetidas por consultas médias O(1) em estruturas hash pode reduzir uma solução quadrática para uma solução linear média.';
+  const twoSum=arraysHashingTopic.subtopics.find(s=>s.id==='dsa_2_1_1');
+  const duplicate=arraysHashingTopic.subtopics.find(s=>s.id==='dsa_2_1_2');
+  if(twoSum)twoSum.text='Two Sum — calcular e procurar o complemento no HashMap; guardar cada número já visto associado ao seu índice, evitando uma segunda varredura. Modelo: número visto → índice; tempo médio O(n), espaço O(n).';
+  if(duplicate)duplicate.text='Contains Duplicate — usar HashSet para verificar em O(1) médio se o elemento já foi visto, percorrendo o array uma vez; tempo médio O(n), espaço O(n).';
+}
+const bigOTopic=NEW_TRACKS.dsa.weeks.flatMap(w=>w.topics).find(t=>t.id==='dsa_2_2');
+if(bigOTopic){
+  bigOTopic.description='Big O mede como o custo cresce quando a entrada cresce; não é cronômetro nem tabela para decorar. Defina n, identifique percursos e custos internos, estruturas auxiliares, termo dominante e declare hipóteses.';
+  bigOTopic.subtopics[0].text='Tempo: definir n → identificar percursos → observar o custo dentro deles → manter o termo dominante → declarar hipóteses';
+  bigOTopic.subtopics[1].text='Espaço: identificar estruturas auxiliares. Em Group Anagrams, n = palavras e k = tamanho médio/máximo; por ordenação, tempo O(n · k log k) e limite didático de espaço O(nk), assumindo sort O(k log k)';
+}
+const hashConsolidation=NEW_TRACKS.dsa.weeks.flatMap(w=>w.topics).find(t=>t.id==='dsa_sem2');
+if(hashConsolidation)hashConsolidation.title='Consolidação: HashMap · Ransom Note + Isomorphic Strings';
+const arraysHashingCheckpoint={id:'dsa_cp_arrays_hashing_bigo',title:'Checkpoint Arrays & Hashing + Big O',schedule:'Após Group Anagrams · concluir antes de Ransom Note',estimatedTime:'4h30 líquidas · sessões de 30 min',priority:'P0 · obrigatório',block:'Arrays & Hashing',activityType:'revisar',checkpoint:true,description:'Consolidar as três soluções, deduzir tempo e espaço e reconstruir o raciocínio antes de avançar para Ransom Note.',subtopics:[
+  {id:'dsa_cp_ah_bigo_review',activityType:'revisar',text:'Revisão conectada: Two Sum, Contains Duplicate e Group Anagrams'},
+  {id:'dsa_cp_ah_bigo_structure',activityType:'revisar',text:'Escolher a estrutura pela informação que precisa ser guardada'},
+  {id:'dsa_cp_ah_bigo_classes',activityType:'revisar',text:'Big O: O(1), O(n), O(n²), O(log n) e O(n log n)'},
+  {id:'dsa_cp_ah_bigo_space',activityType:'revisar',text:'Diferenciar complexidade de tempo e espaço'},
+  {id:'dsa_cp_ah_bigo_twosum',activityType:'pratica',text:'Deduzir o Big O de Two Sum'},
+  {id:'dsa_cp_ah_bigo_duplicate',activityType:'pratica',text:'Deduzir o Big O de Contains Duplicate'},
+  {id:'dsa_cp_ah_bigo_anagrams',activityType:'pratica',text:'Deduzir Group Anagrams: n palavras, k caracteres; tempo O(n · k log k) e espaço didático O(nk)'},
+  {id:'dsa_cp_ah_bigo_rebuild',activityType:'pratica',text:'Reconstruir as três soluções sem copiar'},
+  {id:'dsa_cp_ah_bigo_interview',activityType:'pratica',text:'Explicar cada solução como em uma entrevista'},
+  {id:'dsa_cp_ah_bigo_final',activityType:'pratica',text:'Checkpoint final: estrutura + código + testes + tempo + espaço'}
+]};
+const dsaWeek1=NEW_TRACKS.dsa.weeks.find(w=>w.weekNum===1);
+if(dsaWeek1&&!dsaWeek1.topics.some(t=>t.id===arraysHashingCheckpoint.id))dsaWeek1.topics.push(arraysHashingCheckpoint);
+NEW_TRACKS.dsa.feynmanPractice='Antes de escrever código, explique a estratégia em voz alta. Enunciado → reformular → exemplo manual → identificar a informação necessária → escolher a estrutura → explicar → implementar → testar → tempo e espaço → casos de borda → defender a escolha. Estudo normal: autocomplete permitido. Checkpoint/Mock: sem copiar, autocomplete reduzido quando possível e documentação só depois da tentativa.';
+
 NEW_TRACKS.sql.weeks.push(
   {weekNum:11,startOffset:70,dateRange:'Semana 11 · concorrencia e isolamento',topics:[
     {id:'sql_concurrency_acid',title:'ACID pratico + anomalias de concorrencia',schedule:'Segunda · manha',timeSlot:'08h30–09h45',dayOffset:70,durationMinutes:75,estimatedTime:'75 minutos',priority:'P0',activityType:'estudar',description:'Relacionar garantias do banco com falhas reais em saldo, historico e processamento simultaneo.',subtopics:[
@@ -4495,10 +4590,10 @@ function renderTechnicalEnglish(){
 
 function renderV4TrackIntro(tid){
   if(tid==='javacore') return `<section class="bg-gradient-to-r from-yellow-950/35 to-amber-950/15 border border-yellow-500/30 rounded-xl p-4">
-    <div class="flex flex-wrap items-center justify-between gap-2"><div><div class="text-[10px] mono font-bold text-yellow-400">TRILHA CONCLUIDA · MODO MANUTENCAO</div><h2 class="font-bold text-slate-100 mt-1">Java Core · Weekly Retrieval</h2></div><span class="mono text-[10px] text-yellow-300">1x/semana · 60–90 min · nao aumenta o progresso global</span></div>
-    <p class="text-xs text-slate-400 mt-2">Responder perguntas aleatorias sem material: == vs equals, contrato equals/hashCode, HashSet, HashMap thread-safe, ArrayList vs LinkedList, checked vs unchecked, interface vs abstract class, composicao vs heranca, overload vs override, pass-by-value, record e legibilidade de Streams.</p>
+    <div class="flex flex-wrap items-center justify-between gap-2"><div><div class="text-[10px] mono font-bold text-yellow-400">V4.1 · JAVA PARA CODING INTERVIEWS</div><h2 class="font-bold text-slate-100 mt-1">Aprender a ferramenta antes de aplicá-la em DSA</h2></div><span class="mono text-[10px] text-yellow-300">Java → checkpoint → problema → Big O</span></div>
+    <p class="text-xs text-slate-400 mt-2">A camada inicial cobre sintaxe, arrays, Strings, Collections, Generics e hashing no nível necessário. Checkpoints ficam imediatamente antes do padrão correspondente; após a semana 6, micro-revisões de manutenção aparecem somente nas semanas 7, 9 e 11.</p><p class="text-[10px] text-emerald-300 mt-2">V4.1 adicionou checkpoints de preparação para DSA. Seu progresso antigo foi preservado.</p>
   </section>`;
-  if(tid==='dsa') return `<section class="bg-[#1e293b] border border-red-500/25 rounded-xl p-4 text-xs text-slate-400"><h2 class="font-bold text-red-300">DSA: resolver e explicar padroes essenciais</h2><p class="mt-2">Carga: 1 sessao principal + 1 pratica/revisao curta. P0 e essencial para junior; P1 e util; P2 e aprofundamento; Opcional somente depois. Dynamic Programming avancado, Dijkstra, Union-Find e Trie nao sao prioridade atual.</p></section>`;
+  if(tid==='dsa') return `<section class="bg-[#1e293b] border border-red-500/25 rounded-xl p-4 text-xs text-slate-400"><h2 class="font-bold text-red-300">DSA: reconstruir e defender soluções</h2><p class="mt-2">Enunciado → reformular → exemplo manual → informação necessária → estrutura → explicar estratégia → implementar → testar → tempo e espaço → casos de borda → defender escolha.</p><div class="mt-3 rounded-lg border border-cyan-500/20 bg-cyan-500/5 p-3"><span class="font-bold text-cyan-300">Big O · competência transversal</span><span class="text-slate-400"> — concluir cada problema inclui analisar tempo e espaço; não é uma barreira isolada entre algoritmos.</span></div><p class="mt-3">Depois de Group Anagrams: tempo/espaço → reconstrução → consolidação de HashMap → Ransom Note → Isomorphic Strings. P0 é essencial para júnior; avançados permanecem opcionais.</p></section>`;
   if(tid==='sql'||tid==='testes'||tid==='systemdesign') return `<section class="bg-gradient-to-r from-emerald-950/30 to-slate-900 border border-emerald-500/25 rounded-xl p-4 text-xs text-slate-400"><div class="text-[10px] mono font-bold text-emerald-400">LABORATORIO PRINCIPAL</div><h2 class="font-bold text-slate-100 mt-1">Aplicar no SafeWallet</h2><p class="mt-2">Conceito → exercicio isolado → SafeWallet → teste → explicacao de entrevista. Nao criar outro grande projeto antes de fechar as lacunas P0.</p></section>`;
   if(tid==='storytelling') return `<section class="bg-[#1e293b] border border-purple-500/25 rounded-xl p-4 text-xs text-slate-400"><h2 class="font-bold text-purple-300">Interview Communication</h2><p class="mt-2">Treinar respostas de 20 segundos, 60 segundos e 3 minutos. Clareza e concisao importam mais que decorar um discurso.</p></section>`;
   if(tid==='mockinterview') return `<section class="bg-gradient-to-r from-pink-950/35 to-purple-950/20 border border-pink-500/30 rounded-xl p-4 text-xs text-slate-300"><div class="flex flex-wrap items-center justify-between gap-2"><h2 class="font-bold text-pink-300">Rotina: pergunta → resposta → follow-up → avaliacao</h2><a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-lg bg-pink-500/15 border border-pink-500/35 text-pink-300 font-bold">Fazer simulacao no ChatGPT</a></div><p class="mt-2">Nao corrigir imediatamente. Explorar profundidade e so depois avaliar correcao tecnica, clareza, estrutura, concisao, confianca, limites e capacidade de reformular. Domingo: descanso ou revisao opcional.</p></section>`;
@@ -4510,18 +4605,44 @@ function renderNewWeekPills(tr){
   const c=document.getElementById('newWeekPills'); if(!c) return; c.innerHTML='';
   tr.weeks.forEach((w,i)=>{
     const b=document.createElement('div'); b.className=`wpill ${i===curW?'active':''}`;
-    b.textContent=`S${w.weekNum}`; b.onclick=()=>{curW=i;renderMain();}; c.appendChild(b);
+    b.textContent=w.weekNum===0?'BASE':`S${w.weekNum}`; b.onclick=()=>{curW=i;renderMain();}; c.appendChild(b);
   });
 }
 function renderNewWeekHeader(tr){
   const week=tr.weeks[curW]; if(!week) return;
   const isRev=!!week.isReviewWeek;
   const titleEl=document.getElementById('nwTitle');
-  titleEl.textContent=isRev?'\uD83D\uDD04 Semana '+week.weekNum+' \u2014 Revis\u00e3o':'Semana '+week.weekNum;
+  titleEl.textContent=week.weekNum===0?'Base Pré-DSA · Java para Coding Interviews':week.maintenance?'Java Core · Manutenção para DSA · Semana '+week.weekNum:isRev?'\uD83D\uDD04 Semana '+week.weekNum+' \u2014 Revis\u00e3o':'Semana '+week.weekNum;
   if(isRev) titleEl.classList.add('review-week-header'); else titleEl.classList.remove('review-week-header');
   document.getElementById('nwDate').textContent=formatTrackWeek(tr,week);
-  const revBadge=isRev?'<span class="badge-at badge-revisar" style="margin-left:6px">\uD83D\uDD04 Semana de Revis\u00e3o</span>':'';
+  const revBadge=week.maintenance?'<span class="badge-at badge-revisar" style="margin-left:6px">Micro-revisão próxima ao uso</span>':isRev?'<span class="badge-at badge-revisar" style="margin-left:6px">\uD83D\uDD04 Semana de Revis\u00e3o</span>':'';
   document.getElementById('nwBadges').innerHTML='<span class="text-[10px] mono px-2 py-1 rounded bg-[#0f172a] text-slate-300 border border-slate-600 font-bold">'+week.topics.length+' assunto(s)</span>'+revBadge;
+}
+function javaPrerequisiteInfo(topic){
+  const ids=[...new Set([...(topic.javaPrerequisites||[]),...(topic.subtopics||[]).flatMap(st=>st.javaPrerequisites||[])])];
+  const labels={};
+  NEW_TRACKS.javacore.weeks.forEach(w=>w.topics.forEach(t=>(t.subtopics||[]).forEach(s=>{labels[s.id]=s.text;})));
+  const items=ids.map(id=>({id,label:labels[id]||id,done:isDone(id)}));
+  return {items,total:items.length,done:items.filter(item=>item.done).length};
+}
+function renderDependencyBridge(tr,topic){
+  if(tr.id==='dsa' && javaPrerequisiteInfo(topic).total){
+    const p=javaPrerequisiteInfo(topic); const ready=p.done===p.total;
+    const missing=p.items.filter(item=>!item.done).slice(0,2).map(item=>item.label.split(/[;·]/)[0]).join(' · ');
+    return `<div class="mb-4 rounded-lg border ${ready?'border-emerald-500/30 bg-emerald-500/5':'border-amber-500/25 bg-amber-500/5'} p-2.5 text-[10px]">
+      <div class="flex items-center justify-between gap-2"><span class="font-bold ${ready?'text-emerald-400':'text-amber-300'}">Preparação Java do bloco</span><span class="mono text-slate-300">${p.done}/${p.total}</span></div>
+      <div class="text-slate-500 mt-1">${ready?'✓ Java necessário consolidado':'Revisar antes: '+missing+(p.total-p.done>2?' · …':'')}</div></div>`;
+  }
+  if(tr.id==='javacore' && topic.usedBy?.length) return `<div class="mb-4 text-[10px] text-yellow-300/80"><span class="font-bold">Prepara para:</span> ${topic.usedBy.join(' · ')}</div>`;
+  return '';
+}
+function renderSubtopicPrerequisites(subtopic){
+  if(!subtopic.javaPrerequisites?.length)return '';
+  const p=javaPrerequisiteInfo(subtopic); const ready=p.done===p.total;
+  return `<div class="mt-2 rounded-md border ${ready?'border-emerald-500/20':'border-amber-500/20'} p-2">
+    <div class="flex justify-between gap-2 text-[9px] mono"><span class="font-bold ${ready?'text-emerald-400':'text-amber-300'}">Pré-requisitos Java</span><span>${p.done}/${p.total} · ${ready?'Preparado':'Revisar antes'}</span></div>
+    <div class="mt-1 space-y-0.5">${p.items.map(item=>`<div class="text-[9px] ${item.done?'text-emerald-400':'text-slate-500'}">${item.done?'✓':'○'} ${item.label}</div>`).join('')}</div>
+  </div>`;
 }
 function renderNewTopics(tr){
   const c=document.getElementById('newTopicsContainer'); if(!c) return; c.innerHTML='';
@@ -4549,6 +4670,7 @@ function renderNewTopics(tr){
       <div class="text-[10px] mono text-slate-500 mb-1">${formatTopicSchedule(tr,t)}</div>
       <h3 class="lesson-title text-base sm:text-lg font-bold text-slate-100 leading-snug mb-2">${t.title}</h3>
       <p class="text-xs text-slate-400 mb-4 leading-relaxed">${t.description}</p>
+      ${renderDependencyBridge(tr,t)}
       <div class="mt-auto">
         <div class="flex items-center justify-between text-[10px] text-slate-400 mono mb-1.5">
           <span>Progresso</span>
@@ -4578,7 +4700,7 @@ function renderNewWeekMap(tr){
     const pct=tot>0?Math.round(done/tot*100):0; const isActive=i===curW; const allDone=done===tot&&tot>0;
     const row=document.createElement('div'); row.className=`flex items-center gap-2 p-1.5 rounded-lg cursor-pointer transition-all ${isActive?'bg-[#0f172a]/80 border border-cyan-500/25':'hover:bg-[#0f172a]/40'}`;
     row.onclick=()=>{curW=i;renderMain();};
-    row.innerHTML=`<div class="text-[10px] mono font-bold w-6 shrink-0 ${isActive?'text-cyan-400':allDone?'text-emerald-400':'text-slate-500'}">S${w.weekNum}</div><div class="flex-1 min-w-0"><div class="text-[9px] text-slate-400 truncate">${formatTrackWeek(tr,w)}</div><div class="flex items-center gap-1 mt-0.5"><div class="flex-1 bg-slate-800 h-1 rounded-full overflow-hidden"><div class="h-full rounded-full transition-all" style="width:${pct}%;background:${allDone?'#10b981':tr.color}"></div></div><span class="text-[8px] mono text-slate-500 shrink-0">${done}/${tot}</span></div></div>`;
+    row.innerHTML=`<div class="text-[10px] mono font-bold w-9 shrink-0 ${isActive?'text-cyan-400':allDone?'text-emerald-400':'text-slate-500'}">${w.weekNum===0?'BASE':'S'+w.weekNum}</div><div class="flex-1 min-w-0"><div class="text-[9px] text-slate-400 truncate">${formatTrackWeek(tr,w)}</div><div class="flex items-center gap-1 mt-0.5"><div class="flex-1 bg-slate-800 h-1 rounded-full overflow-hidden"><div class="h-full rounded-full transition-all" style="width:${pct}%;background:${allDone?'#10b981':tr.color}"></div></div><span class="text-[8px] mono text-slate-500 shrink-0">${done}/${tot}</span></div></div>`;
     el.appendChild(row);
   });
 }
@@ -4696,6 +4818,18 @@ function openTrackModal(trackId, topicId){
     sessionInfo.textContent=topic.description;
     why.appendChild(sessionInfo);
   }
+  if(trackId==='dsa' && javaPrerequisiteInfo(topic).total){
+    const p=javaPrerequisiteInfo(topic);
+    const dependencyBox=document.createElement('div');
+    dependencyBox.className='mt-3 pt-3 border-t border-slate-700';
+    dependencyBox.innerHTML=`<div class="flex items-center justify-between gap-2"><span class="text-[10px] font-bold uppercase tracking-wider text-amber-300 mono">Preparação Java agregada do bloco</span><span class="text-[10px] mono ${p.done===p.total?'text-emerald-400':'text-amber-300'}">${p.done}/${p.total}</span></div>
+      <div class="mt-2 text-[10px] text-slate-500">Cada problema abaixo mostra somente os próprios pré-requisitos. É orientação, não bloqueio.</div>`;
+    why.appendChild(dependencyBox);
+  }
+  if(trackId==='javacore' && topic.usedBy?.length){
+    const usedBy=document.createElement('p'); usedBy.className='mt-3 text-yellow-300';
+    usedBy.innerHTML='<strong>Prepara para:</strong> '+topic.usedBy.join(' · '); why.appendChild(usedBy);
+  }
   const sl=document.getElementById('m-subtopics-list'); sl.innerHTML='';
   if(topic.subtopics&&topic.subtopics.length){
     document.getElementById('m-subtopics').classList.remove('hidden');
@@ -4705,7 +4839,7 @@ function openTrackModal(trackId, topicId){
       row.className=`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${isD?'bg-emerald-500/10 border-emerald-500/30':'bg-[#0f172a] border-slate-700/50 hover:border-slate-500'}`;
       row.onclick=()=>{setDone(st.id,!isD);openTrackModal(trackId,topicId);renderMain();};
       const stBadge=activityTypeBadge(st.activityType);
-      row.innerHTML=`<div class="mt-0.5 w-4 h-4 rounded border flex items-center justify-center shrink-0 ${isD?'bg-emerald-500 border-emerald-500 text-white':'border-slate-500'}">${isD?'<svg viewBox="0 0 14 14" fill="none" class="w-3 h-3"><path d="M3 7.5L5.5 10L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div><div class="flex-1 min-w-0">${stBadge?'<div class="mb-1">'+stBadge+'</div>':''}<div class="text-[12px] ${isD?'text-slate-400 line-through':'text-slate-200'} leading-relaxed">${st.text}</div></div>`;
+      row.innerHTML=`<div class="mt-0.5 w-4 h-4 rounded border flex items-center justify-center shrink-0 ${isD?'bg-emerald-500 border-emerald-500 text-white':'border-slate-500'}">${isD?'<svg viewBox="0 0 14 14" fill="none" class="w-3 h-3"><path d="M3 7.5L5.5 10L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div><div class="flex-1 min-w-0">${stBadge?'<div class="mb-1">'+stBadge+'</div>':''}<div class="text-[12px] ${isD?'text-slate-400 line-through':'text-slate-200'} leading-relaxed">${st.text}</div>${trackId==='dsa'?renderSubtopicPrerequisites(st):''}</div>`;
       sl.appendChild(row);
     });
     document.getElementById('m-mark-btn').style.display='none';
@@ -4840,8 +4974,8 @@ const HUB_START_KEY = 'hub_startedAt';
 
 // Offsets em dias a partir da data de início do Java Core (dia 0)
 const TRACK_OFFSETS = {
-  javacore:     { startOff: 0,  totalDays: 41 },  // 03/08 → 13/09 = 41 dias
-  dsa:          { startOff: 1,  totalDays: 82 },  // 04/08 → 25/10 = 82 dias
+  javacore:     { startOff: 0,  totalDays: 83 },  // base, Java principal e manutenção até a semana 11 do DSA
+  dsa:          { startOff: 8,  totalDays: 82 },  // começa após a preparação Java inicial
   testes:       { startOff: 4,  totalDays: NEW_TRACKS.testes.weeks.at(-1).topics.at(-1).dayOffset - 4 }, // Sexta da S1 até sexta final
   sql:          { startOff: 0,  totalDays: NEW_TRACKS.sql.weeks.at(-1).topics.at(-1).dayOffset }, // Segunda da S1 até sexta da última semana
   storytelling: { startOff: 47, totalDays: 35 },  // 19/09 → 24/10 = 35 dias

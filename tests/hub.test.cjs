@@ -83,6 +83,18 @@ for (const id of ['javacore','dsa','testes','sql','storytelling','systemdesign',
 run("setDone('sql_rs_01_01',true); setDone('tst_3_1_1',true); setDone('jc_1_1_1',true); setDone('dsa_2_1_1',true); setDone('sty_5_1_1',true); setDone('m1l1',true)");
 for (const id of ['javacore','dsa','storytelling','ingles']) assert.equal(run(`trackDone('${id}')`),1,`${id} legacy progress`);
 assert(run("isDone('sql_rs_01_01') && isDone('tst_3_1_1')"),'Legacy records retained even when not mapped to new curricula');
+// V4.1 Java/DSA: legacy completion stays intact and new checkpoints stay pending.
+run("setDone('dsa_2_1_2',true); setDone('dsa_2_1_3',true)");
+for (const id of ['dsa_2_1_1','dsa_2_1_2','dsa_2_1_3','jc_1_1_1']) assert(run(`isDone('${id}')`),`${id} legacy progress retained`);
+assert(!run("isDone('dsa_cp_ah_bigo_final')"),'New checkpoint starts pending');
+const javaIds = new Set(tracks.javacore.weeks.flatMap(week=>week.topics).flatMap(topic=>topic.subtopics.map(item=>item.id)));
+for (const topic of tracks.dsa.weeks.flatMap(week=>week.topics)) for (const item of [topic,...topic.subtopics]) {
+  for (const prerequisite of item.javaPrerequisites||[]) assert(javaIds.has(prerequisite),`${item.id} references existing Java prerequisite ${prerequisite}`);
+}
+const findDsaItem = id => tracks.dsa.weeks.flatMap(week=>week.topics).flatMap(topic=>[topic,...topic.subtopics]).find(item=>item.id===id);
+assert.deepEqual(findDsaItem('dsa_2_1_1').javaPrerequisites,['jc_ci_arrays_indices','jc_ci_fluxo_metodos','jc_ci_map_hashmap','jc_ci_generics_basico']);
+assert(!findDsaItem('dsa_2_1_1').javaPrerequisites.includes('jc_ci_strings_chars'),'Two Sum does not require chars/sorting');
+assert(tracks.dsa.weeks[0].topics.at(-1).id==='dsa_cp_arrays_hashing_bigo','Arrays & Hashing checkpoint closes week 1');
 const protectedProgress = local.get('hubGabrielV3');
 
 for (const anchor of ['2026-09-14','2026-12-28','2028-02-28']) {
